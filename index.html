@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brian Flexmore - Photography</title>
+    <title>Brian Flexmore - Photography & Design</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -73,6 +73,22 @@
             box-shadow: inset 6px 6px 12px var(--neumorphic-dark-shadow), 
                        inset -6px -6px 12px var(--neumorphic-light-shadow);
             color: #8b5cf6;
+            transform: none;
+        }
+
+        /* Design nav link styles - Orange accent */
+        .design-nav-link {
+            background: var(--neumorphic-bg);
+            box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
+                       -6px -6px 12px var(--neumorphic-light-shadow);
+            color: var(--subtitle-color);
+            transition: all 0.2s ease;
+        }
+
+        .design-nav-link.active {
+            box-shadow: inset 6px 6px 12px var(--neumorphic-dark-shadow), 
+                       inset -6px -6px 12px var(--neumorphic-light-shadow);
+            color: #f97316;
             transform: none;
         }
 
@@ -174,8 +190,22 @@
             display: none !important;
         }
 
+        /* Target images within the PicFlow gallery */
+        picflow-gallery img {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        picflow-gallery img:hover {
+            transform: scale(1.03);
+            opacity: 0.9;
+        }
+
+        html {
+    scroll-behavior: auto;
+}
     </style>
     <script>if(!window.picflow){window.picflow=!0;var s=document.createElement("script");s.src="https://picflow.com/embed/main.js";s.type='module';s.defer=true;document.head.appendChild(s);}</script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
 </head>
 <body class="min-h-screen bg-gray-200">
 
@@ -192,6 +222,19 @@
                 <circle cx="12" cy="13" r="3"/>
             </svg>
             <span class="text-lg font-medium title-color">Photography</span>
+        </div>
+        
+        <!-- Design Header (visible only on design gallery page) -->
+        <div id="design-nav-header" class="hidden flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+                <circle cx="7" cy="8" r="1"/>
+                <path d="m9.5 8 5 5"/>
+                <path d="m15 7-2 2"/>
+            </svg>
+            <span class="text-lg font-medium title-color">Design</span>
         </div>
 
         <!-- Contact Header (visible only on contact page) -->
@@ -212,6 +255,7 @@
             </button>
             
             <button class="neumorphic-nav-link px-4 py-1 rounded-2xl transition-all duration-200 font-medium text-sm" data-section="photography" onclick="navigateToSection('photography')">Photography</button>
+            <button class="neumorphic-nav-link px-4 py-1 rounded-2xl transition-all duration-200 font-medium text-sm" data-section="ui-design" onclick="navigateToSection('ui-design')">Design</button>
             <button class="neumorphic-nav-link px-4 py-1 rounded-2xl transition-all duration-200 font-medium text-sm" data-section="contact" onclick="navigateToSection('contact')">Contact</button>
         </nav>
     </header>
@@ -235,7 +279,7 @@
                     Brian <span class="font-normal">Flexmore</span>
                 </h2>
                 <p class="text-lg subtitle-color">
-                    Photography
+                    Photography | UI/UX Design | Graphics
                 </p>
             </div>
         </section>
@@ -262,8 +306,8 @@
                         </div>
                     </div>
                     <div class="absolute bottom-6 left-6 right-6 z-10">
-                        <h3 class="text-xl font-medium mb-1 text-left title-color">Portraits</h3>
-                        <p class="text-sm text-left subtitle-color">Portraits & Headshots</p>
+                        <h3 class="text-xl font-medium mb-1 text-center title-color">Portraits</h3>
+                        <p class="text-sm text-center subtitle-color">Portraits & Headshots</p>
                     </div>
                 </button>
 
@@ -276,8 +320,8 @@
                         </div>
                     </div>
                     <div class="absolute bottom-6 left-6 right-6 z-10">
-                        <h3 class="text-xl font-medium mb-1 text-left title-color">EPK / Unit Stills</h3>
-                        <p class="text-sm text-left subtitle-color">Behind-the-scenes & Unit Photography</p>
+                        <h3 class="text-xl font-medium mb-1 text-center title-color">EPK / Unit Stills</h3>
+                        <p class="text-sm text-center subtitle-color">Behind-the-scenes & Unit Photography</p>
                     </div>
                 </button>
 
@@ -290,8 +334,55 @@
                         </div>
                     </div>
                     <div class="absolute bottom-6 left-6 right-6 z-10">
-                        <h3 class="text-xl font-medium mb-1 text-left title-color">Art Department</h3>
-                        <p class="text-sm text-left subtitle-color">Set Dec, Props and Set Design</p>
+                        <h3 class="text-xl font-medium mb-1 text-center title-color">Art Department</h3>
+                        <p class="text-sm text-center subtitle-color">Set Dec, Props and Set Design</p>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <!-- UI Design Section -->
+        <section id="ui-design" class="w-full max-w-6xl mx-auto p-12 mb-20">
+            <div class="flex items-center justify-center mb-12">
+                <div class="neumorphic-section-icon p-3 rounded-2xl mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                        <circle cx="7" cy="8" r="1"/>
+                        <path d="m9.5 8 5 5"/>
+                        <path d="m15 7-2 2"/>
+                    </svg>
+                </div>
+                <h2 class="text-4xl font-semibold title-color">Design</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-3xl mx-auto">
+                
+                <!-- Design Card 1 - Graphics/Designs -->
+                <button class="neumorphic-card relative w-full h-80 rounded-3xl transition-all duration-200 ease-out overflow-hidden" onclick="openDesignPage('graphics')" onmousedown="pressCard(this)" onmouseup="releaseCard(this)" onmouseleave="releaseCard(this)">
+                    <div class="photo-card-bg-light absolute inset-0 rounded-3xl opacity-10 transition-opacity duration-300"></div>
+                    <div class="absolute top-6 left-1/2 transform -translate-x-1/2 w-64 h-48">
+                        <div class="neumorphic-image-inset w-full h-full rounded-2xl overflow-hidden" style="padding: 6px;">
+                            <img src="https://github.com/brianflexmore/website/blob/1a65fccacda91166192784cabed4668f9b9235c4/logo_v04.jpg?raw=true" alt="Graphics and Design" class="w-full h-full object-cover rounded-xl" />
+                        </div>
+                    </div>
+                    <div class="absolute bottom-6 left-6 right-6 z-10">
+                        <h3 class="text-xl font-medium mb-1 text-center title-color">Graphics / Designs</h3>
+                        <p class="text-sm text-left subtitle-color"></p>
+                    </div>
+                </button>
+                
+                <!-- Design Card 2 - UI Apps -->
+                <button class="neumorphic-card relative w-full h-80 rounded-3xl transition-all duration-200 ease-out overflow-hidden" onclick="openDesignPage('ui-apps')" onmousedown="pressCard(this)" onmouseup="releaseCard(this)" onmouseleave="releaseCard(this)">
+                    <div class="photo-card-bg-light absolute inset-0 rounded-3xl opacity-10 transition-opacity duration-300"></div>
+                    <div class="absolute top-6 left-1/2 transform -translate-x-1/2 w-64 h-48">
+                        <div class="neumorphic-image-inset w-full h-full rounded-2xl overflow-hidden" style="padding: 6px;">
+                            <img src="https://github.com/brianflexmore/website/blob/e4b89385075e57bd38014a2822456c2372241e68/UI.jpg?raw=true" alt="UI Apps" class="w-full h-full object-cover rounded-xl" />
+                        </div>
+                    </div>
+                    <div class="absolute bottom-6 left-6 right-6 z-10">
+                        <h3 class="text-xl font-medium mb-1 text-center title-color">UI Apps</h3>
+                        <p class="text-sm text-left subtitle-color"></p>
                     </div>
                 </button>
             </div>
@@ -373,7 +464,7 @@
             <!-- Portraits Gallery -->
             <div id="gallery-portraits" class="gallery-content hidden text-center">
                 <!-- Your PicFlow embed with wider container -->
-                    <picflow-gallery id="gal_u4XeCG2hZc3x7b2t" tenant="tnt_esyrSkpjZ90RWSLf" lightbox="#000000E6" no-background="true" ></picflow-gallery>
+                    <picflow-gallery id="gal_u4XeCG2hZc3x7b2t" tenant="tnt_esyrSkpjZ90RWSLf" lightbox="#000000E6" no-background="true" hover-effect="zoom"></picflow-gallery>
             </div>
 
             <!-- EPK Gallery -->
@@ -383,14 +474,104 @@
             </div>
 
             <!-- Art Department Gallery -->
-            <div id="gallery-art" class="gallery-content hidden text-center">
-                <!-- Replace this div with your PicFlow embed for Art Department -->
-               <picflow-gallery id="gal_XxHkZDEz48Vg1GLc" tenant="tnt_esyrSkpjZ90RWSLf" lightbox="#000000E6" no-background="true"></picflow-gallery>
+<div id="gallery-art" class="gallery-content hidden text-center">
+    <!-- PicFlow embed for Art Department -->
+    <picflow-gallery id="gal_XxHkZDEz48Vg1GLc" tenant="tnt_esyrSkpjZ90RWSLf" lightbox="#000000E6" no-background="true"></picflow-gallery>
+    
+    <!-- Godzilla x Kong Timelapse Video Section -->
+    <div class="mt-12">
+        <!-- Main Section Heading -->
+        <div class="text-center mb-6">
+            <h3 class="text-3xl font-semibold title-color">Godzilla x Kong Timelapse</h3>
+        </div>
+        
+        <!-- Video Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-8xl mx-auto">
+            <!-- Iwi Village Video -->
+            <div class="text-center">
+                <h4 class="text-lg subtitle-color mb-1">Iwi Village</h4>
+                <div class="rounded-2xl overflow-hidden">
+                    <div style="padding:50% 0 0 0;position:relative;">
+                        <iframe src="https://player.vimeo.com/video/1100944186?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="gxk_timelapse_iwivillage"></iframe>
+                    </div>
+                </div>
             </div>
+            
+            <!-- Iwi Ruins Video -->
+            <div class="text-center">
+                <h4 class="text-lg subtitle-color mb-1">Iwi Ruins</h4>
+                <div class="rounded-2xl overflow-hidden">
+                    <div style="padding:50% 0 0 0;position:relative;">
+                        <iframe src="https://player.vimeo.com/video/1100944141?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="gxk_timelapse_iwiruins"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            
         </div>
     </div>
 </section>
 </div>
+
+<!-- Design Gallery Page -->
+<div id="design-page" class="hidden min-h-screen">
+    <!-- Design Navigation Buttons -->
+   <section class="w-full mx-auto p-4 pt-24 mb-8" style="max-width: 95vw">
+        <!-- Design Category Buttons -->
+        <div class="flex justify-center items-center mb-8 space-x-6">
+            <button id="btn-graphics" class="design-nav-link px-6 py-2 rounded-2xl font-medium transition-all duration-200 text-sm" onclick="switchDesign('graphics')">
+                Graphics / Designs
+            </button>
+            <button id="btn-ui-apps" class="design-nav-link px-6 py-2 rounded-2xl font-medium transition-all duration-200 text-sm" onclick="switchDesign('ui-apps')">
+                UI Apps
+            </button>
+        </div>
+
+        <!-- Design Content Area -->
+        <div class="w-full">
+            <!-- Graphics Gallery -->
+            <div id="design-graphics" class="design-content hidden text-center">
+                <!-- Replace this div with your PicFlow embed for Graphics -->
+                <picflow-gallery id="gal_ksXfQoDm47oBno6Q" tenant="tnt_esyrSkpjZ90RWSLf" lightbox="#000000E6" no-padding="true" no-background="true" show-cover="true"></picflow-gallery>
+            </div>
+
+            
+    
+   <!-- UI Apps Gallery -->
+<div id="design-ui-apps" class="design-content hidden">
+    <!-- Section Header -->
+    <div class="text-center mb-6">
+        <h3 class="text-2xl font-semibold title-color mb-2">AI Chat Interface</h3>
+        <p class="text-sm subtitle-color">Video demonstration and system architecture</p>
+    </div>
+    
+    <!-- Vimeo Video Section -->
+    <div class="mb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <!-- Vimeo Video -->
+            <div class="rounded-2xl overflow-hidden">
+                <div style="padding:75% 0 0 0;position:relative;">
+                    <iframe src="https://player.vimeo.com/video/1100805154?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Mei_Video"></iframe>
+                </div>
+            </div>
+            <!-- Image to the right -->
+            <div class="rounded-2xl overflow-hidden">
+                <img src="https://github.com/brianflexmore/website/blob/6a3436b4ae6e8a9d4f7401d113227f5cb0acc8d8/Mei_Backend.jpg?raw=true" alt="Project Image" class="w-full h-full object-cover rounded-xl" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Picflow Gallery Section -->
+    <div class="rounded-2xl min-h-96 text-center">
+        <!-- Replace this with your actual Picflow embed code -->
+        <picflow-gallery id="gal_GThLf8WcEC9oL2xE" tenant="tnt_esyrSkpjZ90RWSLf" lightbox="#000000E6" no-background="true"></picflow-gallery>
+    </div>
+</div>
+</section>
+</div>
+
 
     <!-- Contact Page -->
     <div id="contact-page" class="hidden min-h-screen">
@@ -448,6 +629,7 @@
 
     <script>
         let currentGallery = 'portraits';
+        let currentDesign = 'graphics';
         let currentContact = 'contact';
 
         // Card press effects
@@ -472,12 +654,15 @@
         function navigateHome() {
             // Hide all pages, show main page
             document.getElementById('gallery-page').classList.add('hidden');
+            document.getElementById('design-page').classList.add('hidden');
             document.getElementById('contact-page').classList.add('hidden');
             document.getElementById('main-page').classList.remove('hidden');
             
             // Hide all headers in navbar
             document.getElementById('photography-nav-header').classList.add('hidden');
             document.getElementById('photography-nav-header').classList.remove('flex');
+            document.getElementById('design-nav-header').classList.add('hidden');
+            document.getElementById('design-nav-header').classList.remove('flex');
             document.getElementById('contact-nav-header').classList.add('hidden');
             document.getElementById('contact-nav-header').classList.remove('flex');
 
@@ -495,6 +680,9 @@
             if (sectionId === 'photography') {
                 // Go to Photography page
                 openPhotographyPage();
+            } else if (sectionId === 'ui-design') {
+                // Go to Design page
+                openDesignPageOnly();
             } else if (sectionId === 'contact') {
                 // Go to Contact page
                 openContactPage();
@@ -504,7 +692,7 @@
                     // Already on main page, just scroll
                     scrollToSection(sectionId);
                 } else {
-                    // On gallery page, go back to main page then scroll
+                    // On gallery or design page, go back to main page then scroll
                     navigateHome();
                     setTimeout(() => {
                         scrollToSection(sectionId);
@@ -535,12 +723,15 @@
         function openGalleryPage(galleryType) {
             // Hide all pages, show gallery page
             document.getElementById('main-page').classList.add('hidden');
+            document.getElementById('design-page').classList.add('hidden');
             document.getElementById('contact-page').classList.add('hidden');
             document.getElementById('gallery-page').classList.remove('hidden');
             
             // Show photography header in navbar
             document.getElementById('photography-nav-header').classList.remove('hidden');
             document.getElementById('photography-nav-header').classList.add('flex');
+            document.getElementById('design-nav-header').classList.add('hidden');
+            document.getElementById('design-nav-header').classList.remove('flex');
             document.getElementById('contact-nav-header').classList.add('hidden');
             document.getElementById('contact-nav-header').classList.remove('flex');
             
@@ -559,12 +750,15 @@
         function openPhotographyPage() {
             // Hide all pages, show gallery page
             document.getElementById('main-page').classList.add('hidden');
+            document.getElementById('design-page').classList.add('hidden');
             document.getElementById('contact-page').classList.add('hidden');
             document.getElementById('gallery-page').classList.remove('hidden');
             
             // Show photography header in navbar
             document.getElementById('photography-nav-header').classList.remove('hidden');
             document.getElementById('photography-nav-header').classList.add('flex');
+            document.getElementById('design-nav-header').classList.add('hidden');
+            document.getElementById('design-nav-header').classList.remove('flex');
             document.getElementById('contact-nav-header').classList.add('hidden');
             document.getElementById('contact-nav-header').classList.remove('flex');
             
@@ -588,11 +782,75 @@
             window.scrollTo(0, 0);
         }
 
+        // Design gallery page functions
+        function openDesignPage(designType) {
+            // Hide all pages, show design page
+            document.getElementById('main-page').classList.add('hidden');
+            document.getElementById('gallery-page').classList.add('hidden');
+            document.getElementById('contact-page').classList.add('hidden');
+            document.getElementById('design-page').classList.remove('hidden');
+            
+            // Show design header in navbar
+            document.getElementById('design-nav-header').classList.remove('hidden');
+            document.getElementById('design-nav-header').classList.add('flex');
+            document.getElementById('photography-nav-header').classList.add('hidden');
+            document.getElementById('photography-nav-header').classList.remove('flex');
+            document.getElementById('contact-nav-header').classList.add('hidden');
+            document.getElementById('contact-nav-header').classList.remove('flex');
+            
+            // Set design nav as active
+            setActiveNavLink('ui-design');
+            
+            // Set the current design and switch to it
+            currentDesign = designType;
+            switchDesign(designType);
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Open Design page without gallery selection
+        function openDesignPageOnly() {
+            // Hide all pages, show design page
+            document.getElementById('main-page').classList.add('hidden');
+            document.getElementById('gallery-page').classList.add('hidden');
+            document.getElementById('contact-page').classList.add('hidden');
+            document.getElementById('design-page').classList.remove('hidden');
+            
+            // Show design header in navbar
+            document.getElementById('design-nav-header').classList.remove('hidden');
+            document.getElementById('design-nav-header').classList.add('flex');
+            document.getElementById('photography-nav-header').classList.add('hidden');
+            document.getElementById('photography-nav-header').classList.remove('flex');
+            document.getElementById('contact-nav-header').classList.add('hidden');
+            document.getElementById('contact-nav-header').classList.remove('flex');
+            
+            // Set design nav as active
+            setActiveNavLink('ui-design');
+            
+            // Clear all design selections - no active gallery
+            document.querySelectorAll('#design-page .design-nav-link').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Hide all design content
+            document.querySelectorAll('.design-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Clear current design
+            currentDesign = '';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
         // Contact page functions
         function openContactPage() {
             // Hide all pages, show contact page
             document.getElementById('main-page').classList.add('hidden');
             document.getElementById('gallery-page').classList.add('hidden');
+            document.getElementById('design-page').classList.add('hidden');
             document.getElementById('contact-page').classList.remove('hidden');
             
             // Show contact header in navbar
@@ -600,9 +858,15 @@
             document.getElementById('contact-nav-header').classList.add('flex');
             document.getElementById('photography-nav-header').classList.add('hidden');
             document.getElementById('photography-nav-header').classList.remove('flex');
+            document.getElementById('design-nav-header').classList.add('hidden');
+            document.getElementById('design-nav-header').classList.remove('flex');
             
             // Set contact nav as active
             setActiveNavLink('contact');
+            
+            // Set default to contact tab
+            currentContact = 'contact';
+            switchContact('contact');
             
             // Scroll to top
             window.scrollTo(0, 0);
@@ -631,6 +895,52 @@
             document.getElementById('gallery-' + galleryType).classList.remove('hidden');
         }
 
+        function switchDesign(designType) {
+            // Update current design
+            currentDesign = designType;
+            
+            // Remove active class from all design buttons
+            document.querySelectorAll('#design-page .design-nav-link').forEach(btn => {
+                if (btn.id && btn.id.startsWith('btn-')) {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Add active class to selected button
+            document.getElementById('btn-' + designType).classList.add('active');
+            
+            // Hide all design content
+            document.querySelectorAll('.design-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected design content
+            document.getElementById('design-' + designType).classList.remove('hidden');
+        }
+
+        function switchContact(contactType) {
+            // Update current contact
+            currentContact = contactType;
+            
+            // Remove active class from all contact buttons
+            document.querySelectorAll('#contact-page .contact-nav-link').forEach(btn => {
+                if (btn.id && btn.id.startsWith('btn-')) {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Add active class to selected button
+            document.getElementById('btn-' + contactType).classList.add('active');
+            
+            // Hide all contact content
+            document.querySelectorAll('.contact-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected contact content
+            document.getElementById(contactType + '-content').classList.remove('hidden');
+        }
+
         // Scroll to top functionality
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -652,6 +962,9 @@
 
         // Removed scroll-based navigation updates as requested
         // Navigation buttons will only change state when clicked, not when scrolling
+
+        
     </script>
+    
 </body>
 </html>
