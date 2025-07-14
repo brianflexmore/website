@@ -202,6 +202,46 @@
 
         html {
     scroll-behavior: auto;
+        }
+
+        .design-portfolio-card {
+    background: var(--neumorphic-bg);
+    box-shadow: 8px 8px 16px var(--neumorphic-dark-shadow), 
+               -8px -8px 16px var(--neumorphic-light-shadow);
+}
+
+.design-portfolio-card.pressed {
+    box-shadow: inset 8px 8px 16px var(--neumorphic-dark-shadow), 
+               inset -8px -8px 16px var(--neumorphic-light-shadow);
+    transform: scale(0.98);
+}
+
+.status-card {
+    background: var(--neumorphic-bg);
+    box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
+               -6px -6px 12px var(--neumorphic-light-shadow);
+}
+
+.status-dot {
+    box-shadow: 2px 2px 4px rgba(163, 177, 198, 0.3), 
+               -2px -2px 4px rgba(255, 255, 255, 0.7);
+}
+
+.pulse-dot {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { 
+        opacity: 1; 
+        transform: scale(1);
+        box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+    }
+    50% { 
+        opacity: 0.7; 
+        transform: scale(1.1);
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.8);
+    }
 }
     </style>
     <script>if(!window.picflow){window.picflow=!0;var s=document.createElement("script");s.src="https://picflow.com/embed/main.js";s.type='module';s.defer=true;document.head.appendChild(s);}</script>
@@ -534,7 +574,43 @@
             <!-- Graphics Gallery -->
             <div id="design-graphics" class="design-content hidden text-center">
                 <!-- Replace this div with your PicFlow embed for Graphics -->
-                <picflow-gallery id="gal_ksXfQoDm47oBno6Q" tenant="tnt_esyrSkpjZ90RWSLf" lightbox="#000000E6" no-padding="true" no-background="true" show-cover="true"></picflow-gallery>
+                <div class="flex flex-col items-center justify-center space-y-8 min-h-96">
+    
+    <!-- Design Portfolio Card -->
+    <div class="design-portfolio-card w-80 h-32 rounded-2xl transition-all duration-300 cursor-pointer"
+         onmousedown="pressDesignCard(this)" 
+         onmouseup="releaseDesignCard(this)" 
+         onmouseleave="releaseDesignCard(this)">
+        <div class="h-full flex items-center justify-center p-6">
+            <div class="text-center">
+                <h3 class="text-lg font-medium mb-3 title-color">Design Portfolio</h3>
+                <div class="flex items-center justify-center space-x-3">
+                    <div class="status-dot w-3 h-3 rounded-full" style="background: #10b981;"></div>
+                    <div class="status-dot w-3 h-3 rounded-full" style="background: #f59e0b;"></div>
+                    <div class="status-dot w-3 h-3 rounded-full" style="background: #ef4444;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Status Card -->
+    <div class="status-card w-80 h-24 rounded-2xl transition-all duration-300">
+        <div class="h-full flex items-center justify-between p-6">
+            <span class="text-sm font-medium title-color">Status</span>
+            <div class="flex items-center space-x-2">
+                <div class="pulse-dot w-3 h-3 rounded-full" 
+                     style="background: #10b981; box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);"></div>
+                <span class="text-sm" style="color: #10b981;">In Development</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Optional: Coming Soon Message -->
+    <div class="text-center mt-6">
+        <p class="text-lg font-medium title-color mb-2">New Designs Coming Soon</p>
+        <p class="text-sm subtitle-color">Portfolio updates in progress</p>
+    </div>
+</div>
             </div>
 
             
@@ -962,7 +1038,14 @@
 
         // Removed scroll-based navigation updates as requested
         // Navigation buttons will only change state when clicked, not when scrolling
+        /* Add these functions to your existing <script> section */
+function pressDesignCard(card) {
+    card.classList.add('pressed');
+}
 
+function releaseDesignCard(card) {
+    card.classList.remove('pressed');
+}
         
     </script>
     
