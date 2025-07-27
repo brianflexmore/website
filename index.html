@@ -243,6 +243,59 @@
         box-shadow: 0 0 12px rgba(16, 185, 129, 0.8);
     }
 }
+
+/* Mobile-specific header fixes */
+@media (max-width: 768px) {
+    /* Ensure header doesn't get cut off */
+    header {
+        padding: 12px 16px;
+        min-height: 60px;
+    }
+    
+    /* Smaller title on mobile */
+    header h1 {
+        font-size: 18px;
+    }
+    
+    /* Smaller navigation buttons */
+    header nav {
+        gap: 8px;
+    }
+    
+    header nav button {
+        padding: 6px 12px;
+        font-size: 12px;
+        min-height: 32px;
+    }
+    
+    /* Home button adjustments */
+    .home-button {
+        padding: 8px;
+        min-width: 36px;
+        min-height: 36px;
+    }
+    
+    /* Header icons for section headers */
+    #photography-nav-header svg,
+    #design-nav-header svg,
+    #contact-nav-header svg {
+        width: 24px;
+        height: 24px;
+    }
+    
+    #photography-nav-header span,
+    #design-nav-header span,
+    #contact-nav-header span {
+        font-size: 16px;
+    }
+}
+
+/* iOS safe area support */
+@supports (padding: max(0px)) {
+    header {
+        padding-top: max(16px, env(safe-area-inset-top));
+    }
+}
     </style>
     <script>if(!window.picflow){window.picflow=!0;var s=document.createElement("script");s.src="https://picflow.com/embed/main.js";s.type='module';s.defer=true;document.head.appendChild(s);}</script>
     <script src="https://player.vimeo.com/api/player.js"></script>
