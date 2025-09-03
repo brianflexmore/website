@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 5000 2916">
+  <defs>
+    <style>
+      .cls-1 {
+        mask: url(#mask);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-4);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-5 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-6 {
+        mask: url(#mask-2);
+      }
+
+      .cls-7 {
+        mask: url(#mask-3);
+      }
+
+      .cls-8 {
+        mask: url(#mask-1);
+      }
+
+      .cls-9 {
+        fill: #1a1a1a;
+        fill-rule: evenodd;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="4857.54" y1="2113.47" x2="-3544.56" y2="1801.15" gradientTransform="translate(0 -91.57)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <mask id="mask" x="0" y="952.53" width="5000" height="1963.47" maskUnits="userSpaceOnUse">
+      <rect class="cls-5" y="952.53" width="5000" height="1963.47"/>
+    </mask>
+    <linearGradient id="linear-gradient-2" x1="345.3" y1="908.15" x2="6585.32" y2="3638.14" gradientTransform="translate(0 -149.29)" xlink:href="#linear-gradient"/>
+    <mask id="mask-1" x="0" y="635.02" width="5000" height="2133.02" maskUnits="userSpaceOnUse">
+      <rect class="cls-4" y="635.02" width="5000" height="2133.02"/>
+    </mask>
+    <linearGradient id="linear-gradient-3" x1="4554.19" y1="1682.89" x2="-2635.79" y2="1592.89" gradientTransform="translate(0 -273.16)" xlink:href="#linear-gradient"/>
+    <mask id="mask-2" x="0" y="317.51" width="5000" height="2133.02" maskUnits="userSpaceOnUse">
+      <rect class="cls-3" y="317.51" width="5000" height="2133.02"/>
+    </mask>
+    <linearGradient id="linear-gradient-4" x1="237.08" y1="960.77" x2="5846.72" y2="2207.08" gradientTransform="translate(0 -397.02)" xlink:href="#linear-gradient"/>
+    <mask id="mask-3" x="0" y="0" width="5000" height="2133.02" maskUnits="userSpaceOnUse">
+      <rect class="cls-2" y="0" width="5000" height="2133.02"/>
+    </mask>
+  </defs>
+  <rect width="5000" height="2916"/>
+  <g class="cls-1">
+    <path class="cls-9" d="M0,1270.04c2057.02,2143.1,4179.6,54.65,4930.32,1645.96h69.68v-147.96C4319.53,864.97,2124.8,3166.24,0,952.53v317.51Z"/>
+  </g>
+  <g class="cls-8">
+    <path class="cls-9" d="M0,952.53c2124.8,2213.7,4319.53-87.56,5000,1815.51v-317.51C4319.53,547.46,2124.8,2848.73,0,635.02v317.51Z"/>
+  </g>
+  <g class="cls-6">
+    <path class="cls-9" d="M0,635.02c2124.8,2213.7,4319.53-87.56,5000,1815.51v-317.51C4319.53,229.95,2124.8,2531.21,0,317.51v317.51Z"/>
+  </g>
+  <g class="cls-7">
+    <path class="cls-9" d="M0,317.51c2124.8,2213.7,4319.53-87.56,5000,1815.51v-317.51C4319.53-87.56,2124.8,2213.7,0,0v317.51Z"/>
+  </g>
+</svg>
