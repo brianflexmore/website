@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brian Flexmore - Cinematography Short Clips</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: 
+                url('https://raw.githubusercontent.com/brianflexmore/website/9596ab7089bf2db699991cf5996450bf25ac52e6/rocks.webp'),
+                linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0a1628 100%);
+            background-size: cover, cover;
+            background-position: center, center;
+            background-repeat: no-repeat, no-repeat;
+            background-attachment: fixed, fixed;
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        .glass {
+            background: rgba(219, 219, 219, 0.112);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
+        }
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5);
+        }
+        
+        .video-container {
+            background: rgba(210, 204, 204, 0.01);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .video-container-wide {
+            background: rgba(0, 0, 0, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .title-glow {
+            color: white;
+            text-shadow: 0 0 0px rgba(255, 255, 255, 0.5);
+        }
+        
+        .video-title {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hover-lift {
+            transition: border 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            border: 1px solid #8B5CF6 !important;
+        }
+
+        .header-fixed {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            width: calc(100% - 2rem);
+            max-width: 400px;
+        }
+        
+    </style>
+</head>
+<body>
+        <div class="min-h-screen py-12 px-4">
+            <div class="max-w-6xl mx-auto">
+            <!-- Header Section -->
+            <div class="text-center mb-16">
+                <div class="glass p-3">
+                    <h1 class="text-4xl md:text-4xl font-semi text-white mb-4">
+                        BRIAN FLEXMORE
+                    </h1>
+                    <p class="text-lg md:text-xl font-thin tracking-wide" style="color: #B2E81D;">
+                        Cinematography Sample Clips
+                    </p>
+                    
+                </div>
+            </div>
+            
+            <!-- Quality Notice Card -->
+<div class="text-center mb-12 mt-2">
+    <div class="glass p-3 max-w-md mx-auto">
+        <p class="text-white/80 text-sm mb-4 font-light">
+            For best viewing experience please select the highest resolution
+        </p>
+        <div class="flex justify-center">
+            <img 
+                src="https://raw.githubusercontent.com/brianflexmore/website/1f99f39affa1517d48b39a8c9bb91cf4f2d66595/vimeo.webp" 
+                alt="Vimeo quality selector" 
+                class="w-60 h-auto"
+                style="aspect-ratio: 2.23;"
+            />
+        </div>
+    </div>
+</div>
+            <!-- Video 1: Painting Vignette -->
+            <div class="mb-12">
+                <div class="glass p-4 hover-lift">
+                    <h2 class="text-xl mb-4"><span style="color: #B2E81D;" class="font-thin" class="text-l">Short Clip:</span> <span style="color: white;" class="font-semi">Painting Vignette</span></h2>
+                    <div class="video-container-wide overflow-hidden">
+                        <div style="padding:50% 0 0 0;position:relative;">
+                            <iframe src="https://player.vimeo.com/video/1115071118?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Painting"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 2: Bee Vignette -->
+            <div class="mb-12">
+                <div class="glass p-4 hover-lift">
+                    <h2 class="text-xl mb-4"><span style="color: #B2E81D;" class="font-thin" class="text-l">Short Clip:</span> <span style="color: white;" class="font-semi">Honey Harvest</span></h2>
+                    <div class="video-container-wide overflow-hidden">
+                        <div style="padding:50% 0 0 0;position:relative;">
+                            <iframe src="https://player.vimeo.com/video/1115369326?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Honey Harvest"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video 3: Bar Scene Vignette -->
+            <div class="mb-12">
+                <div class="glass p-4 hover-lift">
+                    <div class="flex items-baseline gap-3 mb-4">
+                        <h2 class="text-xl mb-4"><span style="color: #B2E81D;" class="font-thin" class="text-l">Short Clip:</span> <span style="color: white;" class="font-semi">Bar Scene Single Shot</span></h2>
+                        <p class="text-sm text-white/50">Video Only</p>
+                    </div>
+                    <div class="video-container-wide overflow-hidden">
+                        <div style="padding:50% 0 0 0;position:relative;">
+                            <iframe src="https://player.vimeo.com/video/1109422400?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Bar_Scene_Vignette"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video 3: Showreel -->
+            <div class="mb-12">
+                <div class="glass p-4 hover-lift">
+                    <div class="flex items-baseline gap-3 mb-4">
+                        <h2 class="text-xl mb-4"><span style="color: #B2E81D;" class="font-thin" class="text-l">Short Clip:</span> <span style="color: white;" class="font-semi">Showreel</span></h2>
+                        <p class="text-sm text-white/50">Reduced Quality</p>
+                    </div>
+                    <div class="video-container-wide overflow-hidden">
+                        <div style="padding:56.25% 0 0 0;position:relative;">
+                            <iframe src="https://player.vimeo.com/video/1109423924?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Bar_Scene_Vignette"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- Footer -->
+            <div class="text-center mt-16">
+                <div class="glass p-2">
+                    <p class="text-white/60 text-xs">
+                        © 2025 Brian Flexmore
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+</body>
+</html>
