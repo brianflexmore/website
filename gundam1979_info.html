@@ -94,25 +94,46 @@
     </nav>-->
 
 <!-- Floating Navigation -->
-<nav class="fixed top-6 right-6 z-50 glass-effect rounded-2xl px-4 py-2">
-    <div class="flex items-center space-x-3">
-        <!-- Navigation Icon -->
-        <svg class="w-4 h-4 text-text-secondary" fill="none" stroke="#16a34a" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
+<nav class="fixed top-6 right-6 z-50">
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex glass-effect rounded-2xl px-4 py-2">
+        <div class="flex items-center space-x-3">
+            <!-- Navigation Icon -->
+            <svg class="w-4 h-4 text-text-secondary" fill="none" stroke="#16a34a" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            
+            <!-- Vertical Divider -->
+            <div class="h-4 w-px bg-text-secondary opacity-30"></div>
+            
+            <!-- Navigation Links -->
+            <a href="#federation" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-sm font-medium">Federation</a>
+            <div class="h-3 w-px bg-text-secondary opacity-30"></div>
+            <a href="#zeon" class="text-text-secondary hover:text-accent-red transition-colors duration-200 text-sm font-medium">Zeon</a>
+            <div class="h-3 w-px bg-text-secondary opacity-30"></div>
+            <a href="#suits-federation" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-sm font-medium">Mobile Suits Federation</a>
+            <div class="h-3 w-px bg-text-secondary opacity-30"></div>
+            <a href="#suits-zeon" class="text-text-secondary hover:text-accent-red transition-colors duration-200 text-sm font-medium">Mobile Suits Zeon</a>
+        </div>
+    </div>
+
+    <!-- Mobile Hamburger Menu -->
+    <div class="md:hidden">
+        <button id="mobile-menu-button" class="glass-effect rounded-2xl p-3">
+            <svg class="w-6 h-6 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
         
-        <!-- Vertical Divider -->
-        <div class="h-4 w-px bg-text-secondary opacity-30"></div>
-        
-        <!-- Navigation Links -->
-        <!-- Navigation Links -->
-<a href="#federation" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-sm font-medium">Federation</a>
-<div class="h-3 w-px bg-text-secondary opacity-30"></div>
-<a href="#zeon" class="text-text-secondary hover:text-accent-red transition-colors duration-200 text-sm font-medium">Zeon</a>
-<div class="h-3 w-px bg-text-secondary opacity-30"></div>
-<a href="#suits-federation" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-sm font-medium">Mobile Suits Federation</a>
-<div class="h-3 w-px bg-text-secondary opacity-30"></div>
-<a href="#suits-zeon" class="text-text-secondary hover:text-accent-red transition-colors duration-200 text-sm font-medium">Mobile Suits Zeon</a>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden absolute top-16 right-0 glass-effect rounded-2xl p-4 min-w-48">
+            <div class="flex flex-col space-y-3">
+                <a href="#federation" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-sm font-medium mobile-link">Federation</a>
+                <a href="#zeon" class="text-text-secondary hover:text-accent-red transition-colors duration-200 text-sm font-medium mobile-link">Zeon</a>
+                <a href="#suits-federation" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-sm font-medium mobile-link">Mobile Suits Federation</a>
+                <a href="#suits-zeon" class="text-text-secondary hover:text-accent-red transition-colors duration-200 text-sm font-medium mobile-link">Mobile Suits Zeon</a>
+            </div>
+        </div>
     </div>
 </nav>
 
@@ -803,6 +824,30 @@
             observer.observe(el);
         });
     });
+
+        // Mobile menu toggle
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+
+if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close menu when clicking on a link
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+            mobileMenu.classList.add('hidden');
+        }
+    });
+}
 </script>
 </body>
 </html>
