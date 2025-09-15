@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Suit Gundam 1979 - Apple Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'apple-gray': {
+                            50: '#f9fafb',
+                            100: '#f3f4f6',
+                            200: '#e5e7eb',
+                            300: '#d1d5db',
+                            400: '#9ca3af',
+                            500: '#6b7280',
+                            600: '#4b5563',
+                            700: '#374151',
+                            800: '#1f2937',
+                            900: '#111827'
+                        }
+                    },
+                    fontFamily: {
+                        'apple': ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'sans-serif']
+                    },
+                    fontSize: {
+                        'hero': ['7rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+                        'hero-sm': ['4rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+                        'subtitle': ['1.75rem', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
+                        'body-lg': ['1.125rem', { lineHeight: '1.6' }]
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(40px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.95);
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+        }
+        
+        /* Apple-style blur effect */
+        .backdrop-blur-apple {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+        }
+        
+        /* Smooth transitions */
+        * {
+            transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+        }
+        
+        
+    </style>
+</head>
+<body class="bg-white text-apple-gray-900 font-apple antialiased">
+    
+    <!-- Hero Section -->
+    <header class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative bg-gradient-to-b from-apple-gray-50 to-white">
+        <div class="max-w-6xl mx-auto animate-fade-in-up">
+            <!-- Main Title -->
+            <h1 class="text-hero-sm md:text-hero font-semibold text-apple-gray-900 mb-6 tracking-tight">
+                Mobile Suit<br>
+                <span class="text-apple-gray-600">Gundam</span>
+            </h1>
+            
+            <!-- Year Badge -->
+            <div class="inline-flex items-center justify-center bg-apple-gray-100 rounded-full px-6 py-2 mb-12 animate-scale-in">
+                <span class="text-subtitle font-medium text-apple-gray-700">1979</span>
+            </div>
+            
+            <!-- Hero Images Grid -->
+            <div class="grid grid-cols-3 gap-4 md:gap-6 max-w-3xl mx-auto mb-12 animate-fade-in">
+                <div class="aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden shadow-lg  ">
+                    <img src="https://picflow.media/images/d60842a2-8a3d-42e0-8e5e-52c0a5c6ead6/base/d60842a2-8a3d-42e0-8e5e-52c0a5c6ead6.webp" 
+                         alt="Gundam Image 1" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden shadow-lg  ">
+                    <img src="https://picflow.media/images/f7391fe9-2dfb-4383-b2d0-c81e4eb5d285/base/f7391fe9-2dfb-4383-b2d0-c81e4eb5d285.webp" 
+                         alt="Gundam Image 2" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden shadow-lg  ">
+                    <img src="https://picflow.media/images/9dfa3f10-f6c8-49c7-b245-6869608158db/base/9dfa3f10-f6c8-49c7-b245-6869608158db.webp" 
+                         alt="Gundam Image 3" 
+                         class="w-full h-full object-cover">
+                </div>
+            </div>
+            
+            <!-- Tagline -->
+            <p class="text-body-lg text-apple-gray-600 max-w-2xl mx-auto animate-fade-in">
+                The series that revolutionized mecha anime and introduced the world to the Universal Century
+            </p>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-apple-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- Synopsis Section -->
+    <section class="py-20 md:py-32 px-6 bg-white">
+        <div class="max-w-5xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16 animate-fade-in-up">
+                <h2 class="text-4xl md:text-6xl font-semibold text-apple-gray-900 mb-4 tracking-tight">
+                    Storyline
+                </h2>
+                <div class="inline-flex items-center justify-center bg-apple-gray-100 rounded-full px-4 py-2">
+                    <span class="text-sm font-medium text-apple-gray-600 uppercase tracking-wider">Original Series 1979</span>
+                </div>
+            </div>
+            
+            <!-- Main Content Card -->
+            <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 md:p-12 animate-scale-in  ">
+                <div class="prose prose-lg md:prose-xl max-w-none">
+                    <p class="text-body-lg text-apple-gray-700 leading-relaxed mb-0">
+                        Set in Universal Century 0079, the series throws a teenage civilian, Amuro Ray, into the deep end when a surprise attack on his space colony destroys his home and forces him to pilot the Earth Federation's new prototype mecha, the RX-78-2 Gundam, just to survive.
+                    </p>
+                    <br>
+                    <p class="text-body-lg text-apple-gray-700 leading-relaxed mb-0">
+                        What follows is a gritty space-war drama aboard the warship White Base, populated by a rag-tag crew of civilians and soldiers fleeing Zeon forces, navigating political intrigue, shifting loyalties, and the brutal costs of war.
+                    </p>
+                </div>
+                
+                <!-- Key Stats -->
+                <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-apple-gray-100">
+                    <div class="text-center">
+                        <div class="text-3xl font-semibold text-apple-gray-900 mb-1">43</div>
+                        <div class="text-sm text-apple-gray-600 font-medium">Episodes</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-semibold text-apple-gray-900 mb-1">1979</div>
+                        <div class="text-sm text-apple-gray-600 font-medium">Original Air Date</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-semibold text-apple-gray-900 mb-1">U.C. 0079</div>
+                        <div class="text-sm text-apple-gray-600 font-medium">Universal Century</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Call to Action -->
+            <div class="text-center mt-16">
+                <button class="inline-flex items-center justify-center bg-apple-gray-900 text-white px-8 py-4 rounded-full font-medium hover:bg-apple-gray-800 transition-colors duration-200 shadow-lg  ">
+                    Explore Characters
+                    <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="flex justify-center py-12 bg-apple-gray-50">
+        <div class="animate-bounce">
+            <svg class="w-8 h-8 text-apple-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Nations Section -->
+    <section class="py-20 md:py-32 px-6 bg-apple-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-20 animate-fade-in-up">
+                <h2 class="text-4xl md:text-6xl font-semibold text-apple-gray-900 mb-4 tracking-tight">
+                    Nations
+                </h2>
+                <p class="text-body-lg text-apple-gray-600 max-w-2xl mx-auto">
+                    Two opposing forces locked in the devastating conflict known as the One Year War
+                </p>
+            </div>
+            
+            <!-- Nations Grid -->
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-16">
+                
+                <!-- Earth Federation -->
+                <div class="animate-scale-in  ">
+                    <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 md:p-10 h-full">
+                        <!-- Flag Container -->
+                        <div class="flex justify-center mb-8">
+                            <div class="w-48 h-32 rounded-2xl overflow-hidden shadow-lg">
+                                <img src="https://picflow.media/images/6c7d9955-3f8c-4280-b9c1-6d095137af57/base/6c7d9955-3f8c-4280-b9c1-6d095137af57.webp" 
+                                     alt="Earth Federation Flag" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        
+                        <!-- Title -->
+                        <h3 class="text-2xl md:text-3xl font-semibold text-apple-gray-900 text-center mb-6 tracking-tight">
+                            Earth Federation
+                        </h3>
+                        
+                        <!-- Description -->
+                        <div class="prose max-w-none">
+                            <p class="text-apple-gray-700 leading-relaxed mb-0">
+                                The Earth Federation is the governing body of Earth and its space colonies. In the One Year War, they represent the established authority fighting against Zeon's bid for independence.
+                            </p>
+                            <br>
+                            <p class="text-apple-gray-700 leading-relaxed mb-0">
+                                The Federation fields advanced warships, experimental mobile suits like the Gundam, and relies on the White Base and its young crew to carry critical hopes for survival.
+                            </p>
+                        </div>
+                        
+                        <!-- Accent Line -->
+                        <div class="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-8"></div>
+                    </div>
+                </div>
+                
+                <!-- Principality of Zeon -->
+                <div class="animate-scale-in  ">
+                    <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 md:p-10 h-full">
+                        <!-- Flag Container -->
+                        <div class="flex justify-center mb-8">
+                            <div class="w-48 h-32 rounded-2xl overflow-hidden shadow-lg">
+                                <img src="https://picflow.media/images/cf3f0a1c-e591-451d-a541-b90ae75b2d1d/base/cf3f0a1c-e591-451d-a541-b90ae75b2d1d.webp" 
+                                     alt="Principality of Zeon Flag" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        
+                        <!-- Title -->
+                        <h3 class="text-2xl md:text-3xl font-semibold text-apple-gray-900 text-center mb-6 tracking-tight">
+                            Principality of Zeon
+                        </h3>
+                        
+                        <!-- Description -->
+                        <div class="prose max-w-none">
+                            <p class="text-apple-gray-700 leading-relaxed mb-0">
+                                The Principality of Zeon is a breakaway nation of space colonies that declared independence from the Earth Federation. Led by the ruling Zabi family, Zeon launched the One Year War seeking dominance over Earth and space.
+                            </p>
+                            <br>
+                            <p class="text-apple-gray-700 leading-relaxed mb-0">
+                                Known for their powerful mobile suits and charismatic leaders, Zeon characters often embody ambition, ideology, and the costs of militarism.
+                            </p>
+                        </div>
+                        
+                        <!-- Accent Line -->
+                        <div class="w-16 h-1 bg-red-500 rounded-full mx-auto mt-8"></div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="flex justify-center py-12 bg-white">
+        <div class="animate-bounce">
+            <svg class="w-8 h-8 text-apple-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Key Characters Section -->
+    <section class="py-20 md:py-32 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-20 animate-fade-in-up">
+                <h2 class="text-4xl md:text-6xl font-semibold text-apple-gray-900 mb-4 tracking-tight">
+                    Key Characters
+                </h2>
+                <p class="text-body-lg text-apple-gray-600 max-w-2xl mx-auto">
+                    The heroes and villains who shaped the course of the One Year War
+                </p>
+            </div>
+            
+            <!-- Federation Characters -->
+            <div class="mb-16">
+                <!-- Faction Header -->
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center justify-center bg-blue-50 rounded-full px-6 py-3">
+                        <span class="text-lg font-semibold text-blue-600 uppercase tracking-wider">Earth Federation</span>
+                    </div>
+                </div>
+                
+                <!-- Characters Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+                    
+                    
+
+                    <!-- Amuro Ray -->
+        <div class="animate-scale-in max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/3c36d3ac-adc0-48b0-81b4-ecfb501edb37/base/3c36d3ac-adc0-48b0-81b4-ecfb501edb37.webp" 
+                             alt="Amuro Ray" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Amuro Ray</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">Gundam Pilot</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">A teenage civilian who becomes the reluctant pilot of the Federation's prototype Gundam. His journey embodies ordinary people burdened with extraordinary responsibility.</p>
+                </div>
+                <div class="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-8"></div>
+           <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Federation
+                    </span>
+                </div>
+            </div>
+        </div>
+
+<!-- Bright Noa -->
+        <div class="animate-scale-in max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/b7187110-958a-4591-9339-5291928ba85d/base/b7187110-958a-4591-9339-5291928ba85d.webp" 
+                             alt="Bright Noa" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Bright Noa</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">White Base Captain</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">A young officer thrust into command after senior crew are killed. Though strict and often clashing with Amuro, he matures into a reliable leader crucial to White Base's survival.</p>
+                </div>
+                <div class="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Federation
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sayla Mass -->
+        <div class="animate-scale-in max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/ac0448fb-49b4-4506-9e9a-3ecba1bbdd60/base/ac0448fb-49b4-4506-9e9a-3ecba1bbdd60.webp" 
+                             alt="Sayla Mass" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Sayla Mass</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">G-Fighter Pilot</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">A medical student turned soldier who pilots the G-Fighter support craft. Secretly Char's sister, adding emotional complexity and divided loyalties to her role.</p>
+                </div>
+                <div class="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Federation
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kai Shiden -->
+        <div class="animate-scale-in max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/3b7bd632-067f-4914-a760-432400a09ed8/base/3b7bd632-067f-4914-a760-432400a09ed8.webp" 
+                             alt="Kai Shiden" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Kai Shiden</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">Guncannon Pilot</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">Originally a cynical civilian reluctant to fight, Kai develops from a sarcastic outsider into a dependable Guncannon pilot and trusted White Base crew member.</p>
+                </div>
+                <div class="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Federation
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hayato Kobayashi -->
+        <div class="animate-scale-in max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/8ec7082a-4297-4124-89e9-f5b7654c502a/base/8ec7082a-4297-4124-89e9-f5b7654c502a.webp" 
+                             alt="Hayato Kobayashi" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Hayato Kobayashi</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">Guntank Pilot</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">Amuro's childhood friend who pilots the Guntank artillery unit. Though quiet and often overshadowed, his determination and loyalty make him essential to White Base's defense.</p>
+                </div>
+                <div class="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Federation
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mirai Yashima -->
+        <div class="animate-scale-in max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/72919891-93b9-41ce-b310-335548c2176f/base/72919891-93b9-41ce-b310-335548c2176f.webp" 
+                             alt="Mirai Yashima" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Mirai Yashima</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">White Base Helmsman</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">From a wealthy family, Mirai proves calm and dependable under pressure as White Base's pilot. She becomes Bright's trusted partner, offering stability amidst chaos.</p>
+                </div>
+                <div class="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Federation
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ryu Jose -->
+        <div class="animate-scale-in max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/4de178ad-98de-4396-a3ff-608d5a81e869/base/4de178ad-98de-4396-a3ff-608d5a81e869.webp" 
+                             alt="Ryu Jose" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Ryu Jose</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">Core Fighter Pilot</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">A brave Federation officer who becomes a mentor figure for Amuro and the crew. Pilots the Core Fighter and provides steadying influence until his tragic sacrifice.</p>
+                </div>
+                <div class="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Federation
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fraw Bow -->
+        <div class="animate-scale-in max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/83f013bc-b541-42bb-aa27-05793b78a748/base/83f013bc-b541-42bb-aa27-05793b78a748.webp" 
+                             alt="Fraw Bow" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Fraw Bow</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">Civilian Caretaker</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">Amuro's childhood friend who takes responsibility for caring for war orphans aboard White Base. Though not a soldier, her compassion provides emotional balance for the crew.</p>
+                </div>
+                <div class="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Federation
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Haro -->
+        <div class="animate-scale-in max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/83f013bc-b541-42bb-aa27-05793b78a748/base/83f013bc-b541-42bb-aa27-05793b78a748.webp" 
+                             alt="Fraw Bow" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Haro</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">AI Robot</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">Haro—Amuro’s small spherical companion—rolls around White Base entertaining the orphans and offering simple help, a cheerful reminder of ordinary life amid war.</p>
+                </div>
+                <div class="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Federation
+                    </span>
+                </div>
+            </div>
+        </div>
+           </div>
+           </div>
+
+           
+
+           <!-- Section Divider -->
+    <div class="flex justify-center py-12 bg-white">
+        <div class="animate-bounce">
+            <svg class="w-8 h-8 text-apple-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </div>
+           <!-- Zeon Characters -->
+<div class="mb-16">
+    <!-- Faction Header -->
+    <div class="text-center mb-12">
+        <div class="inline-flex items-center justify-center bg-red-50 rounded-full px-6 py-3">
+            <span class="text-lg font-semibold text-red-600 uppercase tracking-wider">Principality of Zeon</span>
+        </div>
+    </div>
+    
+    <!-- Characters Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+        
+        <!-- Char Aznable -->
+        <div class="animate-scale-in max-w-sm w-full">
+            <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/a0ff03db-b3a0-459f-a7b8-0c0d8301f429/base/a0ff03db-b3a0-459f-a7b8-0c0d8301f429.webp" 
+                             alt="Char Aznable" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Char Aznable</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium">Red Comet Ace Pilot</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">The masked "Red Comet" of Zeon, driven by personal vengeance against the Zabi family. His rivalry with Amuro defines the series' central conflict between duty and ideology.</p>
+                </div>
+                <div class="w-16 h-1 bg-red-500 rounded-full mx-auto mt-8"></div>
+                <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Zeon
+                    </span>
+                </div>
+            </div>
+        </div>
+
+       <!-- Gihren Zabi -->
+        <div class="animate-scale-in max-w-sm w-full">
+            <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/159d616d-1b0f-42c6-9199-06b94a793939/base/159d616d-1b0f-42c6-9199-06b94a793939.webp" 
+                             alt="Gihren Zabi" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Gihren Zabi</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium">Supreme Commander</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">The eldest Zabi son and ruthless leader whose authoritarian rule drives Zeon's war against the Federation. His dictatorial ambition and rhetoric shape Zeon's militaristic ideology.</p>
+                </div>
+                <div class="w-16 h-1 bg-red-500 rounded-full mx-auto mt-8"></div>
+                
+                <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Zeon
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dozle Zabi -->
+        <div class="animate-scale-in   max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/96d39ef4-3c50-46e7-a17d-e814a238aa1c/base/96d39ef4-3c50-46e7-a17d-e814a238aa1c.webp" 
+                             alt="Dozle Zabi" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Dozle Zabi</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium">Space Fleet Commander</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">Known for his large stature and surprisingly compassionate nature, Dozle commands Zeon's space fleets. Despite family loyalty, he shows genuine care for subordinates.</p>
+                </div>
+                <div class="w-16 h-1 bg-red-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Zeon
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Garma Zabi -->
+        <div class="animate-scale-in   max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/e1f764f4-9175-4aad-8d50-bf5a5361ed2d/base/e1f764f4-9175-4aad-8d50-bf5a5361ed2d.webp" 
+                             alt="Garma Zabi" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Garma Zabi</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium">Earth Forces Commander</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">The youngest Zabi sibling who leads Zeon's Earth operations. His manipulation by Char becomes a pivotal turning point that reshapes the war's trajectory.</p>
+                </div>
+                <div class="w-16 h-1 bg-red-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Zeon
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kycilia Zabi -->
+        <div class="animate-scale-in   max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/3620ff77-b941-45e3-834b-659097203b8c/base/3620ff77-b941-45e3-834b-659097203b8c.webp" 
+                             alt="Kycilia Zabi" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Kycilia Zabi</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium">Intelligence Commander</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">The only Zabi daughter, sharp and calculating in her ambitions. She schemes against her brothers while seeking to advance her own influence within Zeon's power structure.</p>
+                </div>
+                <div class="w-16 h-1 bg-red-500 rounded-full mx-auto mt-8"></div>
+           <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Zeon
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Degwin Sodo Zabi -->
+        <div class="animate-scale-in   max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/10084b8f-38b4-40e2-8a6f-d90409ac9727/base/10084b8f-38b4-40e2-8a6f-d90409ac9727.webp" 
+                             alt="Degwin Sodo Zabi" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Degwin Sodo Zabi</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium">Sovereign of Zeon</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">The Zabi patriarch who initially sought independence but gradually lost control as his son Gihren pushed the war to extremes. His conflicts with his children reveal Zeon's fractures.</p>
+                </div>
+                <div class="w-16 h-1 bg-red-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Zeon
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- M'Quve -->
+        <div class="animate-scale-in   max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/10084b8f-38b4-40e2-8a6f-d90409ac9727/base/10084b8f-38b4-40e2-8a6f-d90409ac9727.webp" 
+                             alt="M'Quve" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">M'Quve</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium">Base Commander</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">Colonel in Zeon's Assault Mobile Force who commanded mining operations in occupied Eastern Europe during the One Year War.</p>
+                </div>
+                <div class="w-16 h-1 bg-red-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Zeon
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ramba Ral -->
+        <div class="animate-scale-in   max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/e9a4053b-6556-4a4f-a745-40aef833258c/base/e9a4053b-6556-4a4f-a745-40aef833258c.webp" 
+                             alt="Ramba Ral" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Ramba Ral</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium">Gouf Pilot</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">A veteran soldier who commands respect from allies and enemies alike. Unlike many Zeon officers, he values honor and fair combat, making him a sympathetic antagonist.</p>
+                </div>
+                <div class="w-16 h-1 bg-red-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Zeon
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crowley Hamon -->
+        <div class="animate-scale-in   max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/79558607-cf80-47e3-bf97-39f58b6696b3/base/79558607-cf80-47e3-bf97-39f58b6696b3.webp" 
+                             alt="Crowley Hamon" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Crowley Hamon</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium">Squad Leader</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">Ramba Ral's devoted companion who assumes command after his death and leads a final, tragic assault. Her actions underscore the loyalty and sacrifice of Zeon soldiers.</p>
+                </div>
+                <div class="w-16 h-1 bg-red-500 rounded-full mx-auto mt-8"></div>
+            <!-- Nation Pill -->
+                <div class="absolute bottom-4 right-4">
+                     <span class="inline-flex items-center bg-apple-gray-100 text-apple-gray-600 px-2 py-1 rounded-full text-xs font-medium">
+                        Zeon
+                    </span>
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="flex justify-center py-12 bg-white">
+        <div class="animate-bounce">
+            <svg class="w-8 h-8 text-apple-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Earth Federation Mobile Suits Section -->
+    <section class="py-20 md:py-32 px-6 bg-apple-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-20 animate-fade-in-up">
+                <h2 class="text-4xl md:text-6xl font-semibold text-apple-gray-900 mb-4 tracking-tight">
+                    Mobile Suits
+                </h2>
+                <p class="text-body-lg text-apple-gray-600 max-w-2xl mx-auto">
+                    Mobile suits are piloted humanoid weapons used by both Zeon and the Earth Federation—agile platforms that condense heavy firepower into a single cockpit, making wars hinge on pilots, logistics, and technology alike.
+                </p>
+            </div>
+            
+            <!-- Federation Characters -->
+            <div class="mb-16">
+                <!-- Faction Header -->
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center justify-center bg-blue-50 rounded-full px-6 py-3">
+                        <span class="text-lg font-semibold text-blue-600 uppercase tracking-wider">Earth Federation</span>
+                    </div>
+                </div>
+                
+                <!-- Characters Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+                    
+                    
+
+                    <!-- Amuro Ray -->
+        <div class="animate-scale-in max-w-sm w-full">
+             <div class="bg-white rounded-3xl shadow-xl border border-apple-gray-100 p-8 h-full relative">
+                <div class="flex justify-center mb-6">
+                    <div class="w-48 h-48 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picflow.media/images/3c36d3ac-adc0-48b0-81b4-ecfb501edb37/base/3c36d3ac-adc0-48b0-81b4-ecfb501edb37.webp" 
+                             alt="Amuro Ray" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Amuro Ray</h3>
+                <div class="text-center mb-6">
+                    <span class="inline-flex items-center justify-center bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">Gundam Pilot</span>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <p class="text-apple-gray-700 leading-relaxed text-center mb-0">A teenage civilian who becomes the reluctant pilot of the Federation's prototype Gundam. His journey embodies ordinary people burdened with extraordinary responsibility.</p>
+                </div>
+                <div class="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-8"></div>
+            </div>
+        </div>
+
+    <!-- JavaScript for Scroll Animations -->
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0s';
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with animation classes
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.animate-fade-in-up, .animate-scale-in, .animate-fade-in');
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
