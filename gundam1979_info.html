@@ -3,852 +3,1579 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Suit Gundam 1979</title>
+    <title>Mobile Suit Gundam 1979 - Apple Style</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'dark-bg': '#0a0a0a',
-                        'dark-card': '#1a1a1a',
-                        'dark-border': '#2a2a2a',
-                        'accent-blue': '#3b82f6',
-                        'accent-red': '#ef4444',
-                        'text-primary': '#f8fafc',
-                        'text-secondary': '#94a3b8',
-                        'text-muted': '#64748b'
+                        'apple-gray': {
+                            50: '#f9fafb',
+                            100: '#f3f4f6',
+                            200: '#e5e7eb',
+                            300: '#d1d5db',
+                            400: '#9ca3af',
+                            500: '#6b7280',
+                            600: '#4b5563',
+                            700: '#374151',
+                            800: '#1f2937',
+                            900: '#111827'
+                        }
                     },
                     fontFamily: {
-                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                        'apple': ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'sans-serif']
+                    },
+                    fontSize: {
+                        'hero': ['7rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+                        'hero-sm': ['4rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+                        'subtitle': ['1.75rem', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
+                        'body-lg': ['1.125rem', { lineHeight: '1.6' }]
                     },
                     animation: {
-                        'fade-in': 'fade-in 0.6s ease-out',
-                        'slide-up': 'slide-up 0.8s ease-out'
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out'
                     }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        @keyframes fade-in {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(40px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
         }
         
-        @keyframes slide-up {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
-        .glass-effect {
-            background: rgba(26, 26, 26, 0.8);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        @keyframes scaleIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.95);
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1);
+            }
         }
         
-        .hover-lift {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Apple-style blur effect */
+        .backdrop-blur-apple {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
         }
         
-        .hover-lift:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        /* Smooth transitions */
+        * {
+            transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
         }
         
-        .image-placeholder {
-            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-            border: 1px solid #2a2a2a;
-        }
-        
-        .text-gradient {
-            background: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .fade-in-element {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+ /* 3D Carousel Styles */
+.carousel-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
-.fade-in-active {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
+.wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
 }
 
+.inner {
+    --w: 160px;
+    --h: 160px;
+    --translateZ: 220px;
+    --rotateX: -8deg;
+    --perspective: 1400px;
+    position: absolute;
+    width: var(--w);
+    height: var(--h);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) perspective(var(--perspective)) rotateX(var(--rotateX));
+    transform-style: preserve-3d;
+    animation: rotating 25s linear infinite;
+}
+
+@keyframes rotating {
+    from {
+        transform: translate(-50%, -50%) perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(360deg);
+    }
+}
+
+.card {
+    position: absolute;
+    border: 1.5px solid rgba(var(--color-card), 0.8);
+    border-radius: 16px;
+    overflow: hidden;
+    inset: 0;
+    transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+ .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #3b82f6, #1e40af);
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 15px;
+            top: 24px;
+            width: 20px;
+            height: 20px;
+            background: #3b82f6;
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+            z-index: 10;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 20px;
+        }
+        .timeline-item:hover .timeline-dot {
+            background: #1e40af;
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+        .timeline-item:hover .timeline-content {
+            transform: translateX(8px);
+            transition: all 0.3s ease;
+        }
     </style>
-</head>
-<body class="bg-dark-bg text-text-primary font-sans antialiased">
-    <!-- Floating Navigation 
-    <nav class="fixed top-6 right-6 z-50 glass-effect rounded-2xl p-4">
-        <div class="flex flex-col space-y-3">
-            <a href="#federation" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-sm font-medium">Federation</a>
-            <a href="#zeon" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-sm font-medium">Zeon</a>
-            <a href="#suits" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-sm font-medium">Mobile Suits</a>
-        </div>
-    </nav>-->
 
-<!-- Floating Navigation -->
-<nav class="fixed top-6 right-6 z-50">
-    <!-- Desktop Navigation -->
-    <div class="hidden md:flex glass-effect rounded-2xl px-4 py-2">
-        <div class="flex items-center space-x-3">
-            <!-- Navigation Icon -->
-            <svg class="w-4 h-4 text-text-secondary" fill="none" stroke="#16a34a" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-            
-            <!-- Vertical Divider -->
-            <div class="h-4 w-px bg-text-secondary opacity-30"></div>
-            
-            <!-- Navigation Links -->
-            <a href="#federation" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-sm font-medium">Federation</a>
-            <div class="h-3 w-px bg-text-secondary opacity-30"></div>
-            <a href="#zeon" class="text-text-secondary hover:text-accent-red transition-colors duration-200 text-sm font-medium">Zeon</a>
-            <div class="h-3 w-px bg-text-secondary opacity-30"></div>
-            <a href="#suits-federation" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-sm font-medium">Mobile Suits Federation</a>
-            <div class="h-3 w-px bg-text-secondary opacity-30"></div>
-            <a href="#suits-zeon" class="text-text-secondary hover:text-accent-red transition-colors duration-200 text-sm font-medium">Mobile Suits Zeon</a>
-        </div>
-    </div>
-
-    <!-- Mobile Hamburger Menu -->
-    <div class="md:hidden">
-        <button id="mobile-menu-button" class="glass-effect rounded-2xl p-3">
-            <svg class="w-6 h-6 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
-        
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden absolute top-16 right-0 glass-effect rounded-2xl p-4 min-w-48">
-            <div class="flex flex-col space-y-3">
-                <a href="#federation" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-sm font-medium mobile-link">Federation</a>
-                <a href="#zeon" class="text-text-secondary hover:text-accent-red transition-colors duration-200 text-sm font-medium mobile-link">Zeon</a>
-                <a href="#suits-federation" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-sm font-medium mobile-link">Mobile Suits Federation</a>
-                <a href="#suits-zeon" class="text-text-secondary hover:text-accent-red transition-colors duration-200 text-sm font-medium mobile-link">Mobile Suits Zeon</a>
-            </div>
-        </div>
-    </div>
-</nav>
-
-<!-- Top Left Copyright -->
-<div class="fixed top-6 left-6 z-50 glass-effect rounded-2xl px-4 py-2">
+    <!-- Top Left Copyright -->
+<div class="fixed bottom-6 left-6 z-50 bg-apple-gray-100 rounded-2xl px-4 py-2">
     <div class="flex items-center">
         <span class="text-text-secondary text-xs font-medium"> </span>
         <a href="https://www.brianflexmore.com" target="_blank" class="text-text-secondary hover:text-accent-blue transition-colors duration-200 text-xs font-medium no-underline">Brian Flexmore</a>
     </div>
 </div>
 
-    <!-- Header -->
-<header class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative pt-16">
-    <div class="max-w-5xl mx-auto animate-fade-in">
-        <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold text-gradient mb-6">
-            MOBILE SUIT GUNDAM
-        </h1>
-        <p class="text-3xl md:text-5xl font-light text-text-secondary mb-8">1979</p>
-        <div class="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-            <div class="aspect-[1/1.4] rounded-xl overflow-hidden">
-                <img src="https://picflow.media/images/d60842a2-8a3d-42e0-8e5e-52c0a5c6ead6/base/d60842a2-8a3d-42e0-8e5e-52c0a5c6ead6.webp" alt="Image 1" class="w-full h-full object-cover">
+</head>
+
+
+<body class="bg-[#f5f5f7] text-apple-gray-900 font-apple antialiased">
+    
+    <!-- Hero Section with 3D Carousel -->
+    <header
+        class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative bg-[#f5f5f7]">
+        <div class="max-w-6xl mx-auto animate-fade-in-up">
+            <!-- Main Title -->
+            <h1 class="text-hero-sm md:text-hero font-semibold text-apple-gray-900 mb-6 tracking-tight">
+                Mobile Suit<br>
+                <span class="text-apple-gray-600">Gundam</span>
+            </h1>
+    
+            <!-- Year Badge -->
+            <div
+                class="inline-flex items-center justify-center bg-apple-gray-200 rounded-full px-6 py-2 mb-2 animate-scale-in">
+                <span class="text-subtitle font-medium text-apple-gray-700">1979</span>
             </div>
-            <div class="aspect-[1/1.4] rounded-xl overflow-hidden">
-                <img src="https://picflow.media/images/f7391fe9-2dfb-4383-b2d0-c81e4eb5d285/base/f7391fe9-2dfb-4383-b2d0-c81e4eb5d285.webp" alt="Image 2" class="w-full h-full object-cover">
-            </div>
-            <div class="aspect-[1/1.4] rounded-xl overflow-hidden">
-                <img src="https://picflow.media/images/9dfa3f10-f6c8-49c7-b245-6869608158db/base/9dfa3f10-f6c8-49c7-b245-6869608158db.webp" alt="Image 3" class="w-full h-full object-cover">
+        
+        <!-- 3D Rotating Carousel -->
+        <div class="carousel-container mb-12 animate-fade-in" style="height: 500px; width: 100%; max-width: 900px; margin: 0 auto;">
+            <div class="wrapper">
+                <div class="inner" style="--quantity: 9;">
+                    <div class="card" style="--index: 0;--color-card: 75, 85, 99;">
+                        <img src="https://picflow.media/images/3c36d3ac-adc0-48b0-81b4-ecfb501edb37/base/3c36d3ac-adc0-48b0-81b4-ecfb501edb37.webp" 
+                             alt="Gundam Image 1" class="img">
+                    </div>
+                    <div class="card" style="--index: 1;--color-card: 75, 85, 99;">
+                        <img src="https://picflow.media/images/resized/l1280/5feda3bb-a224-4dd4-8beb-a0cff4496b1b.webp" 
+                             alt="Gundam Image 2" class="img">
+                    </div>
+                    <div class="card" style="--index: 2;--color-card: 75, 85, 99;">
+                        <img src="https://picflow.media/images/resized/l1280/41a28b21-6609-4155-a2ec-1c937e94c2c7.webp" 
+                             alt="Gundam Image 3" class="img">
+                    </div>
+                    <div class="card" style="--index: 3;--color-card: 75, 85, 99;">
+                        <img src="https://picflow.media/images/resized/l1280/9da62c56-e299-4a90-bf97-d5a5d6a30231.webp" 
+                             alt="RX-78-2 Gundam" class="img">
+                    </div>
+                    <div class="card" style="--index: 4;--color-card: 75, 85, 99;">
+                        <img src="https://picflow.media/images/a0ff03db-b3a0-459f-a7b8-0c0d8301f429/base/a0ff03db-b3a0-459f-a7b8-0c0d8301f429.webp" 
+                             alt="MS-06 Zaku II" class="img">
+                    </div>
+                    <div class="card" style="--index: 5;--color-card: 75, 85, 99;">
+                        <img src="https://picflow.media/images/resized/l1920mi/1f00af08-840d-4605-9427-eb8cd578fb0d.webp" 
+                             alt="RX-77-2 Guncannon" class="img">
+                    </div>
+                    <div class="card" style="--index: 6;--color-card: 75, 85, 99;">
+                        <img src="https://picflow.media/images/resized/l1920mi/92c67ea1-f9af-47a1-acbf-b06b381ec48d.webp" 
+                             alt="RX-75-4 Guntank" class="img">
+                    </div>
+                    <div class="card" style="--index: 7;--color-card: 75, 85, 99;">
+                        <img src="https://picflow.media/images/resized/l1920mi/4eac1eaf-0f62-4043-9d14-74b4b2342e83.webp" 
+                             alt="MS-07B Gouf" class="img">
+                    </div>
+                    <div class="card" style="--index: 8;--color-card: 75, 85, 99;">
+                        <img src="https://picflow.media/images/resized/l1920mi/241c42c4-6596-419e-b8b6-388477feceaa.webp" 
+                             alt="MS-14 Gelgoog" class="img">
+                    </div>
+                    <div class="card" style="--index: 9;--color-card: 75, 85, 99;">
+                        <img src="https://picflow.media/images/resized/l1920mi/b1591dd6-26d7-4bd5-a74a-e4dbcfb4c73a.webp" 
+                             alt="MS-09 Dom" class="img">
+                    </div>
+                </div>
             </div>
         </div>
+        
+        <!-- Tagline 
+        <p class="text-body-lg text-apple-gray-600 max-w-2xl mx-auto animate-fade-in">
+            The series that revolutionized mecha anime and introduced the world to the Universal Century
+        </p> -->
     </div>
-</header>
+    
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <svg class="w-6 h-6 text-apple-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+    </div>
+    </header>
+ <!-- Section Divider -->
+    <div class="flex justify-center pt-1 pb-2 bg-white">
+    </div>
 
     <!-- Synopsis Section -->
-<section class="py-10 px-4 border-t border-dark-border">
-    <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-10 animate-slide-up">
-            <h2 class="text-4xl md:text-5xl font-bold text-text-primary mb-6">
-                Synopsis
-            </h2>
-            <h3 class="text-2xl md:text-3xl font-semibold text-green-500 mb-8">
-                ORIGINAL SERIES 1979
-            </h3>
-            
-            <!-- Card Container -->
-            <div class="bg-dark-card rounded-3xl p-5 border border-dark-border max-w-5xl mx-auto">
-                <div class="flex justify-center">
-                    <!-- Description -->
-                    <div class="text-left">
-                        <p class="text-base md:text-lg text-text-secondary leading-relaxed">
-                            Set in Universal Century 0079, the series throws a teenage civilian, Amuro Ray, into the deep end when a surprise attack on his space colony destroys his home and forces him to pilot the Earth Federation's new prototype mecha, the RX-78-2 Gundam, just to survive. What follows is a gritty space-war drama aboard the warship White Base, populated by a rag-tag crew of civilians and soldiers fleeing Zeon forces, navigating political intrigue, shifting loyalties, and the brutal costs of war.
-                        </p>
-                    </div>
-                </div>
+    <section class="pt-4 pb-12 md:pt-14 md:pb-14 px-6 bg-[#f5f5f7]">
+        <div class="max-w-5xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-12 animate-fade-in-up">
+                <h2 class="text-4xl md:text-6xl font-semibold text-apple-gray-900 mb-4 tracking-tight">
+                    Storyline
+                </h2>
+                <!-- <div class="inline-flex items-center justify-center bg-none rounded-full px-4 py-1">
+                            <span class="text-base md:text-lg font-medium text-apple-gray-800 uppercase tracking-none">Universal Century</span>
+                        </div> -->
             </div>
-        </div>
-    </div>
-</section>
-
-    <!-- Earth Federation Section -->
-<section id="federation" class="py-20 px-4">
-    <div class="max-w-7xl mx-auto">
-        <!-- Section Header -->
-        <div class="text-center mb-20 animate-slide-up">
-            <h2 class="text-4xl md:text-5xl font-bold text-text-primary mb-6">
-                Primary Characters
-            </h2>
-            <h3 class="text-2xl md:text-3xl font-semibold text-accent-blue mb-8">
-                EARTH FEDERATION
-            </h3>
-            
-            <!-- Card Container -->
-            <div class="bg-dark-card rounded-3xl p-5 border border-dark-border max-w-5xl mx-auto">
-                <div class="flex flex-col md:flex-row gap-5 items-center">
-                    <!-- Image -->
-                    <div class="w-56 h-36 flex-shrink-0 rounded-2xl overflow-hidden">
-                        <img src="https://picflow.media/images/6c7d9955-3f8c-4280-b9c1-6d095137af57/base/6c7d9955-3f8c-4280-b9c1-6d095137af57.webp" alt="Earth Flag" class="w-full h-full object-cover">
-                    </div>
-                    
-                    <!-- Description -->
-                    <div class="flex-grow text-left">
-                        <p class="text-base md:text-lg text-text-secondary leading-relaxed">
-                            The Earth Federation is the governing body of Earth and its space colonies. In the One Year War, they represent the established authority fighting against Zeon's bid for independence. The Federation fields advanced warships, experimental mobile suits like the Gundam, and relies on the White Base and its young crew to carry critical hopes for survival.
-                        </p>
-                    </div>
+    
+            <!-- Main Content Card -->
+            <div class="p-8 md:p-3 animate-scale-in">
+                <div class="prose prose-lg md:prose-xl max-w-none">
+                    <p class="text-base md:text-xl tracking-normal text-left font-medium text-apple-gray-700 leading-snug mb-0">
+                        In Universal Century 0079, the Principality of Zeon declares independence from the Earth Federation,
+                        launching the One Year War. Zeon quickly gains the upper hand with their revolutionary humanoid weapons, the
+                        mobile suits.
+                    </p>
+                    <br>
+                    <p class="text-base md:text-xl tracking-normal text-left font-medium text-apple-gray-700 leading-snug mb-0">
+                        The Earth Federation secretly develops its own mobile suit prototypes, including the RX-78-2 Gundam, at the
+                        neutral Side 7 colony. When Zeon's ace pilot, Char Aznable, discovers this, his reconnaissance attack on
+                        Side 7 kills most of the colony's inhabitants.
+                    </p>
+                    <br>
+                    <p class="text-base md:text-xl tracking-normal text-left font-medium text-apple-gray-700 leading-snug mb-0">
+                        In the chaos, teenage mechanic Amuro Ray stumbles upon the Gundam and pilots it successfully, fending off
+                        the attack. He and other survivors are forced to join the crew of the assault carrier White Base. Now thrust
+                        into the war, Amuro must learn to fight for survival as the White Base crew, largely civilians, attempts to
+                        make their perilous journey to safety, all while being relentlessly pursued by Char Aznable.
+                    </p>
                 </div>
-            </div>
-        </div>
-
-            <!-- Character Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Amuro Ray -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/3c36d3ac-adc0-48b0-81b4-ecfb501edb37/base/3c36d3ac-adc0-48b0-81b4-ecfb501edb37.webp" alt="Amuro Ray" class="w-full h-full object-cover">
-                        </div>
-                        
-                            <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Amuro Ray</h3>
-                            <p class="text-accent-blue mb-4 font-medium text-center">Gundam Pilot</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                A teenage civilian caught in war, Amuro becomes the reluctant pilot of the Federation's prototype Gundam. Intelligent but introverted, he struggles with the trauma of combat while slowly growing into a capable soldier. His journey is central to the theme of ordinary people burdened with extraordinary responsibility.
-                            </p>
-                        </div>
+    
+                <!-- Stat Section 
+                 <div class="flex flex-wrap justify-center gap-12 mt-12 pt-2">
+                <div class="grid grid-cols-2 gap-10 mt-12 pt-2"> 
+                        <div class="text-center bg-apple-gray-200 rounded-2xl p-5">
+                        <div class="text-xl font-semibold text-apple-gray-900 mb-0">43</div>
+                        <div class="text-sm text-apple-gray-600 font-medium">Episodes</div>
                     </div>
-             
-
-                <!-- Bright Noa -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/b7187110-958a-4591-9339-5291928ba85d/base/b7187110-958a-4591-9339-5291928ba85d.webp" alt="Bright Noa" class="w-full h-full object-cover">
-                        </div>
-                      
-                            <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Bright Noa</h3>
-                            <p class="text-accent-blue mb-4 font-medium text-center">White Base Captain</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                A young officer suddenly placed in command after senior crew are killed. Bright is strict, serious, and often clashes with Amuro, but he matures into a reliable leader. Though not a mobile suit pilot, his leadership of White Base is pivotal in the Federation's survival and counterattacks.
-                            </p>
-                        </div>
+    
+                    <div class="text-center bg-apple-gray-200 rounded-2xl p-5">
+                        <div class="text-xl font-semibold text-apple-gray-900 mb-0">1979</div>
+                        <div class="text-sm text-apple-gray-600 font-medium">Release</div>
                     </div>
-            
-
-                <!-- Sayla Mass -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/ac0448fb-49b4-4506-9e9a-3ecba1bbdd60/base/ac0448fb-49b4-4506-9e9a-3ecba1bbdd60.webp" alt="Sayla Mass" class="w-full h-full object-cover">
-                        </div>
-                       
-                            <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Sayla Mass</h3>
-                            <p class="text-accent-blue mb-4 font-medium text-center">G-Fighter Pilot</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                A medical student turned soldier, Sayla becomes an important White Base crew member and occasionally pilots the G-Fighter support craft alongside the Gundam. Secretly, she is Char Aznable's sister, adding emotional complexity and divided loyalties to her role.
-                            </p>
-                        </div>
-                    </div>
-              
-
-                <!-- Kai Shiden -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/3b7bd632-067f-4914-a760-432400a09ed8/base/3b7bd632-067f-4914-a760-432400a09ed8.webp" alt="Kai Shiden" class="w-full h-full object-cover">
-                        </div>
-                       
-                            <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Kai Shiden</h3>
-                            <p class="text-accent-blue mb-4 font-medium text-center">Guncannon Pilot</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                Originally a cynical civilian with little interest in fighting, Kai reluctantly joins the battle by piloting the Guncannon mobile suit. Over time, he proves his bravery and develops from a sarcastic outsider into a dependable member of the White Base crew.
-                            </p>
-                        </div>
-                    </div>
-            
-
-                <!-- Hayato Kobayashi -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/8ec7082a-4297-4124-89e9-f5b7654c502a/base/8ec7082a-4297-4124-89e9-f5b7654c502a.webp" alt="Hayato Kobayashi" class="w-full h-full object-cover">
-                        </div>
-                      
-                            <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Hayato Kobayashi</h3>
-                            <p class="text-accent-blue mb-4 font-medium text-center">Guntank Pilot</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                A childhood friend of Amuro, Hayato steps up to pilot the Guntank—a hybrid artillery mobile suit. Though quiet and often overshadowed by others, his determination and loyalty make him an essential part of White Base's defense team. His courage allows him to find purpose despite being thrust into battle.
-                            </p>
-                        </div>
-                    </div>
-            
-
-                <!-- Mirai Yashima -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/72919891-93b9-41ce-b310-335548c2176f/base/72919891-93b9-41ce-b310-335548c2176f.webp" alt="Mirai Yashima" class="w-full h-full object-cover">
-                        </div>
-                     
-                            <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Mirai Yashima</h3>
-                            <p class="text-accent-blue mb-4 font-medium text-center">White Base Helmsman</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                Coming from a wealthy family, Mirai proves calm and dependable under pressure. She serves as White Base's pilot/helmsman and later becomes Bright Noa's trusted partner, offering stability and empathy amidst chaos.
-                            </p>
-                        </div>
-                    </div>
-            
-
-                <!-- Ryu Jose -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/4de178ad-98de-4396-a3ff-608d5a81e869/base/4de178ad-98de-4396-a3ff-608d5a81e869.webp" alt="Ryu Jose" class="w-full h-full object-cover">
-                        </div>
-                    
-                            <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Ryu Jose</h3>
-                            <p class="text-accent-blue mb-4 font-medium text-center">White Base Pilot</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                A brave Federation officer, Ryu becomes a mentor figure for Amuro and the crew. He often pilots the Core Fighter and provides a steadying influence until his tragic sacrifice during the war.
-                            </p>
-                        </div>
-                    </div>
-           
-
-                <!-- Fraw Bow -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/83f013bc-b541-42bb-aa27-05793b78a748/base/83f013bc-b541-42bb-aa27-05793b78a748.webp" alt="Fraw Bow" class="w-full h-full object-cover">
-                        </div>
-                     
-                            <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Fraw Bow</h3>
-                            <p class="text-accent-blue mb-4 font-medium text-center">White Base Civilian Caretaker</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                Amuro's childhood friend, Fraw Bow takes on the responsibility of caring for the war orphans aboard White Base. Though not a soldier, her compassion provides emotional balance for the crew during their struggles.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <div></div>
+                    <div></div>
+                </div> -->
+    
     
     </section>
 
-    <!-- Zeon Section -->
-<section id="zeon" class="py-24 px-4 border-t border-dark-border">
-    <div class="max-w-7xl mx-auto">
-        <!-- Section Header -->
-        <div class="text-center mb-20 animate-slide-up">
-            <h2 class="text-4xl md:text-5xl font-bold text-text-primary mb-6">
-                Primary Characters
-            </h2>
-            <h3 class="text-2xl md:text-3xl font-semibold text-accent-red mb-8">
-                PRINCIPALITY OF ZEON
-            </h3>
-            
-            <!-- Card Container -->
-            <div class="bg-dark-card rounded-3xl p-5 border border-dark-border max-w-5xl mx-auto">
-                <div class="flex flex-col md:flex-row gap-5 items-center">
-                    <!-- Image -->
-                    <div class="w-56 h-36 flex-shrink-0 rounded-2xl overflow-hidden">
-                        <img src="https://picflow.media/images/cf3f0a1c-e591-451d-a541-b90ae75b2d1d/base/cf3f0a1c-e591-451d-a541-b90ae75b2d1d.webp" alt="Zeon Flag" class="w-full h-full object-cover">
-                    </div>
+    <!-- Section Divider -->
+    <div class="flex justify-center pt-1 pb-2 bg-white">
+    </div>
+
+    <!-- Factions Section -->
+    <section class="pt-4 pb-12 md:pt-14 md:pb-14 px-6 bg-[#f5f5f7]">
+        <div class="max-w-6xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-20 animate-fade-in-up">
+                <h2 class="text-4xl md:text-6xl font-semibold text-apple-gray-900 mb-4 tracking-tight">
+                    Nations At War
+                </h2>
+                <p class="text-lg md:text-2xl text-center text-apple-gray-900 max-w-3xl mx-auto">
                     
-                    <!-- Description -->
-                    <div class="flex-grow text-left">
-                        <p class="text-base md:text-lg text-text-secondary leading-relaxed">
-                            The Principality of Zeon is a breakaway nation of space colonies that declared independence from the Earth Federation. Led by the ruling Zabi family, Zeon launched the One Year War seeking dominance over Earth and space. Known for their powerful mobile suits and charismatic leaders, Zeon characters often embody ambition, ideology, and the costs of militarism.
-                        </p>
+                </p>
+            </div>
+    
+            <!-- Nations Grid -->
+            <div class="flex flex-wrap justify-center gap-12 lg:gap-12">
+    
+                <div class="w-full max-w-md">
+    
+                    <!-- Earth Federation -->
+                    <div class="animate-scale-in  ">
+                        <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-4 md:p-6 h-full">
+                            <!-- Flag Container -->
+                            <div class="flex justify-center mb-8">
+                                <div class="w-full overflow-hidden rounded-2xl shadow-none">
+                                    <img src="https://picflow.media/images/resized/l1280/876d3d1d-45d1-448a-ad15-31cf5f34bb86.jpg"
+                                        alt="Earth Federation Flag" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+    
+                            <!-- Title -->
+                            <h3
+                                class="text-2xl md:text-3xl font-semibold text-apple-gray-900 text-center mb-4 tracking-tight">
+                                Earth Federation
+                            </h3>
+    
+                            <!-- Description -->
+                            <div class="prose max-w-none">
+                                <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base md:text-lg text-left mb-0">
+                                    The Earth Federation is the governing body of Earth and its space colonies. In the One
+                                    Year War, they represent
+                                    the established authority fighting against Zeon's bid for independence.
+                                </p>
+                                <br>
+                                <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base md:text-lg text-left mb-0">
+                                    The Federation fields advanced warships, experimental mobile suits like the Gundam, and
+                                    relies on the White Base
+                                    and its young crew to carry critical hopes for survival.
+                                </p>
+                            </div>
+    
+                            <!-- Accent Line -->
+                            <div class="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-8"></div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="w-full max-w-md">
+                    <!-- Principality of Zeon -->
+                    <div class="animate-scale-in">
+                        <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-4 md:p-6 h-full">
+                            <!-- Flag Container -->
+                            <div class="flex justify-center mb-8">
+                                <div class="w-full overflow-hidden shadow-none rounded-2xl">
+                                    <img src="https://picflow.media/images/resized/l1280/7d298cf4-7b36-4806-bc2f-324e90222dbc.jpg"
+                                        alt="Principality of Zeon Flag" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+    
+                            <!-- Title -->
+                            <h3
+                                class="text-2xl md:text-3xl font-semibold text-apple-gray-900 text-center mb-4 tracking-tight">
+                                Principality of Zeon
+                            </h3>
+    
+                            <!-- Description -->
+                            <div class="prose max-w-none">
+                                <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base md:text-lg text-left mb-0">
+                                    The Principality of Zeon is a breakaway nation of space colonies that declared
+                                    independence from the Earth Federation. Led by the ruling Zabi family, Zeon launched the
+                                    One Year War seeking dominance over Earth and space.
+                                </p>
+                                <br>
+                                <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base md:text-lg text-left mb-0">
+                                    Known for their powerful mobile suits and charismatic leaders, Zeon characters often
+                                    embody ambition and militarism.
+                                </p>
+                            </div>
+    
+                            <!-- Accent Line -->
+                            <div class="w-16 h-1 bg-red-500 rounded-full mx-auto mt-8"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-            <!-- Character Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <!-- Char Aznable -->
-    <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                <img src="https://picflow.media/images/a0ff03db-b3a0-459f-a7b8-0c0d8301f429/base/a0ff03db-b3a0-459f-a7b8-0c0d8301f429.webp" alt="Char Aznable" class="w-full h-full object-cover">
-            </div>
-            <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Char Aznable</h3>
-            <p class="text-accent-red mb-4 font-medium text-center">MS-06S Pilot</p>
-            <p class="text-text-secondary leading-relaxed">
-                Known as the "Red Comet," Char is a masked ace pilot of Zeon. Char is charismatic, cunning, and driven by personal vengeance against the Zabi family who rule Zeon. His rivalry with Amuro provides much of the dramatic tension in the story, symbolizing ideological conflict as well as personal vendetta.
-            </p>
-        </div>
+    <!-- Section Divider -->
+    <div class="flex justify-center pt-1 pb-2 bg-white">
     </div>
 
-    <!-- Gihren Zabi -->
-    <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                <img src="https://picflow.media/images/159d616d-1b0f-42c6-9199-06b94a793939/base/159d616d-1b0f-42c6-9199-06b94a793939.webp" alt="Gihren Zabi" class="w-full h-full object-cover">
+    <!-- Key Characters Section -->
+     <section class="pt-4 pb-12 md:pt-14 md:pb-14 px-6 bg-[#f5f5f7]">
+        <div class="max-w-6xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-8 animate-fade-in-up">
+                <h2 class="text-4xl md:text-6xl font-semibold text-apple-gray-900 mb-4 tracking-tight">
+                    Main Characters
+                </h2>
+               <!-- <p class="text-xl font-semibold text-apple-gray-600 max-w-2xl mx-auto">
+                    The heroes and villains who shaped the course of the One Year War
+                </p> -->
             </div>
-            <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Gihren Zabi</h3>
-            <p class="text-accent-red mb-4 font-medium text-center">Zeon Supreme Commander</p>
-            <p class="text-text-secondary leading-relaxed">
-                The eldest son of the Zabi family, Gihren is a ruthless leader whose authoritarian rule drives Zeon's war against the Federation. He is often compared to real-world dictators in his rhetoric and ambition.
-            </p>
-        </div>
-    </div>
-
-
-                <!-- Dozle Zabi -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/96d39ef4-3c50-46e7-a17d-e814a238aa1c/base/96d39ef4-3c50-46e7-a17d-e814a238aa1c.webp" alt="Char Aznable" class="w-full h-full object-cover">
-                        </div>
-                        
-                            <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Dozle Zabi</h3>
-                            <p class="text-accent-red mb-4 font-medium text-center">Zeon Military Commander</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                Known for his large stature and surprisingly compassionate side, Dozle commands Zeon's space fleets. Despite his loyalty to the Zabi family, he shows genuine care for his subordinates and family, making him a more complex figure.
-                            </p>
+    
+            <!-- Federation Characters -->
+            <div class="mb-14">
+                <!-- Faction Header -->
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center justify-center bg-blue-600 rounded-full px-6 py-1">
+                        <span class="text-xl md:text-2xl font-light text-white tracking-normal">Earth Federation</span>
+                    </div>
+                </div>
+    
+                <!-- Characters Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+                
+                    <!-- Amuro Ray -->
+                    <div class="animate-scale-in max-w-sm w-full">
+                        <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                            <div class="flex justify-center mb-4">
+                                <div class="w-full rounded-2xl overflow-hidden">
+                                    <img src="https://picflow.media/images/3c36d3ac-adc0-48b0-81b4-ecfb501edb37/base/3c36d3ac-adc0-48b0-81b4-ecfb501edb37.webp"
+                                        alt="Amuro Ray" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Amuro Ray
+                            </h3>
+                            <div class="text-center mb-4">
+                                <span
+                                    class="inline-flex items-center justify-center bg-blue-50 text-blue-700 px-4 py-0.5 rounded-full text-base font-semibold">Gundam
+                                    Pilot</span>
+                            </div>
+                            <div class="prose prose-sm max-w-none">
+                                <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A teenage civilian
+                                    who
+                                    becomes the reluctant pilot of the Federation's prototype Gundam. His journey embodies ordinary
+                                    people
+                                    burdened with extraordinary responsibility.</p>
+                            </div>
+                          </div>
+                    </div>
+                
+                    <!-- Bright Noa -->
+                    <div class="animate-scale-in max-w-sm w-full">
+                        <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                            <div class="flex justify-center mb-4">
+                                <div class="w-full rounded-2xl overflow-hidden">
+                                    <img src="https://picflow.media/images/b7187110-958a-4591-9339-5291928ba85d/base/b7187110-958a-4591-9339-5291928ba85d.webp"
+                                        alt="Bright Noa" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Bright Noa
+                            </h3>
+                            <div class="text-center mb-4">
+                                <span
+                                    class="inline-flex items-center justify-center bg-blue-50 text-blue-700 px-4 py-0.5 rounded-full text-base md:text-base font-semibold">White
+                                    Base Captain</span>
+                            </div>
+                            <div class="prose prose-sm max-w-none">
+                                <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A young officer
+                                    thrust
+                                    into command after senior crew are killed. Though strict and often clashing with Amuro, he matures
+                                    into
+                                    a reliable leader crucial to White Base's survival.</p>
+                            </div>
+                            
                         </div>
                     </div>
-             
-
-                <!-- Garma Zabi -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/e1f764f4-9175-4aad-8d50-bf5a5361ed2d/base/e1f764f4-9175-4aad-8d50-bf5a5361ed2d.webp" alt="Char Aznable" class="w-full h-full object-cover">
-                        </div>
-                       
-                           <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Garma Zabi</h3>
-                           <p class="text-accent-red mb-4 font-medium text-center">Zeon Ground Forces Commander</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                The youngest of the Zabi siblings, Garma leads Zeon's Earth-based operations. Char Aznable manipulates him during his rise, leading to one of the early turning points in the series.
-                            </p>
-                        </div>
-                    </div>
-             
-
-                <!-- Degwin Sodo Zabi -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/10084b8f-38b4-40e2-8a6f-d90409ac9727/base/10084b8f-38b4-40e2-8a6f-d90409ac9727.webp" alt="Char Aznable" class="w-full h-full object-cover">
-                        </div>
-                       
-                          <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Degwin Sodo Zabi</h3>
-                            <p class="text-accent-red mb-4 font-medium text-center">Sovereign of Zeon</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                The patriarch of the Zabi family, Degwin initially sought independence for Zeon but gradually lost control as his son Gihren pushed the war to extreme measures. His conflict with his children underscores Zeon's internal fractures.
-                            </p>
+                
+                    <!-- Sayla Mass -->
+                    <div class="animate-scale-in max-w-sm w-full">
+                        <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                            <div class="flex justify-center mb-4">
+                                <div class="w-full rounded-2xl overflow-hidden">
+                                    <img src="https://picflow.media/images/ac0448fb-49b4-4506-9e9a-3ecba1bbdd60/base/ac0448fb-49b4-4506-9e9a-3ecba1bbdd60.webp"
+                                        alt="Sayla Mass" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Sayla Mass
+                            </h3>
+                            <div class="text-center mb-4">
+                                <span
+                                    class="inline-flex items-center justify-center bg-blue-50 text-blue-700 px-4 py-0.5 rounded-full text-base font-semibold">G-Fighter
+                                    Pilot</span>
+                            </div>
+                            <div class="prose prose-sm max-w-none">
+                                <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A medical student
+                                    turned soldier who pilots the G-Fighter support craft. Secretly Char's sister, adding emotional
+                                    complexity and divided loyalties to her role.</p>
+                            </div>
+                            
                         </div>
                     </div>
-             
-
-                <!-- Kycilia Zabi -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/3620ff77-b941-45e3-834b-659097203b8c/base/3620ff77-b941-45e3-834b-659097203b8c.webp" alt="Char Aznable" class="w-full h-full object-cover">
-                        </div>
-                       
-                           <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Kycilia Zabi</h3>
-                            <p class="text-accent-red mb-4 font-medium text-center">Zeon Intel & Tactical Commander</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                The only daughter of the Zabi family, Kycilia is sharp, calculating, and ambitious. She often schemes against her brothers while seeking to advance her own influence within Zeon.
-                            </p>
-                        </div>
-                    </div>
-              
-
-                <!-- Ramba Ral -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/e9a4053b-6556-4a4f-a745-40aef833258c/base/e9a4053b-6556-4a4f-a745-40aef833258c.webp" alt="Char Aznable" class="w-full h-full object-cover">
-                        </div>
-                       
-                            <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Ramba Ral</h3>
-                            <p class="text-accent-red mb-4 font-medium text-center">Zeon Officer & Mobile Suit Commander</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                A veteran soldier who commands respect from both allies and enemies, Ramba Ral pilots the Gouf mobile suit. Unlike many Zeon officers, he values honor and fair combat, making him a sympathetic antagonist.
-                            </p>
+                
+                    <!-- Kai Shiden -->
+                    <div class="animate-scale-in max-w-sm w-full">
+                        <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                            <div class="flex justify-center mb-4">
+                                <div class="w-full rounded-2xl overflow-hidden">
+                                    <img src="https://picflow.media/images/3b7bd632-067f-4914-a760-432400a09ed8/base/3b7bd632-067f-4914-a760-432400a09ed8.webp"
+                                        alt="Kai Shiden" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Kai Shiden
+                            </h3>
+                            <div class="text-center mb-4">
+                                <span
+                                    class="inline-flex items-center justify-center bg-blue-50 text-blue-700 px-4 py-0.5 rounded-full text-base font-semibold">Guncannon
+                                    Pilot</span>
+                            </div>
+                            <div class="prose prose-sm max-w-none">
+                                <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">Originally a
+                                    cynical civilian reluctant to fight, Kai develops from a sarcastic outsider into a dependable
+                                    Guncannon pilot and trusted White Base crew member.</p>
+                            </div>
+                            
                         </div>
                     </div>
-             
-
-                <!-- Crowley Hamon -->
-                <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-square mb-4 rounded-2xl overflow-hidden mx-auto">
-                            <img src="https://picflow.media/images/79558607-cf80-47e3-bf97-39f58b6696b3/base/79558607-cf80-47e3-bf97-39f58b6696b3.webp" alt="Char Aznable" class="w-full h-full object-cover">
+                
+                    <!-- Hayato Kobayashi -->
+                    <div class="animate-scale-in max-w-sm w-full">
+                        <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                            <div class="flex justify-center mb-4">
+                                <div class="w-full rounded-2xl overflow-hidden">
+                                    <img src="https://picflow.media/images/8ec7082a-4297-4124-89e9-f5b7654c502a/base/8ec7082a-4297-4124-89e9-f5b7654c502a.webp"
+                                        alt="Hayato Kobayashi" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Hayato
+                                Kobayashi</h3>
+                            <div class="text-center mb-4">
+                                <span
+                                    class="inline-flex items-center justify-center bg-blue-50 text-blue-700 px-4 py-0.5 rounded-full text-base font-semibold">Guntank
+                                    Pilot</span>
+                            </div>
+                            <div class="prose prose-sm max-w-none">
+                                <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">Amuro's childhood
+                                    friend who pilots the Guntank artillery unit. Though quiet and often overshadowed, his determination
+                                    and loyalty make him essential to White Base's defense.</p>
+                            </div>
+                            
                         </div>
-                    
-                            <h3 class="text-xl text-center font-semibold mb-3 text-text-primary">Crowley Hamon</h3>
-                            <p class="text-accent-red mb-4 font-medium text-center">Zeon Squad Lead</p>
-                            <p class="text-text-secondary leading-relaxed">
-                                Zeon Squad Lead and the devoted companion of Ramba Ral. After Ral's death, she assumes command and leads a final, tragic assault. Her actions underscore the unwavering loyalty and personal sacrifices made by Zeon soldiers.
-                            </p>
+                    </div>
+                
+                    <!-- Mirai Yashima -->
+                    <div class="animate-scale-in max-w-sm w-full">
+                        <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                            <div class="flex justify-center mb-4">
+                                <div class="w-full rounded-2xl overflow-hidden">
+                                    <img src="https://picflow.media/images/72919891-93b9-41ce-b310-335548c2176f/base/72919891-93b9-41ce-b310-335548c2176f.webp"
+                                        alt="Mirai Yashima" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Mirai
+                                Yashima</h3>
+                            <div class="text-center mb-4">
+                                <span
+                                    class="inline-flex items-center justify-center bg-blue-50 text-blue-700 px-4 py-0.5 rounded-full text-base font-semibold">White
+                                    Base Helmsman</span>
+                            </div>
+                            <div class="prose prose-sm max-w-none">
+                                <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">From a wealthy
+                                    family, Mirai proves calm and dependable under pressure as White Base's pilot. She becomes Bright's
+                                    trusted partner, offering stability amidst chaos.</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                
+                    <!-- Ryu Jose -->
+                    <div class="animate-scale-in max-w-sm w-full">
+                        <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                            <div class="flex justify-center mb-4">
+                                <div class="w-full rounded-2xl overflow-hidden">
+                                    <img src="https://picflow.media/images/4de178ad-98de-4396-a3ff-608d5a81e869/base/4de178ad-98de-4396-a3ff-608d5a81e869.webp"
+                                        alt="Ryu Jose" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Ryu Jose
+                            </h3>
+                            <div class="text-center mb-4">
+                                <span
+                                    class="inline-flex items-center justify-center bg-blue-50 text-blue-700 px-4 py-0.5 rounded-full text-base font-semibold">Core
+                                    Fighter Pilot</span>
+                            </div>
+                            <div class="prose prose-sm max-w-none">
+                                <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A brave Federation
+                                    officer who becomes a mentor figure for Amuro and the crew. Pilots the Core Fighter and provides
+                                    steadying influence until his tragic sacrifice.</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                
+                    <!-- Fraw Bow -->
+                    <div class="animate-scale-in max-w-sm w-full">
+                        <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                            <div class="flex justify-center mb-4">
+                                <div class="w-full rounded-2xl overflow-hidden">
+                                    <img src="https://picflow.media/images/83f013bc-b541-42bb-aa27-05793b78a748/base/83f013bc-b541-42bb-aa27-05793b78a748.webp"
+                                        alt="Fraw Bow" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Fraw Bow
+                            </h3>
+                            <div class="text-center mb-4">
+                                <span
+                                    class="inline-flex items-center justify-center bg-blue-50 text-blue-700 px-4 py-0.5 rounded-full text-base font-semibold">Civilian
+                                    Caretaker</span>
+                            </div>
+                            <div class="prose prose-sm max-w-none">
+                                <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">Amuro's childhood
+                                    friend who takes responsibility for caring for war orphans aboard White Base. Though not a soldier,
+                                    her compassion provides emotional balance for the crew.</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                
+                    <!-- Haro -->
+                    <div class="animate-scale-in max-w-sm w-full">
+                        <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                            <div class="flex justify-center mb-4">
+                                <div class="w-full rounded-2xl overflow-hidden">
+                                    <img src="https://picflow.media/images/resized/l1920mi/b1591dd6-26d7-4bd5-a74a-e4dbcfb4c73a.webp"
+                                        alt="Haro" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Haro</h3>
+                            <div class="text-center mb-4">
+                                <span
+                                    class="inline-flex items-center justify-center bg-blue-50 text-blue-700 px-4 py-0.5 rounded-full text-base font-semibold">AI
+                                    Robot</span>
+                            </div>
+                            <div class="prose prose-sm max-w-none">
+                                <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">Amuro’s small
+                                    spherical companion—rolls around White Base entertaining the orphans and offering simple help, a
+                                    cheerful reminder of ordinary life amid war.</p>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
-            </div>
-      
+                </div>
+
+ 
+        <!-- Zeon Characters -->
+        <div class="mb-14">
+                <!-- Faction Header -->
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center justify-center bg-red-700 rounded-full px-6 py-1">
+                        <span class="text-xl md:text-2xl font-light text-white tracking-normal">Principality of Zeon</span>
+                    </div>
+                </div>
         
-    </section>
-
-    <!-- Mobile Suits Section -->
-<section id="suits-federation" class="py-24 px-4 border-t border-dark-border">
-    <div class="max-w-7xl mx-auto">
-        <!-- Section Header -->
-        <div class="text-center mb-20 animate-slide-up">
-            <h2 class="text-4xl md:text-5xl font-bold text-text-primary mb-6">
-                Mobile Suits
-            </h2>
-            <h3 class="text-2xl md:text-3xl font-semibold text-accent-blue mb-8">
-                EARTH FEDERATION
-            </h3>
-            
-            <!-- Card Container -->
-            <div class="bg-dark-card rounded-3xl p-5 border border-dark-border max-w-5xl mx-auto">
-                <div class="flex justify-center">
-                    <!-- Description -->
-                    <div class="text-left">
-                        <p class="text-base md:text-lg text-text-secondary leading-relaxed">
-                            Initially caught off-guard by Zeon's breakthrough, the Earth Federation countered with the prototype RX-78-2 Gundam. Highly adaptable and resilient, it demonstrated the Federation's ability to match and eventually surpass Zeon's innovations. Alongside the Gundam, support units like the Guncannon, Guntank, G-Fighter, and the Core Fighter gave White Base its unique edge. By war's end, the mass-produced GM provided the Federation with the numbers needed to reclaim balance and turn the tide.
-                        </p>
+            <!-- Characters Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+        
+                <!-- Char Aznable -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden">
+                                <img src="https://picflow.media/images/a0ff03db-b3a0-459f-a7b8-0c0d8301f429/base/a0ff03db-b3a0-459f-a7b8-0c0d8301f429.webp"
+                                    alt="Char Aznable" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Char
+                            Aznable</h3>
+                        <div class="text-center mb-4">
+                            <span
+                                class="inline-flex items-center justify-center bg-red-50 text-red-700 px-4 py-0.5 rounded-full text-base font-semibold">Red
+                                Comet Ace Pilot</span>
+                        </div>
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">The masked "Red
+                                Comet" of Zeon, driven by personal vengeance against the Zabi family. His rivalry with Amuro
+                                defines the series' central conflict between duty and ideology.</p>
+                        </div>
+                        
                     </div>
                 </div>
-            </div>
-        </div>
-            
-            <!-- Mobile Suits Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-[2/3] mb-4 rounded-2xl overflow-hidden mx-auto">
-                <img src="https://picflow.media/images/abc647d9-0a53-4f40-94f0-29e930158ddf/base/abc647d9-0a53-4f40-94f0-29e930158ddf.webp" alt="RX-78-2 Gundam" class="w-full h-full object-cover">
-            </div>
-            <h3 class="text-xl text-center font-semibold mb-3">
-    <span class="text-accent-blue">RX-78-2</span> 
-    <span class="text-text-primary">GUNDAM</span>
-</h3>
-            <p class="text-text-secondary text-sm leading-relaxed">The prototype mobile suit that changed the course of the war. Piloted by Amuro Ray, it combines cutting-edge firepower, armor, and adaptability, serving as the Federation’s answer to Zeon’s Zaku.</p>
-        </div>
-    </div>
-    <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-[2/3] mb-4 rounded-2xl overflow-hidden mx-auto">
-                <img src="https://picflow.media/images/a3d5dcfc-3c85-498d-9faf-bf46f268ebc1/base/a3d5dcfc-3c85-498d-9faf-bf46f268ebc1.webp" alt="RX-77-2 Guncannon" class="w-full h-full object-cover">
-            </div>
-            <h3 class="text-xl text-center font-semibold mb-3">
-    <span class="text-accent-blue">RX-77-2</span> 
-    <span class="text-text-primary">GUNCANNON</span>
-</h3>
-            <p class="text-text-secondary text-sm leading-relaxed">A mid-range support suit, armed with shoulder-mounted cannons and rifles. Provides heavy fire support alongside the Gundam, forming part of White Base’s core trio.</p>
-        </div>
-    </div>
-    <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-[2/3] mb-4 rounded-2xl overflow-hidden mx-auto">
-                <img src="https://picflow.media/images/6aa0921d-28d9-48dc-a065-b19892ed1d88/base/6aa0921d-28d9-48dc-a065-b19892ed1d88.webp" alt="RX-75-4 Guntank" class="w-full h-full object-cover">
-            </div>
-            <h3 class="text-xl text-center font-semibold mb-3">
-    <span class="text-accent-blue">RX-75-4</span> 
-    <span class="text-text-primary">GUNTANK</span>
-</h3>
-            
-            <p class="text-text-secondary text-sm leading-relaxed">A hybrid tank-mobile suit with dual cannons and caterpillar tracks. Though limited in mobility, it delivers devastating long-range firepower in early Federation battles.</p>
-        </div>
-    </div>
-    <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-[2/3] mb-4 rounded-2xl overflow-hidden mx-auto">
-                <img src="https://picflow.media/images/8a997e20-622b-4d06-979b-40a6d0039849/base/8a997e20-622b-4d06-979b-40a6d0039849.webp" alt="G-Fighter" class="w-full h-full object-cover">
-            </div>
-            <h3 class="text-xl text-center text-accent-blue font-semibold mb-3">G-FIGHTER</h3>
-            <p class="text-text-secondary text-sm leading-relaxed">A versatile support craft that can combine with the Gundam to form multiple combat configurations. Used for transport, bombing runs, and tactical flexibility.</p>
-        </div>
-    </div>
-    <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-[2/3] mb-4 rounded-2xl overflow-hidden mx-auto">
-                <img src="https://picflow.media/images/6d74d5ec-4e20-4f9a-adc2-495b74d25e14/base/6d74d5ec-4e20-4f9a-adc2-495b74d25e14.webp" alt="RGM-79 GM" class="w-full h-full object-cover">
-            </div>
-            <h3 class="text-xl text-center font-semibold mb-3">
-    <span class="text-accent-blue">RGM-79</span> 
-    <span class="text-text-primary">GM</span>
-</h3>
-            <p class="text-text-secondary text-sm leading-relaxed">The Earth Federation’s first mass-produced mobile suit, modeled after the RX-78 Gundam. Cheaper and less durable but highly adaptable, the GM served as the backbone of Federation forces in frontline combat.</p>
-        </div>
-    </div>
-    <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-        <div class="text-left">
-            <div class="w-full aspect-[2/3] mb-4 rounded-2xl overflow-hidden mx-auto">
-                <img src="https://picflow.media/images/1e5cc023-e34e-4199-9e5b-ed6e7708fe48/base/1e5cc023-e34e-4199-9e5b-ed6e7708fe48.webp" alt="FF-X7 Core Fighter" class="w-full h-full object-cover">
-            </div>
-            <h3 class="text-xl text-center font-semibold mb-3">
-    <span class="text-accent-blue">FF-X7</span> 
-    <span class="text-text-primary">CORE FIGHTER</span>
-</h3>
-            <p class="text-text-secondary text-sm leading-relaxed">A small, high-speed fighter that doubles as the cockpit module for the Federation’s prototype suits. Acts as both an escape system and a compact combat craft.</p>
-        </div>
-    </div>
-</div>
-</div>
-</section>
-
-<!-- Zeon Mobile Suits Section -->
-<section id="suits-zeon" class="py-24 px-4 border-t border-dark-border">
-    <div class="max-w-7xl mx-auto">
-        <!-- Section Header -->
-        <div class="text-center mb-20 animate-slide-up">
-            <h2 class="text-4xl md:text-5xl font-bold text-text-primary mb-6">
-                Mobile Suits
-            </h2>
-            <h3 class="text-2xl md:text-3xl font-semibold text-accent-red mb-8">
-                PRINCIPALITY OF ZEON
-            </h3>
-            
-            <!-- Card Container -->
-            <div class="bg-dark-card rounded-3xl p-5 border border-dark-border max-w-5xl mx-auto">
-                <div class="flex justify-center">
-                    <!-- Description -->
-                    <div class="text-left">
-                        <p class="text-base md:text-lg text-text-secondary leading-relaxed">
-                            Zeon pioneered mobile suit warfare with the MS-06 Zaku II and its many variants. Mass-produced, versatile, and intimidating, the Zaku gave Zeon an overwhelming early advantage in the One Year War. As the conflict progressed, Zeon fielded increasingly advanced designs like the Gouf, Dom, Gelgoog, and the experimental Elmeth—each reflecting their push for military dominance and technological supremacy. These machines embodied Zeon's ambition and became enduring symbols of its power.
-                        </p>
+        
+                <!-- Gihren Zabi -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden">
+                                <img src="https://picflow.media/images/resized/l1280/d7c9151f-da40-4ff3-bac7-662f7be02466.webp"
+                                    alt="Gihren Zabi" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Gihren
+                            Zabi</h3>
+                        <div class="text-center mb-4">
+                            <span
+                                class="inline-flex items-center justify-center bg-red-50 text-red-700 px-4 py-0.5 rounded-full text-base font-semibold">Supreme
+                                Commander</span>
+                        </div>
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">The eldest Zabi
+                                son and ruthless leader whose authoritarian rule drives Zeon's war against the Federation. His
+                                dictatorial ambition and rhetoric shape Zeon's militaristic ideology.</p>
+                        </div>
+                        
                     </div>
                 </div>
+        
+                <!-- Dozle Zabi -->
+                <div class="animate-scale-in   max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden">
+                                <img src="https://picflow.media/images/resized/l1280/e2cb8743-4535-470b-bea2-66a3c1bcce6e.webp"
+                                    alt="Dozle Zabi" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Dozle
+                            Zabi</h3>
+                        <div class="text-center mb-4">
+                            <span
+                                class="inline-flex items-center justify-center bg-red-50 text-red-700 px-4 py-0.5 rounded-full text-base font-semibold">Space
+                                Fleet Commander</span>
+                        </div>
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">Known for his
+                                large stature and surprisingly compassionate nature, Dozle commands Zeon's space fleets. Despite
+                                family loyalty, he shows genuine care for subordinates.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+        
+                <!-- Garma Zabi -->
+                <div class="animate-scale-in   max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden">
+                                <img src="https://picflow.media/images/e1f764f4-9175-4aad-8d50-bf5a5361ed2d/base/e1f764f4-9175-4aad-8d50-bf5a5361ed2d.webp"
+                                    alt="Garma Zabi" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Garma
+                            Zabi</h3>
+                        <div class="text-center mb-4">
+                            <span
+                                class="inline-flex items-center justify-center bg-red-50 text-red-700 px-4 py-0.5 rounded-full text-base font-semibold">Earth
+                                Forces Commander</span>
+                        </div>
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">The youngest
+                                Zabi sibling who leads Zeon's Earth operations. His manipulation by Char becomes a pivotal
+                                turning point that reshapes the war's trajectory.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+        
+                <!-- Kycilia Zabi -->
+                <div class="animate-scale-in   max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden">
+                                <img src="https://picflow.media/images/resized/l1280/a5994428-5159-4182-bd16-5d54ea94c022.webp"
+                                    alt="Kycilia Zabi" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            Kycilia Zabi</h3>
+                        <div class="text-center mb-4">
+                            <span
+                                class="inline-flex items-center justify-center bg-red-50 text-red-700 px-4 py-0.5 rounded-full text-base font-semibold">Intelligence
+                                Commander</span>
+                        </div>
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">The only Zabi
+                                daughter, sharp and calculating in her ambitions. She schemes against her brothers while seeking
+                                to advance her own influence within Zeon's power structure.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+        
+                <!-- Degwin Sodo Zabi -->
+                <div class="animate-scale-in   max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden">
+                                <img src="https://picflow.media/images/resized/l1280/6097ebb9-faba-46db-982c-53bdd57c5f18.webp"
+                                    alt="Degwin Sodo Zabi" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Degwin
+                            Sodo Zabi</h3>
+                        <div class="text-center mb-4">
+                            <span
+                                class="inline-flex items-center justify-center bg-red-50 text-red-700 px-4 py-0.5 rounded-full text-base font-semibold">Sovereign
+                                of Zeon</span>
+                        </div>
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">The Zabi
+                                patriarch who initially sought independence but gradually lost control as his son Gihren pushed
+                                the war to extremes. His conflicts with his children reveal Zeon's fractures.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+        
+                <!-- M'Quve -->
+                <div class="animate-scale-in   max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden">
+                                <img src="https://picflow.media/images/resized/l960/4df7bcbb-0593-4393-8fef-de586dee747a.webp"
+                                    alt="M'Quve" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">M'Quve
+                        </h3>
+                        <div class="text-center mb-4">
+                            <span
+                                class="inline-flex items-center justify-center bg-red-50 text-red-700 px-4 py-0.5 rounded-full text-base font-semibold">Base
+                                Commander</span>
+                        </div>
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">Colonel in
+                                Zeon's Assault Mobile Force who commanded mining operations in occupied Eastern Europe during
+                                the One Year War.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+        
+                <!-- Ramba Ral -->
+                <div class="animate-scale-in   max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden">
+                                <img src="https://picflow.media/images/e9a4053b-6556-4a4f-a745-40aef833258c/base/e9a4053b-6556-4a4f-a745-40aef833258c.webp"
+                                    alt="Ramba Ral" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Ramba
+                            Ral</h3>
+                        <div class="text-center mb-4">
+                            <span
+                                class="inline-flex items-center justify-center bg-red-50 text-red-700 px-4 py-0.5 rounded-full text-base font-semibold">Gouf
+                                Pilot</span>
+                        </div>
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A veteran
+                                soldier who commands respect from allies and enemies alike. Unlike many Zeon officers, he values
+                                honor and fair combat, making him a sympathetic antagonist.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+        
+                <!-- Crowley Hamon -->
+                <div class="animate-scale-in   max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden">
+                                <img src="https://picflow.media/images/79558607-cf80-47e3-bf97-39f58b6696b3/base/79558607-cf80-47e3-bf97-39f58b6696b3.webp"
+                                    alt="Crowley Hamon" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            Crowley Hamon</h3>
+                        <div class="text-center mb-4">
+                            <span
+                                class="inline-flex items-center justify-center bg-red-50 text-red-700 px-4 py-0.5 rounded-full text-base font-semibold">Squad
+                                Leader</span>
+                        </div>
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">Ramba Ral's
+                                devoted companion who assumes command after his death and leads a final, tragic assault. Her
+                                actions underscore the loyalty and sacrifice of Zeon soldiers.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+        
+        
+                <!-- Lalah Sune -->
+                <div class="animate-scale-in   max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden">
+                                <img src="https://picflow.media/images/resized/l1280/dd4537af-e788-47f0-93e3-d8818b534f3c.webp"
+                                    alt="Crowley Hamon" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">Lalah
+                            Sune</h3>
+                        <div class="text-center mb-4">
+                            <span
+                                class="inline-flex items-center justify-center bg-red-50 text-red-700 px-4 py-0.5 rounded-full text-base font-semibold">Elmeth
+                                Pilot</span>
+                        </div>
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A pivotal
+                                Newtype whose bond with Amuro reframes the conflict; her fate defines the rivalry with Char.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+        
+        
             </div>
         </div>
+        </section>
+
+    <!-- Section Divider -->
+    <div class="flex justify-center pt-1 pb-2 bg-white">
     
-    <!-- Zeon Mobile Suits Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-            <div class="text-left">
-                <div class="w-full aspect-[2/3] mb-4 rounded-2xl overflow-hidden mx-auto">
-                    <img src="https://picflow.media/images/39b47400-034d-42d3-bfea-8e0206d8009e/base/39b47400-034d-42d3-bfea-8e0206d8009e.webp" alt="MS-06 Zaku II" class="w-full h-full object-cover">
+    </div>
+
+<!-- Mobile Suits Section -->
+<section class="pt-4 pb-12 md:pt-14 md:pb-14 px-6 bg-[#f5f5f7]">
+    <div class="max-w-6xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-8 animate-fade-in-up">
+            <h2 class="text-4xl md:text-6xl font-semibold text-apple-gray-900 mb-4 tracking-tight">
+                Mobile Suits
+            </h2>
+            <!-- <p class="text-xl font-semibold  text-apple-gray-600 max-w-3xl mx-auto">
+                The mechanical warriors that revolutionized warfare in the Universal Century
+            </p> -->
+        </div>
+
+        <!-- Federation Mobile Suits -->
+        <div class="mb-14">
+            <!-- Faction Header -->
+            <div class="text-center mb-12">
+                    <div class="inline-flex items-center justify-center bg-blue-600 rounded-full px-6 py-1">
+                        <span class="text-xl md:text-2xl font-light text-white tracking-normal">Earth Federation</span>
+                    </div>
+            </div>
+
+            <!-- Mobile Suits Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+
+                <!-- RX-78-2 Gundam -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1280/5feda3bb-a224-4dd4-8beb-a0cff4496b1b.webp"
+                                    alt="RX-78-2 Gundam" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            RX-78-2 Gundam</h3>
+                            
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">Earth
+                                Federation prototype mobile suit featuring the Core Block (FF-X7) System and a learning
+                                computer, designed for ground and space combat. </p>
+                        </div>
+                        
+                    </div>
                 </div>
-                <h3 class="text-xl text-center font-semibold mb-3">
-    <span class="text-accent-red">MS-06</span> 
-    <span class="text-text-primary">ZAKU II</span>
-</h3>
-                <p class="text-text-secondary text-sm leading-relaxed">The workhorse of Zeon’s army. Cheap, reliable, and versatile, the Zaku became the symbol of the Principality’s military might and the face of mobile suit warfare.</p>
+
+                <!-- RX-77 Guncannon -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1280/39ae4801-e23f-40db-995c-5cd80cbf9d41.webp"
+                                    alt="Dozle Zabi" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            RX-77 Guncannon</h3>
+                        
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A red
+                                artillery-type MS developed by the Earth Federal Army for medium-range support.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- RX-75 Guntank -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1280/41a28b21-6609-4155-a2ec-1c937e94c2c7.webp"
+                                    alt="RX-75" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            RX-75 Guntank</h3>
+                       
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A navy
+                                blue tank type MS developed by the Earth Federation Army for long-range support.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- G-Fighter -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1280/823f8a41-fe4f-439f-950e-a3bdecca0626.webp"
+                                    alt="G-Fighter" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">G-Fighter
+                            </h3>
+                        
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A
+                                versatile support craft that can combine with the Gundam and Core-Fighter to form multiple combat
+                                configurations. Used for transport, bombing runs, and tactical flexibility.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- RGM-79 GM -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1280/86c11c7a-5c8f-4110-9d81-bcaa9fd04a44.webp"
+                                    alt="G-Fighter" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            RGM-79 GM</h3>
+                        
+                
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">The
+                                Earth Federation’s first mass-produced Mobile Suit for close-range ground combat.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- FF-X7 -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1280/9da62c56-e299-4a90-bf97-d5a5d6a30231.webp"
+                                    alt="G-Fighter" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            FF-X7 Core Fighter</h3>
+                        
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A
+                                compact, high-speed craft that serves as the cockpit “core block” for RX-78-2 and includes a learning computer. Built as
+                                an escape module, it can detach and operate as a light fighter.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- RB-79 -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1280/44141b8d-689d-4b05-9a93-73e6e29a629b.webp"
+                                    alt="G-Fighter" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            RB-79 Ball</h3>
+                        
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A
+                                converted civilian work pod repurposed as a low-cost space-combat unit. Mounting a 180
+                                mm recoilless cannon, thrusters, and manipulator arms.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+
             </div>
         </div>
-        <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-            <div class="text-left">
-                <div class="w-full aspect-[2/3] mb-4 rounded-2xl overflow-hidden mx-auto">
-                    <img src="https://picflow.media/images/56989dbc-51ea-4ed8-b60e-fecef8dd5480/base/56989dbc-51ea-4ed8-b60e-fecef8dd5480.webp" alt="MS-07B Gouf" class="w-full h-full object-cover">
+
+
+
+        <!-- Zeon Mobile Suits -->
+        <div class="mb-14">
+            <!-- Faction Header -->
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center bg-red-700 rounded-full px-6 py-1">
+                    <span class="text-xl md:text-2xl font-light text-white tracking-normal">Principality of
+                        Zeon</span>
                 </div>
-                <h3 class="text-xl text-center font-semibold mb-3">
-    <span class="text-accent-red">MS-07B</span> 
-    <span class="text-text-primary">GOUF</span>
-</h3>
-                <p class="text-text-secondary text-sm leading-relaxed">Designed for ground combat, the Gouf trades ranged versatility for melee dominance. Piloted by Ramba Ral, it introduced the heat sword and whip into mobile suit combat.</p>
             </div>
-        </div>
-        <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-            <div class="text-left">
-                <div class="w-full aspect-[2/3] mb-4 rounded-2xl overflow-hidden mx-auto">
-                    <img src="https://picflow.media/images/a0e6917b-d0ed-43aa-a33a-e7163fef5aa6/base/a0e6917b-d0ed-43aa-a33a-e7163fef5aa6.webp" alt="MS-14 Gelgoog" class="w-full h-full object-cover">
+
+            <!-- Mobile Suits Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+
+                <!--  MS-06 Zaku II -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1920mi/27205f2d-af63-4ac1-9a93-e834d3e6479d.webp"
+                                    alt="MS-06 Zaku II" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            MS-06 Zaku II</h3>
+
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">The
+                                workhorse of Zeon’s army. Cheap, reliable, and versatile.</p>
+                        </div>
+                        
+                    </div>
                 </div>
-                <h3 class="text-xl text-center font-semibold mb-3">
-    <span class="text-accent-red">MS-14</span> 
-    <span class="text-text-primary">GELGOOG</span>
-</h3>
-                <p class="text-text-secondary text-sm leading-relaxed">Zeon’s late-war high-performance mobile suit. Comparable to the Gundam in ability, it came too late to shift the tide, though aces like Char piloted it with deadly skill.</p>
-            </div>
-        </div>
-        <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-            <div class="text-left">
-                <div class="w-full aspect-[2/3] mb-4 rounded-2xl overflow-hidden mx-auto">
-                    <img src="https://picflow.media/images/1c2f9ba0-c080-4019-b560-b1ce2595e3fa/base/1c2f9ba0-c080-4019-b560-b1ce2595e3fa.webp" alt="MS-09 Dom" class="w-full h-full object-cover">
+
+                <!--  MS-07B GOUF -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1920mi/1f00af08-840d-4605-9427-eb8cd578fb0d.webp"
+                                    alt="MS-07B GOUF" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            MS-07B Gouf</h3>
+
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">
+                                Designed for ground combat, the Gouf introduced the heat sword and whip into mobile suit
+                                combat.</p>
+                        </div>
+                        
+                    </div>
                 </div>
-                <h3 class="text-xl text-center font-semibold mb-3">
-    <span class="text-accent-red">MS-09</span> 
-    <span class="text-text-primary">DOM</span>
-</h3>
-                <p class="text-text-secondary text-sm leading-relaxed">A heavy ground unit with high mobility thanks to hover jet engines. Famously used by the Black Tri-Stars, its teamwork and firepower posed a major threat to White Base.</p>
-            </div>
-        </div>
-        <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-            <div class="text-left">
-                <div class="w-full aspect-[2/3] mb-4 rounded-2xl overflow-hidden mx-auto">
-                    <img src="https://picflow.media/images/e4bf7a40-c25e-49ca-ba61-852ac49b65be/base/e4bf7a40-c25e-49ca-ba61-852ac49b65be.webp" alt="MS-06S Zaku II" class="w-full h-full object-cover">
+
+                <!--  MS-14 GELGOOG -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1920mi/92c67ea1-f9af-47a1-acbf-b06b381ec48d.webp"
+                                    alt="G-Fighter" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            MS-14 Gelgoog</h3>
+
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">Zeon’s
+                                late-war high-performance mobile suit. Comparable to the Gundam in ability.</p>
+                        </div>
+                        
+                    </div>
                 </div>
-                <h3 class="text-xl text-center font-semibold mb-3">
-    <span class="text-accent-red">MS-06S</span> 
-    <span class="text-text-primary">ZAKU II</span>
-</h3>
-                <p class="text-text-secondary text-sm leading-relaxed">A high-performance version of the Zaku II, customized for ace pilots like Char Aznable. Painted red for Char’s unit, it’s faster and deadlier than the standard type.</p>
-            </div>
-        </div>
-        <div class="bg-dark-card rounded-3xl p-5 border border-dark-border hover-lift">
-            <div class="text-left">
-                <div class="w-full aspect-[2/3] mb-4 rounded-2xl overflow-hidden mx-auto">
-                    <img src="https://picflow.media/images/1662a84c-835c-4233-9de4-0b25f7f68f66/base/1662a84c-835c-4233-9de4-0b25f7f68f66.webp" alt="MAN-08 Elmeth" class="w-full h-full object-cover">
+
+                <!--  MS-09 DOM -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1920mi/4eac1eaf-0f62-4043-9d14-74b4b2342e83.webp"
+                                    alt="G-Fighter" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            MS-09 Dom</h3>
+
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A
+                                heavy ground unit with high mobility thanks to hover jet engines. Famously used by the
+                                Black Tri-Stars.</p>
+                        </div>
+                        
+                    </div>
                 </div>
-                <h3 class="text-xl text-center font-semibold mb-3">
-    <span class="text-accent-red">MAN-08</span> 
-    <span class="text-text-primary">ELMETH</span>
-</h3>
-                <p class="text-text-secondary text-sm leading-relaxed">A mobile armor piloted by Lalah Sune, equipped with remote-controlled psycommu bits. It revolutionized long-range combat and showcased the fearsome power of Newtype warfare.</p>
+
+                <!--  MS-06S ZAKU II -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1920mi/241c42c4-6596-419e-b8b6-388477feceaa.webp"
+                                    alt="G-Fighter" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            MS-06S Zaku II</h3>
+
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A
+                                high-performance version of the Zaku II customized for Char Aznable. It’s faster and
+                                deadlier than the standard type.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!--  MAN-08 ELMETH -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1920mi/6d5a9526-f42b-43a8-935a-e846c1be2b2e.webp"
+                                    alt="G-Fighter" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            MAN-08 Elmeth</h3>
+
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">
+                                Prototype Newtype-use Space Mobile Armor piloted by Lalah Sune.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+
+                <!--   MSM-03 Gogg -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1280/15b8a911-6f27-4229-bb8b-33fd1346bf25.webp"
+                                    alt="G-Fighter" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            MSM-03 Gogg</h3>
+
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">Zeon’s amphibious assault suit. A heavily armored, water-jet–propelled bruiser built for underwater raids.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+
+                <!--   MA-08 BIG-ZAM -->
+                <div class="animate-scale-in max-w-sm w-full">
+                    <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 p-6 h-full relative">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-full rounded-2xl overflow-hidden shadow-none">
+                                <img src="https://picflow.media/images/resized/l1920mi/8db93fca-e304-4295-be8e-3e3e8d0daaf9.webp"
+                                    alt="G-Fighter" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-semibold text-apple-gray-900 text-center mb-3 tracking-tight">
+                            MA-08 Big Zam</h3>
+
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">
+                                Prototype Anti-Fortress Heavy Assault Space Mobile Armor.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+
+
             </div>
         </div>
     </div>
-</div>
 </section>
-
-    <!-- Stats Section -->
-<section class="py-24 px-4 border-t border-dark-border">
-    <div class="max-w-4xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div class="bg-dark-card rounded-2xl p-4 border border-dark-border hover-lift">
-                <div class="w-10 h-10 mx-auto rounded-xl mb-3 flex items-center justify-center">
-                    <!-- Episodes Icon - TV/Monitor -->
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="episodesGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#4ade80"/>
-                                <stop offset="100%" style="stop-color:#16a34a"/>
-                            </linearGradient>
-                        </defs>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" stroke="url(#episodesGradient)" d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125Z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-text-primary mb-1">43</h3>
-                <p class="text-text-secondary text-standard">Episodes</p>
-            </div>
-            <div class="bg-dark-card rounded-2xl p-4 border border-dark-border hover-lift">
-                <div class="w-10 h-10 mx-auto rounded-xl mb-3 flex items-center justify-center">
-                    <!-- Air Date Icon - Clock -->
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="dateGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#4ade80"/>
-                                <stop offset="100%" style="stop-color:#16a34a"/>
-                            </linearGradient>
-                        </defs>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" stroke="url(#dateGradient)" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-text-primary mb-1">1979</h3>
-                <p class="text-text-secondary text-standard">Original Air Date</p>
-            </div>
-            <div class="bg-dark-card rounded-2xl p-4 border border-dark-border hover-lift">
-                <div class="w-10 h-10 mx-auto rounded-xl mb-3 flex items-center justify-center">
-                    <!-- Universal Century Icon - Calendar -->
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="centuryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#4ade80"/>
-                                <stop offset="100%" style="stop-color:#16a34a"/>
-                            </linearGradient>
-                        </defs>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" stroke="url(#centuryGradient)" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-text-primary mb-1">U.C. 0079</h3>
-                <p class="text-text-secondary text-standard">Universal Century</p>
-            </div>
-        </div>
+   
+    <!-- Section Divider -->
+    <div class="flex justify-center pt-1 pb-2 bg-white">
+    
     </div>
-</section>
+          <!-- Timeline Section -->
+<section class="pt-4 pb-12 md:pt-14 md:pb-14 px-6 bg-[#f5f5f7]">
+    <div class="max-w-6xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-8 animate-fade-in-up">
+            <h2 class="text-4xl md:text-6xl font-semibold text-apple-gray-900 mb-4 tracking-tight">
+                Timeline
+            </h2>
+           <p class="text-xl font-semibold  text-apple-gray-600 max-w-3xl mx-auto">
+                Series and movies set in the Universal Century era
+            </p>
+        </div>
 
-    <!-- Footer -->
-    <footer class="py-8 px-4 border-t border-dark-border">
-        <div class="max-w-4xl mx-auto text-center">
+    <body class="bg-[#f5f5f7]">
+    <div class="max-w-xl mx-auto p-6">
+        <div class="relative timeline-line">
             
-            <h3 class="text-semi font-semibold text-text-primary mb-4">Based on Mobile Suit Gundam 1979</h3>
-            <p class="text-text-secondary text-sm">© Brian Flexmore</p>
+            <!-- UC 0079 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div class="mb-3 md:mb-0">
+                            <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0079</span>
+                        </div>
+                        <div class="flex-1 md:ml-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Gundam</h3>
+                            <p class="text-gray-600">1979-80 • 43 Episodes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UC 0087 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div class="mb-3 md:mb-0">
+                            <span class="inline-block bg-purple-100 text-purple-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0087</span>
+                        </div>
+                        <div class="flex-1 md:ml-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Zeta Gundam</h3>
+                            <p class="text-gray-600">1985-86 • 50 Episodes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UC 0088 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div class="mb-3 md:mb-0">
+                            <span class="inline-block bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0088</span>
+                        </div>
+                        <div class="flex-1 md:ml-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Gundam ZZ</h3>
+                            <p class="text-gray-600">1986-87 • 47 Episodes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UC 0093 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div class="mb-3 md:mb-0">
+                            <span class="inline-block bg-red-100 text-red-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0093</span>
+                        </div>
+                        <div class="flex-1 md:ml-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-1">MSG: Char's Counterattack</h3>
+                            <p class="text-gray-600">1988 • Movie</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UC 0096 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-500">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div class="mb-3 md:mb-0">
+                            <span class="inline-block bg-yellow-100 text-yellow-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0096</span>
+                        </div>
+                        <div class="flex-1 md:ml-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Gundam Unicorn</h3>
+                            <p class="text-gray-600">2010-14 • 7 Episodes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UC 0097 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-indigo-500">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div class="mb-3 md:mb-0">
+                            <span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0097</span>
+                        </div>
+                        <div class="flex-1 md:ml-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Gundam Narrative</h3>
+                            <p class="text-gray-600">2018 • Movie</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UC 0105 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-pink-500">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div class="mb-3 md:mb-0">
+                            <span class="inline-block bg-pink-100 text-pink-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0105</span>
+                        </div>
+                        <div class="flex-1 md:ml-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Gundam Hathaway</h3>
+                            <p class="text-gray-600">2021 • Trilogy Movies</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UC 0123 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-cyan-500">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div class="mb-3 md:mb-0">
+                            <span class="inline-block bg-cyan-100 text-cyan-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0123</span>
+                        </div>
+                        <div class="flex-1 md:ml-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Gundam F91</h3>
+                            <p class="text-gray-600">1991 • Movie</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UC 0153 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-orange-500">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div class="mb-3 md:mb-0">
+                            <span class="inline-block bg-orange-100 text-orange-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0153</span>
+                        </div>
+                        <div class="flex-1 md:ml-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Victory Gundam</h3>
+                            <p class="text-gray-600">1993-94 • 51 Episodes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+</section>
+     <!-- Section Divider -->
+    <div class="flex justify-center pt-1 pb-2 bg-white">
+    
+    </div>
+</body>
+    
+<footer class="bg-[#f5f5f7] text-apple-gray-900 py-6 mt-5">
+        <div class="max-w-2xl mx-auto px-4 text-center">
+            <div class="mb-3">
+                <p class="text-sm font-medium">
+                    An unaffiliated Art Dept resource. Research-based, best-effort accuracy.
+                </p>
+                <div class="mb-3">
+                <p class="text-sm font-medium">
+                    For educational purposes only.
+                </p>
+            </div>
+            <div class="text-xs text-apple-gray-800">
+                <p>brianflexmore@gmail.com</p>
+                
+            </div>
         </div>
     </footer>
+    
+</html>
+            
+           <!--
+                he 1979 Mobile Suit Gundam TV series features several Earth Federation Forces (EFF) and Zeon ships:
+                 including the White Base (Pegasus-class assault carrier), Magellan-class battleships, Salamis-class heavy cruisers, and Papua-class supply ships. 
+                For the Zeon, key ships include the Musai-class light cruiser (the first warship designed to carry mobile suits), and potentially the Gwazine-class battleship. 
+                Other vessels seen are the unarmed Columbus-class transporters and the Zanzibar II-class mobile cruiser.  -->
 
+
+
+
+
+    <!-- JavaScript for Scroll Animations -->
     <script>
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Wait for DOM to be fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        // Intersection Observer for animations
+        // Intersection Observer for scroll animations
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: '0px 0px -100px 0px'
         };
 
-        const observer = new IntersectionObserver(entries => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-active');
+                    entry.target.style.animationDelay = '0s';
+                    entry.target.style.animationPlayState = 'running';
                 }
             });
         }, observerOptions);
 
-        // Observe all animatable elements
-        const elementsToAnimate = document.querySelectorAll('section > div, .hover-lift, .bg-dark-card, .grid > div');
-        
-        elementsToAnimate.forEach(el => {
-            el.classList.add('fade-in-element');
-            observer.observe(el);
+        // Observe elements with animation classes
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.animate-fade-in-up, .animate-scale-in, .animate-fade-in');
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
         });
-    });
 
-        // Mobile menu toggle
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-const mobileMenu = document.getElementById('mobile-menu');
-
-if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener('click', function() {
-        mobileMenu.classList.toggle('hidden');
-    });
-
-    // Close menu when clicking on a link
-    document.querySelectorAll('.mobile-link').forEach(link => {
-        link.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
-            mobileMenu.classList.add('hidden');
-        }
-    });
-}
-</script>
+    </script>
 </body>
 </html>
-                
