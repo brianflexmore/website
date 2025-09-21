@@ -80,65 +80,7 @@
             transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
         }
         
- /* 3D Carousel Styles */
-.carousel-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    max-width: 1440px;
-    margin: 0 auto;
-}
-
-.wrapper {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible;
-}
-
-.inner {
-    --w: 160px;
-    --h: 160px;
-    --translateZ: 220px;
-    --rotateX: -8deg;
-    --perspective: 1400px;
-    position: absolute;
-    width: var(--w);
-    height: var(--h);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) perspective(var(--perspective)) rotateX(var(--rotateX));
-    transform-style: preserve-3d;
-    animation: rotating 25s linear infinite;
-}
-
-@keyframes rotating {
-    from {
-        transform: translate(-50%, -50%) perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0deg);
-    }
-    to {
-        transform: translate(-50%, -50%) perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(360deg);
-    }
-}
-
-.card {
-    position: absolute;
-    border: 1.5px solid rgba(var(--color-card), 0.8);
-    border-radius: 16px;
-    overflow: hidden;
-    inset: 0;
-    transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
-}
+ 
 
  .timeline-line::before {
             content: '';
@@ -175,6 +117,12 @@
             transform: translateX(8px);
             transition: all 0.3s ease;
         }
+        @keyframes scroll-right-to-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+
     </style>
 
     <!-- Top Left Copyright -->
@@ -191,8 +139,7 @@
 <body class="bg-[#f5f5f7] text-apple-gray-900 font-apple antialiased">
     
     <!-- Hero Section with 3D Carousel -->
-    <header
-        class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative bg-[#f5f5f7]">
+    <header class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative bg-[#f5f5f7]">
         <div class="max-w-6xl mx-auto animate-fade-in-up">
             <!-- Main Title -->
             <h1 class="text-hero-sm md:text-hero font-semibold text-apple-gray-900 mb-6 tracking-tight">
@@ -206,55 +153,8 @@
                 <span class="text-subtitle font-medium text-apple-gray-700">1979</span>
             </div>
         
-        <!-- 3D Rotating Carousel -->
-        <div class="carousel-container mb-12 animate-fade-in" style="height: 500px; width: 100%; max-width: 900px; margin: 0 auto;">
-            <div class="wrapper">
-                <div class="inner" style="--quantity: 9;">
-                    <div class="card" style="--index: 0;--color-card: 75, 85, 99;">
-                        <img src="https://picflow.media/images/3c36d3ac-adc0-48b0-81b4-ecfb501edb37/base/3c36d3ac-adc0-48b0-81b4-ecfb501edb37.webp" 
-                             alt="Gundam Image 1" class="img">
-                    </div>
-                    <div class="card" style="--index: 1;--color-card: 75, 85, 99;">
-                        <img src="https://picflow.media/images/resized/l1280/5feda3bb-a224-4dd4-8beb-a0cff4496b1b.webp" 
-                             alt="Gundam Image 2" class="img">
-                    </div>
-                    <div class="card" style="--index: 2;--color-card: 75, 85, 99;">
-                        <img src="https://picflow.media/images/resized/l1280/41a28b21-6609-4155-a2ec-1c937e94c2c7.webp" 
-                             alt="Gundam Image 3" class="img">
-                    </div>
-                    <div class="card" style="--index: 3;--color-card: 75, 85, 99;">
-                        <img src="https://picflow.media/images/resized/l1280/9da62c56-e299-4a90-bf97-d5a5d6a30231.webp" 
-                             alt="RX-78-2 Gundam" class="img">
-                    </div>
-                    <div class="card" style="--index: 4;--color-card: 75, 85, 99;">
-                        <img src="https://picflow.media/images/a0ff03db-b3a0-459f-a7b8-0c0d8301f429/base/a0ff03db-b3a0-459f-a7b8-0c0d8301f429.webp" 
-                             alt="MS-06 Zaku II" class="img">
-                    </div>
-                    <div class="card" style="--index: 5;--color-card: 75, 85, 99;">
-                        <img src="https://picflow.media/images/resized/l1920mi/1f00af08-840d-4605-9427-eb8cd578fb0d.webp" 
-                             alt="RX-77-2 Guncannon" class="img">
-                    </div>
-                    <div class="card" style="--index: 6;--color-card: 75, 85, 99;">
-                        <img src="https://picflow.media/images/resized/l1920mi/92c67ea1-f9af-47a1-acbf-b06b381ec48d.webp" 
-                             alt="RX-75-4 Guntank" class="img">
-                    </div>
-                    <div class="card" style="--index: 7;--color-card: 75, 85, 99;">
-                        <img src="https://picflow.media/images/resized/l1920mi/4eac1eaf-0f62-4043-9d14-74b4b2342e83.webp" 
-                             alt="MS-07B Gouf" class="img">
-                    </div>
-                    <div class="card" style="--index: 8;--color-card: 75, 85, 99;">
-                        <img src="https://picflow.media/images/resized/l1920mi/241c42c4-6596-419e-b8b6-388477feceaa.webp" 
-                             alt="MS-14 Gelgoog" class="img">
-                    </div>
-                    <div class="card" style="--index: 9;--color-card: 75, 85, 99;">
-                        <img src="https://picflow.media/images/resized/l1920mi/b1591dd6-26d7-4bd5-a74a-e4dbcfb4c73a.webp" 
-                             alt="MS-09 Dom" class="img">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Tagline --> 
+            <!-- Tagline --> 
+         <div class="text-center mt-16">
         <p class="text-base md:text-body-lg text-apple-gray-600 max-w-2xl mx-auto animate-fade-in leading-snug tracking-tight">
             Unofficial ART DEPT resource. Compiled from multiple public sources.
         </p>
@@ -265,6 +165,9 @@
             - Brian Flexmore
         </p>
     </div>
+
+             
+        
     
     <!-- Scroll Indicator -->
     <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
@@ -1068,7 +971,7 @@
                         <div class="prose prose-sm max-w-none">
                             <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A
                                 versatile support craft that can combine with the Gundam and Core-Fighter to form multiple combat
-                                configurations. Used for transport, bombing runs, and tactical flexibility.</p>
+                                configurations. </p>
                         </div>
                         
                     </div>
@@ -1111,8 +1014,7 @@
                         
                         <div class="prose prose-sm max-w-none">
                             <p class="text-apple-gray-800 leading-normal tracking-tight font-medium text-base text-left mb-0">A
-                                compact, high-speed craft that serves as the cockpit “core block” for RX-78-2 and includes a learning computer. Built as
-                                an escape module, it can detach and operate as a light fighter.</p>
+                                compact, high-speed craft that serves as the cockpit “core block” for RX-78-2 and includes a learning computer. Can detach and operate as a light fighter.</p>
                         </div>
                         
                     </div>
@@ -1342,171 +1244,198 @@
     <div class="flex justify-center pt-1 pb-2 bg-white">
     
     </div>
-          <!-- Timeline Section -->
-<section class="pt-4 pb-12 md:pt-14 md:pb-14 px-6 bg-[#f5f5f7]">
-    <div class="max-w-6xl mx-auto">
-        <!-- Section Header -->
-        <div class="text-center mb-8 animate-fade-in-up">
-            <h2 class="text-4xl md:text-6xl font-semibold text-apple-gray-900 mb-4 tracking-tight">
-                Timeline
-            </h2>
-           <p class="text-xl font-semibold  text-apple-gray-600 max-w-3xl mx-auto">
-                Series and movies set in the Universal Century era
-            </p>
+          <section class="py-16 px-5 bg-[#f5f5f7]">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-6xl font-semibold text-apple-gray-900 mb-4 tracking-tight">Timeline</h2>
+            <p class="text-xl text-apple-gray-600">Series and movies set in the Universal Century era</p>
         </div>
-
-    <body class="bg-[#f5f5f7]">
-    <div class="max-w-xl mx-auto p-6">
-        <div class="relative timeline-line">
-            
-            <!-- UC 0079 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                        <div class="mb-3 md:mb-0">
-                            <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0079</span>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto">
+            <!-- Mobile Suit Gundam -->
+            <div class="animate-scale-in">
+                <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 overflow-hidden h-full flex">
+                    <div class="w-32 md:w-40 flex-shrink-0">
+                        <img src="https://m.media-amazon.com/images/M/MV5BM2Y2MjViYzQtY2M0Yy00ZmEyLThlM2MtZWYwNjU2OTg1ZjVkXkEyXkFqcGc@._V1_FMjpg_UX1200_.jpg" alt="Mobile Suit Gundam poster" class="w-full h-full object-fit">
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <h3 class="text-xl md:text-xl font-semibold text-gray-900 mb-3 tracking-tight">Mobile Suit Gundam</h3>
+                        <div class="mb-4">
+                            <span class="inline-flex items-center justify-center bg-blue-50 text-blue-700 px-4 py-0.5 rounded-full text-sm font-semibold">U.C. 0079</span>
                         </div>
-                        <div class="flex-1 md:ml-6">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Gundam</h3>
-                            <p class="text-gray-600">1979-80 • 43 Episodes</p>
+                        <div class="prose prose-sm max-w-none flex-1">
+                            <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base mb-0">U.C. 0079. The Principality of Zeon is at war with the Earth Federation. Due to a Zeon attack, Amuro Ray, a boy living at Side 7, becomes the pilot of the Federation mobile suit Gundam. Through his various experiences, Amuro begins to awaken as a Newtype.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- UC 0087 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                        <div class="mb-3 md:mb-0">
-                            <span class="inline-block bg-purple-100 text-purple-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0087</span>
+            <!-- MSG: The 08th MS Team -->
+            <div class="animate-scale-in">
+                <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 overflow-hidden h-full flex">
+                    <div class="w-32 md:w-40 flex-shrink-0">
+                        <img src="https://static.wikia.nocookie.net/gundam/images/9/90/08th_MS_Team_-_Miller%27s_Report.png/revision/latest?cb=20200902015250" alt="MSG: The 08th MS Team poster" class="w-full h-full object-fit">
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <h3 class="text-xl md:text-xl font-semibold text-gray-900 mb-3 tracking-tight">MSG: The 08th MS Team</h3>
+                        <div class="mb-4">
+                            <span class="inline-flex items-center justify-center bg-blue-50 text-blue-700 px-4 py-0.5 rounded-full text-sm font-semibold">U.C. 0079</span>
                         </div>
-                        <div class="flex-1 md:ml-6">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Zeta Gundam</h3>
-                            <p class="text-gray-600">1985-86 • 50 Episodes</p>
+                        <div class="prose prose-sm max-w-none flex-1">
+                            <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base mb-0">U.C. 0079. On his way to a new assignment on Earth, the young Federation officer Shiro has a fateful encounter with a Zeon pilot named Aina.
+Their paths are destined to cross many times from here on.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- UC 0088 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                        <div class="mb-3 md:mb-0">
-                            <span class="inline-block bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0088</span>
+            <!-- Mobile Suit Gundam: War in the Pocket -->
+            <div class="animate-scale-in">
+                <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 overflow-hidden h-full flex">
+                    <div class="w-32 md:w-40 flex-shrink-0">
+                        <img src="https://m.media-amazon.com/images/M/MV5BYmM5ZDY4N2ItZGU4YS00NWI3LTk0M2ItMjc0M2RmMmNmNzZiXkEyXkFqcGc@._V1_FMjpg_UX1200_.jpg" alt="Mobile Suit Gundam: War in the Pocket poster" class="w-full h-full object-fit">
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <h3 class="text-xl md:text-xl font-semibold text-gray-900 mb-3 tracking-tight">MSG: War in the Pocket</h3>
+                        <div class="mb-4">
+                            <span class="inline-flex items-center justify-center bg-blue-50 text-blue-700 px-4 py-0.5 rounded-full text-sm font-semibold">U.C. 0079</span>
                         </div>
-                        <div class="flex-1 md:ml-6">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Gundam ZZ</h3>
-                            <p class="text-gray-600">1986-87 • 47 Episodes</p>
+                        <div class="prose prose-sm max-w-none flex-1">
+                            <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base mb-0">U.C. 0079. At the end of the One Year War, Zeon detects a new mobile suit at side 6, and sends a special forces team to destroy it. Rookie soldier Bernie meets Al and Chris, who live in the colony, and they form an emotional bond. But the story is headed for a tragic climax.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- UC 0093 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                        <div class="mb-3 md:mb-0">
-                            <span class="inline-block bg-red-100 text-red-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0093</span>
+            <!-- Mobile Suit Gundam: Stardust Memory -->
+            <div class="animate-scale-in">
+                <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 overflow-hidden h-full flex">
+                    <div class="w-32 md:w-40 flex-shrink-0">
+                        <img src="https://picsum.photos/133/200?random=4" alt="Mobile Suit Gundam: Stardust Memory poster" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <h3 class="text-xl md:text-xl font-semibold text-gray-900 mb-3 tracking-tight">MSG: Stardust Memory</h3>
+                        <div class="mb-4">
+                            <span class="inline-flex items-center justify-center bg-purple-100 text-purple-800 px-4 py-0.5 rounded-full text-sm font-semibold">U.C. 0083</span>
                         </div>
-                        <div class="flex-1 md:ml-6">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-1">MSG: Char's Counterattack</h3>
-                            <p class="text-gray-600">1988 • Movie</p>
+                        <div class="prose prose-sm max-w-none flex-1">
+                            <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base mb-0">U.C. 0083. Three years after the end of the One Year War, Zeon pilot Anavel Gato hijacks the prototype Gundam GPO2A. The young Federation pilor Kou Uraki pursues him in the Gundam GP01, but the chase is far from over.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- UC 0096 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-500">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                        <div class="mb-3 md:mb-0">
-                            <span class="inline-block bg-yellow-100 text-yellow-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0096</span>
+            <!-- Mobile Suit Zeta Gundam -->
+            <div class="animate-scale-in">
+                <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 overflow-hidden h-full flex">
+                    <div class="w-32 md:w-40 flex-shrink-0">
+                        <img src="https://picsum.photos/133/200?random=5" alt="Mobile Suit Zeta Gundam poster" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <h3 class="text-xl md:text-xl font-semibold text-gray-900 mb-3 tracking-tight">Mobile Suit Z Gundam</h3>
+                        <div class="mb-4">
+                            <span class="inline-flex items-center justify-center bg-purple-100 text-purple-800 px-4 py-0.5 rounded-full text-sm font-semibold">U.C. 0087</span>
                         </div>
-                        <div class="flex-1 md:ml-6">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Gundam Unicorn</h3>
-                            <p class="text-gray-600">2010-14 • 7 Episodes</p>
+                        <div class="prose prose-sm max-w-none flex-1">
+                            <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base mb-0">U.C. 0087. Seven years after the One Year war, the Federation has created an elite group called the Titans, who oppress the space colonists under the pretext of hunting Zeon remnants. Young Kamille clashes with Titans officers and is drawn into the conflict, becoming the pilot of the Z Gundam.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- UC 0097 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-indigo-500">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                        <div class="mb-3 md:mb-0">
-                            <span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0097</span>
+            <!-- Mobile Suit Gundam ZZ -->
+            <div class="animate-scale-in">
+                <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 overflow-hidden h-full flex">
+                    <div class="w-32 md:w-40 flex-shrink-0">
+                        <img src="https://picsum.photos/133/200?random=6" alt="Mobile Suit Gundam ZZ poster" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <h3 class="text-xl md:text-xl font-semibold text-gray-900 mb-3 tracking-tight">Mobile Suit Gundam ZZ</h3>
+                        <div class="mb-4">
+                            <span class="inline-flex items-center justify-center bg-purple-100 text-purple-800 px-4 py-0.5 rounded-full text-sm font-semibold">U.C. 0088</span>
                         </div>
-                        <div class="flex-1 md:ml-6">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Gundam Narrative</h3>
-                            <p class="text-gray-600">2018 • Movie</p>
+                        <div class="prose prose-sm max-w-none flex-1">
+                            <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base mb-0">U.C. 0088. A boy named Judau, who works as a junk scavenger at a remote colony in Side 1, joins the A.E.U.G. as a pilot. Together with the ZZ Gundam, Judau takes a stand to confront Haman and her Neo Zeon forces.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- UC 0105 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-pink-500">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                        <div class="mb-3 md:mb-0">
-                            <span class="inline-block bg-pink-100 text-pink-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0105</span>
+            <!-- Mobile Suit Gundam: Char's Counterattack -->
+            <div class="animate-scale-in">
+                <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 overflow-hidden h-full flex">
+                    <div class="w-32 md:w-40 flex-shrink-0">
+                        <img src="https://picsum.photos/133/200?random=7" alt="Mobile Suit Gundam: Char's Counterattack poster" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <h3 class="text-xl md:text-xl font-semibold text-gray-900 mb-3 tracking-tight">MSG: Char's Counterattack</h3>
+                        <div class="mb-4">
+                            <span class="inline-flex items-center justify-center bg-red-100 text-red-800 px-4 py-0.5 rounded-full text-sm font-semibold">U.C. 0093</span>
                         </div>
-                        <div class="flex-1 md:ml-6">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Gundam Hathaway</h3>
-                            <p class="text-gray-600">2021 • Trilogy Movies</p>
+                        <div class="prose prose-sm max-w-none flex-1">
+                            <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base mb-0">U.C. 0093. Char Aznable has become the cader of Neo Zeon, and declared war against the Earth. Amuro, now assigned to the Londo Bell unit commanded by Bright, enters battle in the state-of-the-art Nu Gundam. Will Amuro be able to thwart Char's ambitions?</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- UC 0123 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-cyan-500">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                        <div class="mb-3 md:mb-0">
-                            <span class="inline-block bg-cyan-100 text-cyan-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0123</span>
+            <!-- Mobile Suit Gundam Unicorn -->
+            <div class="animate-scale-in">
+                <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 overflow-hidden h-full flex">
+                    <div class="w-32 md:w-40 flex-shrink-0">
+                        <img src="https://picsum.photos/133/200?random=8" alt="Mobile Suit Gundam Unicorn poster" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <h3 class="text-xl md:text-xl font-semibold text-gray-900 mb-3 tracking-tight">Mobile Suit Gundam Unicorn</h3>
+                        <div class="mb-4">
+                            <span class="inline-flex items-center justify-center bg-red-100 text-red-800 px-4 py-0.5 rounded-full text-sm font-semibold">U.C. 0096</span>
                         </div>
-                        <div class="flex-1 md:ml-6">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Gundam F91</h3>
-                            <p class="text-gray-600">1991 • Movie</p>
+                        <div class="prose prose-sm max-w-none flex-1">
+                            <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base mb-0">U.C. 0096. A youth named Banagher Links, who grew up without knowing his father, lives at the manufacturing colony Industrial 7. When he meets a mysterious female stowaway and the white mobile suit Unicorn, he becomes enmeshed in the expectations that surround them, and the hands of time begin to move.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- UC 0153 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content bg-white rounded-lg shadow-md p-6 border-l-4 border-orange-500">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                        <div class="mb-3 md:mb-0">
-                            <span class="inline-block bg-orange-100 text-orange-800 text-sm font-semibold px-3 py-1 rounded-full">UC 0153</span>
+
+            <!-- Mobile Suit Gundam F91 -->
+            <div class="animate-scale-in">
+                <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 overflow-hidden h-full flex">
+                    <div class="w-32 md:w-40 flex-shrink-0">
+                        <img src="https://picsum.photos/133/200?random=11" alt="Mobile Suit Gundam F91 poster" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <h3 class="text-xl md:text-xl font-semibold text-gray-900 mb-3 tracking-tight">Mobile Suit Gundam F91</h3>
+                        <div class="mb-4">
+                            <span class="inline-flex items-center justify-center bg-cyan-100 text-cyan-800 px-4 py-0.5 rounded-full text-sm font-semibold">U.C. 0123</span>
                         </div>
-                        <div class="flex-1 md:ml-6">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Mobile Suit Victory Gundam</h3>
-                            <p class="text-gray-600">1993-94 • 51 Episodes</p>
+                        <div class="prose prose-sm max-w-none flex-1">
+                            <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base mb-0">U.C. 0123. The Frontier Side is attacked by the forces of the Crossbone Vanguard. Seabook Arno, who has been living at Frontier IV, seeks refuge aboard the Federation warship Space Ark and is forced to become the pilot of the F91 Gundam.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Mobile Suit Victory Gundam -->
+            <div class="animate-scale-in">
+                <div class="bg-white rounded-3xl shadow-lg border border-apple-gray-0 overflow-hidden h-full flex">
+                    <div class="w-32 md:w-40 flex-shrink-0">
+                        <img src="https://picsum.photos/133/200?random=12" alt="Mobile Suit Victory Gundam poster" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <h3 class="text-xl md:text-xl font-semibold text-gray-900 mb-3 tracking-tight">Mobile Suit V Gundam</h3>
+                        <div class="mb-4">
+                            <span class="inline-flex items-center justify-center bg-cyan-100 text-cyan-800 px-4 py-0.5 rounded-full text-sm font-semibold">U.C. 0153</span>
+                        </div>
+                        <div class="prose prose-sm max-w-none flex-1">
+                            <p class="text-apple-gray-800 leading-snug tracking-tight font-medium text-base mb-0">U.C. 0153. The Zanscare Empire of Side 2 has begun an invasion of Earth The Federation is unable to resist, and it is left to the civilians of the League Militaire to fight back. When Uso is caught up in the fighting, he becomes the pilot of the V Gundam.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    
-</section>
+    </section>
+
+
      <!-- Section Divider -->
     <div class="flex justify-center pt-1 pb-2 bg-white">
     
