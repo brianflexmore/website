@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Mark - Art Department Breakdown</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            text-align: center;
+            font-weight: 300;
+        }
+
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 8px;
+            z-index: 200;
+        }
+
+        .btn-circle {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .btn-circle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+
+        .btn-circle::after {
+            content: attr(title);
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .btn-circle:hover::after {
+            opacity: 1;
+        }
+
+        .btn-save { background: #28a745; color: white; }
+        .btn-load { background: #007bff; color: white; }
+        .btn-export { background: #ffc107; color: #333; }
+        .btn-clear { background: #dc3545; color: white; }
+
+        .container {
+            padding: 20px;
+        }
+
+        .scene-row {
+            display: flex;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .scene-info {
+            background: #2c3e50;
+            color: white;
+            min-width: 200px;
+            max-width: 200px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .scene-header {
+            background: #34495e;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .scene-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .scene-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #eaff00;
+        }
+
+        .departments-container {
+            display: flex;
+            overflow-x: scroll;
+            flex: 1;
+            gap: 0;
+        }
+
+        .department-card {
+            min-width: 280px;
+            max-width: 280px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .department-card:last-child {
+            border-right: none;
+        }
+
+        .card-header {
+            padding: 16px 20px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .card-content {
+            padding: 0;
+            background: #fff;
+        }
+
+        .item-row {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px 16px;
+            border-bottom: 1px solid #f1f3f4;
+            gap: 12px;
+            transition: background-color 0.2s;
+        }
+
+        .item-row:hover {
+            background-color: #f8f9fa;
+        }
+
+        .item-row.alternate {
+            background-color: #fbfcfd;
+        }
+
+        .item-row.alternate:hover {
+            background-color: #f1f3f4;
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+            transition: all 0.2s;
+        }
+
+        .checkbox:hover {
+            border-color: #007bff;
+        }
+
+        .checkbox.checked {
+            background-color: #007bff;
+            border-color: #007bff;
+            position: relative;
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            line-height: 1;
+        }
+
+        .item-text {
+            flex: 1;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #333;
+        }
+
+        .person-label {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .empty-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+            padding: 20px;
+            text-align: center;
+            
+            font-size: 0.85rem;
+        }
+
+        /* Department colors */
+        .dept-design { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .dept-props { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .dept-setdec { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .dept-greens { background: linear-gradient(135deg, #2cc55f 0%, #24b398 100%); }
+        .dept-armoury { background: linear-gradient(135deg, #363636 0%, #b50101 100%); }
+        .dept-vehicles { background: linear-gradient(135deg, #082927 0%, #636363 100%); }
+        .dept-graphics { background-color: #0981d1; }
+        .dept-playback { background-color: #6c7e17; }
+        .dept-sfx { background: linear-gradient(135deg, #f100b5 0%, #0c96d5 100%); }
+        .dept-animals { background: linear-gradient(135deg, #dbb785 0%, #674d44 100%); }
+        .dept-stunts { background-color: #f17924; }
+        .dept-vfx { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+
+        /* Scrollbar styling */
+        .departments-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .departments-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .departments-container::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+
+        .departments-container::-webkit-scrollbar-thumb:hover {
+            background: #a1a1a1;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>The Mark</h1>
+        <div class="subtitle">Art Department Breakdown - 167 Scenes Complete</div>
+    </div>
+
+    <div class="controls">
+        <button class="btn-circle btn-save" onclick="saveProgress()" title="Save Progress">💾</button>
+        <button class="btn-circle btn-load" onclick="loadProgress()" title="Load Progress">📂</button>
+        <button class="btn-circle btn-export" onclick="exportProgress()" title="Export Backup">📤</button>
+        <button class="btn-circle btn-clear" onclick="clearProgress()" title="Clear All">🗑️</button>
+    </div>
+
+    <div class="container">
+        <div id="scenesContainer">
+            <!-- Scene rows will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Real data from your spreadsheet (ALL 167 SCENES - COMPLETE!)
+        const sampleData = [
+            {
+                scene: "1",
+                setName: "TARMAC",
+                departments: {
+                    "DESIGN / CONSTR.": "Plane/ladder to tarmac",
+                    "PROPS": "BEN: Ambien, drinks, neck pillow, carry on bag, headphones?\nExtras: guests, flight attendants props\nBLONDE WOMAN: day pack, air pods, BENs wallet\nENO: ID badge",
+                    "SET DEC": "airport tarmac dressing (eg bollards),\nservice area signage",
+                    "ACTION VEHICLES": "plane?\nairport vehicles? (luggage carrier?)",
+                    "GRAPHICS": "Ambien (sedative) package,immigration signs, airport logo (jacket/ signage)"
+                }
+            },
+            {
+                scene: "2",
+                setName: "IMMIGRATIONS - AIRPORT TERMINAL",
+                departments: {
+                    "PROPS": "BEN: as above and PHONE\nENO: knife, lanyard",
+                    "SET DEC": "oversized luggage",
+                    "ARMOURY": "ENO hero knife, soft knife",
+                    "GRAPHICS": "airport logo (jacket, signage)"
+                }
+            },
+            {
+                scene: "3",
+                setName: "SERVICE HALLWAY",
+                departments: {
+                    "PROPS": "BLONDE WOMAN: has ENO knife and lanyard",
+                    "GRAPHICS": "Ambien (sedative) package,immigration signs, airport logo (jacket, signage)"
+                }
+            },
+            {
+                scene: "4",
+                setName: "SERVICE CORRIDOR",
+                departments: {
+                    "PROPS": "BLONDE WOMAN: has ENO knife and lanyard"
+                }
+            },
+            {
+                scene: "5",
+                setName: "ARRIVALS TERMINAL",
+                departments: {
+                    "PROPS": "BLONDE WOMAN: has ENO knife and lanyard"
+                }
+            },
+            {
+                scene: "6",
+                setName: "ARRIVALS TERMINAL",
+                departments: {
+                    "PROPS": "BLONDE WOMAN: has ENO knife and lanyard"
+                }
+            },
+            {
+                scene: "7",
+                setName: "CAB STAND - AIRPORT",
+                departments: {
+                    "ACTION VEHICLES": "Taxis (Gold Coast)",
+                    "GRAPHICS": "number plates\nTaxi graphics?\nairport graphics"
+                }
+            },
+            {
+                scene: "8",
+                setName: "CUSTOMER SERVICE COUNTER",
+                departments: {
+                    "DESIGN / CONSTR.": "Dressing vinyl for counter",
+                    "PROPS": "luggage, wallets, tickets, travel gear, phones\nBEN: bags, phone",
+                    "SET DEC": "customer service dressing",
+                    "GRAPHICS": "customer service signage, customer service badge/logo\npaperwork"
+                }
+            },
+            {
+                scene: "9",
+                setName: "THE PALM HOTEL",
+                departments: {
+                    "DESIGN / CONSTR.": "NEON SIGN (prac LX)",
+                    "PROPS": "BLONDE WOMAN: day pack, airpods\nBIKERS: helmets x2, phone x1",
+                    "ACTION VEHICLES": "Taxis (Gold Coast)\n2x motorcycles: BIKERS",
+                    "GRAPHICS": "NEON SIGN (prac LX)"
+                }
+            },
+            {
+                scene: "10",
+                setName: "ROOM 111 - THE PALM HOTEL",
+                departments: {
+                    "DESIGN / CONSTR.": "hotel room build",
+                    "PROPS": "BLONDE WOMAN: daypack, drugs in makeup containers,",
+                    "SET DEC": "hotel dressing / bed"
+                }
+            },
+            {
+                scene: "11",
+                setName: "BATHROOM - ROOM 111",
+                departments: {
+                    "PROPS": "towel, scissors",
+                    "SET DEC": "mirror, bathroom dressing"
+                }
+            },
+            {
+                scene: "12",
+                setName: "ROOM 11 - THE PALM HOTEL",
+                departments: {
+                    "PROPS": "BIKERS: helmets x2, phone x1",
+                    "ACTION VEHICLES": "2x motorcycles: BIKERS"
+                }
+            },
+            {
+                scene: "13",
+                setName: "AIRPORT TERMINAL",
+                departments: {
+                    "DESIGN / CONSTR.": "Dressing vinyl for counter",
+                    "PROPS": "luggage, wallets, tickets, travel gear, phones\nBEN: bags, phone",
+                    "SET DEC": "customer service dressing"
+                }
+            },
+            {
+                scene: "14",
+                setName: "AIRPORT TERMINAL",
+                departments: {
+                    "PROPS": "BEN: bags, phone",
+                    "SET DEC": "bench, customer service dressing",
+                    "ACTION VEHICLES": "Taxis (Gold Coast)"
+                }
+            },
+            {
+                scene: "15",
+                setName: "CAB",
+                departments: {
+                    "PROPS": "BEN: bags, phone",
+                    "ACTION VEHICLES": "Taxis (Gold Coast)"
+                }
+            },
+            {
+                scene: "16",
+                setName: "ROOM 111 - PALM HOTEL",
+                departments: {
+                    "PROPS": "BLONDE WOMAN: daypack, drugs in makeup containers,",
+                    "SFX": "steam from shower"
+                }
+            },
+            {
+                scene: "17",
+                setName: "CAB",
+                departments: {
+                    "PROPS": "BEN: bags, phone",
+                    "ACTION VEHICLES": "Taxis (Gold Coast)"
+                }
+            },
+            {
+                scene: "18",
+                setName: "ROOM 111 - THE PALM HOTEL",
+                departments: {
+                    "PROPS": "BLONDE WOMAN: daypack, drugs in makeup containers, towel\nwater on floor?",
+                    "SET DEC": "Hotel TV, hotel dressing",
+                    "ARMOURY": "BIKER: 2x guns with silencers\nBLONDE: ENO knife,soft knife",
+                    "GRAPHICS": "hotel graphics",
+                    "PLAYBACK": "Potential blue screen",
+                    "SFX": "steam"
+                }
+            },
+            {
+                scene: "19",
+                setName: "BATHROOM - ROOM 111",
+                departments: {
+                    "PROPS": "BLONDE WOMAN: daypack, drugs in makeup containers, towel\nwater on floor?",
+                    "SET DEC": "Hotel TV, hotel dressing",
+                    "ARMOURY": "BIKER: 2x guns with silencers\nBLONDE: ENO knife,soft knife",
+                    "GRAPHICS": "hotel graphics",
+                    "PLAYBACK": "Potential blue screen",
+                    "SFX": "steam"
+                }
+            },
+            {
+                scene: "20",
+                setName: "THE PALM HOTEL",
+                departments: {
+                    "PROPS": "BEN: bags, phone",
+                    "ACTION VEHICLES": "Taxis (Gold Coast)"
+                }
+            },
+            {
+                scene: "21",
+                setName: "HOTEL LOBBY - THE PALM",
+                departments: {
+                    "PROPS": "BEN: bags, phone\nCLERK: hotel tag and key",
+                    "SET DEC": "hotel lobby dressing",
+                    "GRAPHICS": "hotel graphics,"
+                }
+            },
+            {
+                scene: "22",
+                setName: "BATHROOM - ROOM 111",
+                departments: {
+                    "PROPS": "BLONDE WOMAN: daypack, drugs in makeup containers, phone, airpods\nBIKERS: bike keys, IDS,",
+                    "ARMOURY": "BIKER: 2x guns with silencers\nBLONDE: ENO knife,soft knife",
+                    "GRAPHICS": "hotel graphics, bikers IDS x2"
+                }
+            },
+            {
+                scene: "23",
+                setName: "HOTEL HALLWAY - THE PALM",
+                departments: {
+                    "PROPS": "BEN: bags, phone"
+                }
+            },
+            {
+                scene: "24",
+                setName: "ROOM 111 - THE PALM",
+                departments: {
+                    "PROPS": "BLONDE WOMAN: daypack, drugs in makeup containers, daypack, phone, airpods, chewing gum\nBEN: wallet",
+                    "SET DEC": "Hotel TV, hotel dressing *trashed*"
+                }
+            },
+            {
+                scene: "25",
+                setName: "ROOM 111 - THE PALM HOTEL",
+                departments: {
+                    "PROPS": "BLONDE/BIKER: Phone",
+                    "SET DEC": "Mirror, Hotel TV, hotel dressing *trashed*"
+                }
+            },
+            {
+                scene: "26",
+                setName: "THE PALM HOTEL",
+                departments: {
+                    "DESIGN / CONSTR.": "NEON SIGN (prac LX)",
+                    "PROPS": "BLONDE: Helmet, daypack, airpods, phone, BENS ID, Phone, sim card\nSALOON GUY: car keys",
+                    "ACTION VEHICLES": "2x motorcycles: BIKERS\nMERCEDES SALOON sedan x1",
+                    "GRAPHICS": "PHOTO: Actor GIRL\nPhone screen: Messages/notifications",
+                    "PLAYBACK": "Phone screen: Messages/notifications"
+                }
+            },
+            {
+                scene: "27",
+                setName: "ROOM 111 - THE PALM HOTEL",
+                departments: {
+                    "PROPS": "BLONDE/BIKER: Phone",
+                    "SET DEC": "Mirror, Hotel TV, hotel dressing *trashed*",
+                    "ARMOURY": "SALOON GUY: 1x Glock",
+                    "SFX": "Dead dummies"
+                }
+            },
+            {
+                scene: "28",
+                setName: "THE PALM HOTEL",
+                departments: {
+                    "PROPS": "BLONDE: Helmet, daypack, airpods, phone, BENS ID, Phone,",
+                    "ARMOURY": "POLICE: gun butts?, holsters",
+                    "ACTION VEHICLES": "2x motorcycles: BIKERS\nMERCEDES SALOON sedan x1\n1x POLICE VAN\nTOYOTA LANDCRUISER",
+                    "GRAPHICS": "police graphics, plates"
+                }
+            },
+            {
+                scene: "29",
+                setName: "ROOM 111 - THE PALM HOTEL",
+                departments: {
+                    "PROPS": "BLONDE/BIKER: Phone\nSALOON MAN: CIA ID BADGE\nPOLICE: Handcuffs",
+                    "SET DEC": "Mirror, Hotel TV, hotel dressing *trashed*",
+                    "ARMOURY": "SALOON GUY: 1x Glock\nPOLICE: gun butts?pistolsx2, holsters",
+                    "GRAPHICS": "SALOON MAN: CIA ID BADGE"
+                }
+            },
+            {
+                scene: "30",
+                setName: "THE PALM HOTEL",
+                departments: {
+                    "PROPS": "BLONDE: Helmet, daypack, airpods, phone, BENS ID, Phone,\nPOLICE: Handcuffs\nSALOON MAN: CIA ID BADGE",
+                    "ACTION VEHICLES": "2x motorcycles: BIKERS\nMERCEDES SALOON sedan x1\n1x POLICE VAN\nTOYOTA LANDCRUISER",
+                    "GRAPHICS": "police graphics, plates\nSALOON MAN: CIA ID BADGE"
+                }
+            },
+            {
+                scene: "31",
+                setName: "CITY STREETS",
+                departments: {
+                    "PROPS": "BLONDE Helmet",
+                    "ACTION VEHICLES": "1x POLICE VAN\nTOYOTA LANDCRUISER\n1x Motorbike"
+                }
+            },
+            {
+                scene: "32",
+                setName: "BACK OF POLICE VAN",
+                departments: {
+                    "PROPS": "POLICE: Handcuffs\nSALOON MAN: CIA ID BADGE"
+                }
+            },
+            {
+                scene: "33",
+                setName: "CITY STREETS",
+                departments: {
+                    "PROPS": "BLONDE Helmet",
+                    "ACTION VEHICLES": "1x POLICE VAN\nTOYOTA LANDCRUISER\n1x Motorbike"
+                }
+            },
+            {
+                scene: "34",
+                setName: "POLICE VAN",
+                departments: {
+                    "PROPS": "POLICE: Handcuffs\nSALOON MAN: CIA ID BADGE"
+                }
+            },
+            {
+                scene: "35",
+                setName: "MOTORCYCLE",
+                departments: {
+                    "PROPS": "BLONDE Helmet",
+                    "ACTION VEHICLES": "1x POLICE VAN\nTOYOTA LANDCRUISER\n1x Motorbike"
+                }
+            },
+            {
+                scene: "36",
+                setName: "CITY STREETS",
+                departments: {
+                    "PROPS": "BLONDE Helmet",
+                    "ACTION VEHICLES": "1x POLICE VAN\nTOYOTA LANDCRUISER\n1x Motorbike"
+                }
+            },
+            {
+                scene: "37",
+                setName: "BACK OF POLICE VAN",
+                departments: {
+                    "PROPS": "POLICE: Handcuffs\nSALOON MAN: CIA ID BADGE"
+                }
+            },
+            {
+                scene: "38",
+                setName: "CITY STREETS [STUNT SCENE - crash]",
+                departments: {
+                    "DESIGN / CONSTR.": "STUNT VAN",
+                    "PROPS": "BLONDE Helmet",
+                    "ACTION VEHICLES": "1x POLICE VAN\nTOYOTA LANDCRUISER\n1x Motorbike",
+                    "STUNTS": "STUNT VAN"
+                }
+            },
+            {
+                scene: "39",
+                setName: "BACK OF POLICE VAN [SIM TRAVEL - STUNT SCENE]",
+                departments: {
+                    "DESIGN / CONSTR.": "STUNT VAN",
+                    "PROPS": "POLICE: Handcuffs\nSALOON MAN: CIA ID BADGE",
+                    "SFX": "CRASH DEBRIS",
+                    "STUNTS": "STUNT VAN"
+                }
+            },
+            {
+                scene: "40",
+                setName: "BEACH -  [STUNT SCENE - roll]",
+                departments: {
+                    "DESIGN / CONSTR.": "STUNT VAN",
+                    "PROPS": "BLONDE Helmet",
+                    "ACTION VEHICLES": "1x POLICE VAN\nTOYOTA LANDCRUISER\n1x Motorbike"
+                }
+            },
+            {
+                scene: "41",
+                setName: "POLICE VAN [STUNT SCENE - roll]",
+                departments: {
+                    "DESIGN / CONSTR.": "STUNT VAN",
+                    "PROPS": "POLICE: Handcuffs, cuffs key\nSALOON MAN: CIA ID BADGE"
+                }
+            },
+            {
+                scene: "42",
+                setName: "POLICE VAN - BEACH [STUNT SCENE - roll]",
+                departments: {
+                    "DESIGN / CONSTR.": "STUNT VAN",
+                    "PROPS": "BLONDE Helmet",
+                    "ARMOURY": "WINDBREAKER: pistol?",
+                    "ACTION VEHICLES": "1x POLICE VAN\nTOYOTA LANDCRUISER\n1x Motorbike"
+                }
+            },
+            {
+                scene: "43",
+                setName: "WRECKED POLICE VAN - BEACH",
+                departments: {
+                    "PROPS": "BLONDE Helmet\nBEN: handcuffs, key",
+                    "ARMOURY": "BLONDE: gun? knife?\nWINDBREAKER: pistol? knife, Soft knife",
+                    "ACTION VEHICLES": "1x POLICE VAN\nTOYOTA LANDCRUISER\n1x Motorbike"
+                }
+            },
+            {
+                scene: "44",
+                setName: "ROAD",
+                departments: {
+                    "PROPS": "BLONDE Helmet\nSALOON MAN: CIA ID BADGE",
+                    "ACTION VEHICLES": "SIRENS FLASHING LIGHTS??\n1x Motorbike"
+                }
+            },
+            {
+                scene: "45",
+                setName: "CRASH SCENE - BEACH",
+                departments: {
+                    "PROPS": "SALOON MAN: CIA ID BADGE\nAFP: ID badge",
+                    "ARMOURY": "FLARES",
+                    "ACTION VEHICLES": "AMBULANCE\nAFP vehicle\nSALOON? sedan",
+                    "GRAPHICS": "SALOON MAN: CIA ID BADGE\nAFP: ID badge"
+                }
+            },
+            {
+                scene: "46",
+                setName: "BOARDWALK",
+                departments: {
+                    "DESIGN / CONSTR.": "Potential security cameras on poles?",
+                    "PROPS": "BLONDE: helmet, hotwiring tools, day pack\nBEN: phone, wallet",
+                    "ACTION VEHICLES": "CARS PARKED EVERYWHERE\n1x motorbike\nSUBARU WRX"
+                }
+            },
+            {
+                scene: "47",
+                setName: "ELITE CLUB",
+                departments: {
+                    "PROPS": "Drinks, Drinks Trays\nJERICHO: phone",
+                    "SET DEC": "Elite club dressing",
+                    "GREENS": "sculptural foliage",
+                    "GRAPHICS": "elite club signage,"
+                }
+            },
+            {
+                scene: "48",
+                setName: "TEMPORARY INCIDENT ROOM",
+                departments: {
+                    "PROPS": "CIA agents: coffee, ids,",
+                    "SET DEC": "grungy warehouse, CIA dressing\ncctv monitors\ntrashcan",
+                    "PLAYBACK": "CCTV footage - ben leaving airport (potential blue, put in post?)"
+                }
+            },
+            {
+                scene: "49",
+                setName: "SUBARU WRX",
+                departments: {
+                    "ACTION VEHICLES": "SUBARU WRX"
+                }
+            },
+            {
+                scene: "50",
+                setName: "TEMPORARY INCIDENT ROOM",
+                departments: {
+                    "PROPS": "CIA agents: coffee, ids,",
+                    "SET DEC": "grungy warehouse, CIA dressing\ncctv monitors\ntrash can",
+                    "PLAYBACK": "CCTV footage - facial recognition @ boardwalk (potential blue, put in post?)"
+                }
+            },
+            {
+                scene: "51",
+                setName: "HALLWAY - SURF CLUB",
+                departments: {}
+            },
+            {
+                scene: "52",
+                setName: "MEN'S BATHROOM - SURF CLUB",
+                departments: {
+                    "PROPS": "BIKERS: x2",
+                    "SET DEC": "mirror break?",
+                    "SFX": "mirror break?"
+                }
+            },
+            {
+                scene: "53",
+                setName: "SURF CLUB",
+                departments: {
+                    "PROPS": "blood cleanup attempt",
+                    "ACTION VEHICLES": "SUBARU WRX"
+                }
+            },
+            {
+                scene: "54",
+                setName: "BOARDWALK",
+                departments: {
+                    "DESIGN / CONSTR.": "Potential security cameras on poles?",
+                    "PROPS": "CIA: badges",
+                    "ACTION VEHICLES": "CARS PARKED EVERYWHERE\n1x motorbike\nCIA car"
+                }
+            },
+            {
+                scene: "55",
+                setName: "ALLEY",
+                departments: {
+                    "ACTION VEHICLES": "SUBARU WRX"
+                }
+            },
+            {
+                scene: "56",
+                setName: "MISS G'S BUNGALOW",
+                departments: {
+                    "PROPS": "KIDS: football",
+                    "SET DEC": "bungalow dressing",
+                    "ACTION VEHICLES": "SUBARU WRX"
+                }
+            },
+            {
+                scene: "57",
+                setName: "MISS G'S BUNGALOW",
+                departments: {
+                    "SET DEC": "bungalow dressing"
+                }
+            },
+            {
+                scene: "58",
+                setName: "REMY'S ROOM - MISS G'S BUNGALOW",
+                departments: {
+                    "PROPS": "Photo: Remy,\ncar posters, muscle cars books and magazines\nPOSTER: 1985 Holden Commodore",
+                    "SET DEC": "bungalow dressing"
+                }
+            },
+            {
+                scene: "59",
+                setName: "GARDEN - MISS G'S BUNGALOW",
+                departments: {
+                    "SET DEC": "garden dressing, honey",
+                    "GREENS": "garden plants, garden beds, lemon myrtle, tea tree, weed"
+                }
+            },
+            {
+                scene: "60",
+                setName: "REMY'S ROOM - MISS G'S BUNGALOW",
+                departments: {
+                    "PROPS": "mortar, pestle, honey, lemon myrtle, tea tree leaves, vodka, stitching string and needle",
+                    "SET DEC": "bungalow dressing"
+                }
+            },
+            {
+                scene: "61",
+                setName: "DECK - MISS G'S BUNGALOW",
+                departments: {
+                    "SET DEC": "bungalow dressing"
+                }
+            },
+            {
+                scene: "62",
+                setName: "GARAGE - MISS G'S BUNGALOW",
+                departments: {
+                    "SET DEC": "bungalow dressing, coca cola machine, garage dressing",
+                    "ACTION VEHICLES": "SUBARU WRX\n71HQ MONARO (fix up)\nYamaha XS850",
+                    "GRAPHICS": "garage posters, signage\nLUC 222"
+                }
+            },
+            {
+                scene: "63",
+                setName: "KEBAB SHOP",
+                departments: {
+                    "PROPS": "kebabs, food\nCIA: IDs\nBAILEY: phone",
+                    "SET DEC": "kebab dressing",
+                    "GRAPHICS": "KEBAB SIGNAGE?"
+                }
+            },
+            {
+                scene: "64",
+                setName: "KITCHEN - MISS G'S BUNGALOW",
+                departments: {
+                    "PROPS": "BEN: burner phone",
+                    "SET DEC": "bungalow dressing"
+                }
+            },
+            {
+                scene: "65",
+                setName: "LOLA'S BEDROOM",
+                departments: {
+                    "DESIGN / CONSTR.": "STUDIO BUILD??",
+                    "PROPS": "fort of legos, retro cassette boombox\nLOLA: Phone",
+                    "SET DEC": "Lolas bedroom dressing, lamp"
+                }
+            },
+            {
+                scene: "66",
+                setName: "BATHROOM - MISS G'S BUNGALOW",
+                departments: {
+                    "PROPS": "towels\nfake makeup kit of drugs, powders, sarin black cloth, toxic dose SCOPOLAMINE",
+                    "SET DEC": "shower dressing,\nmirrors",
+                    "GRAPHICS": "Graphics of drugs labels"
+                }
+            },
+            {
+                scene: "67",
+                setName: "REMYS ROOM - MISS G'S BUNGALOW",
+                departments: {}
+            },
+            {
+                scene: "68",
+                setName: "BEACH SHOWER",
+                departments: {
+                    "PROPS": "dirty clothes balled up, towel"
+                }
+            },
+            {
+                scene: "69",
+                setName: "BACKYARD GARDEN - MISS G'S BUNGALOW",
+                departments: {
+                    "PROPS": "alcohol, bbq food, joint, burgers, trays",
+                    "SET DEC": "party backyard dressing",
+                    "GRAPHICS": "beer graphics? product placement?"
+                }
+            },
+            {
+                scene: "70",
+                setName: "NEIGHBORHOOD STREET",
+                departments: {
+                    "PROPS": "MILTON: Cigarette",
+                    "ACTION VEHICLES": "CIA CAR"
+                }
+            },
+            {
+                scene: "71",
+                setName: "BEACH",
+                departments: {}
+            },
+            {
+                scene: "72",
+                setName: "NEIGHBORHOOD STREET",
+                departments: {
+                    "PROPS": "MILTON: Cigarette",
+                    "ACTION VEHICLES": "CIA Car\nMUSCLE CARS and CHOPPER BIKES.\nTATTOOED SURFERS and PETROL HEADS hang"
+                }
+            },
+            {
+                scene: "73",
+                setName: "BEACH",
+                departments: {}
+            },
+            {
+                scene: "74",
+                setName: "MISS G'S BUNGALOW",
+                departments: {
+                    "PROPS": "alcohol, bbq food, joint, burgers, trays\nCIA: ID Badges",
+                    "SET DEC": "party backyard dressing"
+                }
+            },
+            {
+                scene: "75",
+                setName: "BACKYARD GARDEN - MISS G'S BUNGALOW",
+                departments: {}
+            },
+            {
+                scene: "76",
+                setName: "MISS G'S BUNGALOW",
+                departments: {}
+            },
+            {
+                scene: "77",
+                setName: "MISS G'S BUNGALOW",
+                departments: {}
+            },
+            {
+                scene: "78",
+                setName: "BACKYARD - MISS G'S BUNGALOW",
+                departments: {}
+            },
+            {
+                scene: "79",
+                setName: "BEACH BUNGALOW",
+                departments: {}
+            },
+            {
+                scene: "80",
+                setName: "GARAGE - MISS G'S BUNGALOW",
+                departments: {
+                    "PROPS": "2x bike helmets",
+                    "ACTION VEHICLES": "SUBARU WRX\n71HQ MONARO (fix up)\nYamaha XS850"
+                }
+            },
+            {
+                scene: "81",
+                setName: "LIVING ROOM - MISS G'S BUNGALOW",
+                departments: {
+                    "PROPS": "1x joint\ntea cups, tea, milk"
+                }
+            },
+            {
+                scene: "82",
+                setName: "MISS G'S BUNGALOW",
+                departments: {
+                    "ACTION VEHICLES": "CIA Car\nDOUBLES - CIA car tyres slashed"
+                }
+            },
+            {
+                scene: "83",
+                setName: "ALLEY",
+                departments: {
+                    "PROPS": "2x bike helmets",
+                    "ACTION VEHICLES": "Yamaha XS850"
+                }
+            },
+            {
+                scene: "84",
+                setName: "BEN'S YAMAHA - CITY STREETS",
+                departments: {
+                    "PROPS": "2x bike helmets",
+                    "ACTION VEHICLES": "Yamaha XS850"
+                }
+            },
+            {
+                scene: "85",
+                setName: "ROAD",
+                departments: {
+                    "PROPS": "2x bike helmets\nEDEN: Phone, Airpods",
+                    "ACTION VEHICLES": "Yamaha XS850"
+                }
+            },
+            {
+                scene: "86",
+                setName: "CITY STREETS",
+                departments: {
+                    "PROPS": "2x bike helmets\nEDEN: Phone, Airpods",
+                    "ACTION VEHICLES": "Yamaha XS850"
+                }
+            },
+            {
+                scene: "87",
+                setName: "PARKING GARAGE",
+                departments: {
+                    "PROPS": "2x bike helmets\nEDEN: Phone, Airpods, purse\nBEN: secure phone",
+                    "ACTION VEHICLES": "Yamaha XS850"
+                }
+            },
+            {
+                scene: "88",
+                setName: "THE PINK POODLE",
+                departments: {
+                    "PROPS": "drinks\nEDEN: keychain, drugs\nBEN: phone",
+                    "SET DEC": "pink poodle bar dressing",
+                    "ARMOURY": "knife x 1, 1x soft knife"
+                }
+            },
+            {
+                scene: "89",
+                setName: "THE PINK POODLE",
+                departments: {
+                    "PROPS": "EDEN: scarf\nchampagne bottle",
+                    "GRAPHICS": "1x champagne logo",
+                    "SFX": "bottle smash / candy glass"
+                }
+            },
+            {
+                scene: "90",
+                setName: "HIGHER LEVEL - THE PINK POODLE",
+                departments: {}
+            },
+            {
+                scene: "91",
+                setName: "SERVICE AREA - THE PINK POODLE",
+                departments: {}
+            },
+            {
+                scene: "92",
+                setName: "HIGHER LEVEL - THE PINK POODLE",
+                departments: {
+                    "PROPS": "EDEN: drug cloth"
+                }
+            },
+            {
+                scene: "93",
+                setName: "BAR - THE PINK POODLE",
+                departments: {
+                    "PROPS": "BEN: phone",
+                    "ARMOURY": "ISLA: gun\nEDEN: gun *FIRE*"
+                }
+            },
+            {
+                scene: "94",
+                setName: "SERVICE AREA - THE PINK POODLE",
+                departments: {
+                    "ARMOURY": "Eden: Gun?"
+                }
+            },
+            {
+                scene: "95",
+                setName: "CLUB AREA - THE PINK POODLE",
+                departments: {
+                    "ARMOURY": "Eden: Gun?"
+                }
+            },
+            {
+                scene: "96",
+                setName: "CLUB AREA - THE PINK POODLE",
+                departments: {}
+            },
+            {
+                scene: "97",
+                setName: "LOADING BAY - THE PINK POODLE",
+                departments: {}
+            },
+            {
+                scene: "98",
+                setName: "CITY STREET",
+                departments: {
+                    "PROPS": "ISLA:GUN",
+                    "ARMOURY": "ISLA:GUN",
+                    "ACTION VEHICLES": "MOVING TRAFFIC, STUNT CARS\nSOFT BONNETS?"
+                }
+            },
+            {
+                scene: "99",
+                setName: "SIDE ALLEY",
+                departments: {
+                    "DESIGN / CONSTR.": "A/C Unit, Dumpster - for climbing"
+                }
+            },
+            {
+                scene: "100",
+                setName: "PARKING GARAGE",
+                departments: {
+                    "ARMOURY": "ISLA:GUN\nEDEN: gun with silencer",
+                    "ACTION VEHICLES": "BG CARS"
+                }
+            },
+            {
+                scene: "101",
+                setName: "PARKING GARAGE",
+                departments: {
+                    "ACTION VEHICLES": "Yamaha XS850\nBG CARS"
+                }
+            },
+            {
+                scene: "102",
+                setName: "CITY STREETS",
+                departments: {
+                    "ACTION VEHICLES": "Yamaha XS850"
+                }
+            },
+            {
+                scene: "103",
+                setName: "MULTI-LEVEL PARKING GARAGE",
+                departments: {
+                    "PROPS": "crime scene props,\nbody / body bag\ndetective: gloves, evidence bag - locker key",
+                    "ACTION VEHICLES": "COP CARS\nBG CARS"
+                }
+            },
+            {
+                scene: "104",
+                setName: "SUITE 333 - LUXURY HOTEL",
+                departments: {
+                    "PROPS": "silver case, blood catheder, cage\nJERICHO: phone",
+                    "SET DEC": "JERICHO: large throne chair"
+                }
+            },
+            {
+                scene: "105",
+                setName: "AIRPORT TERMINAL",
+                departments: {
+                    "PROPS": "small stash, passport, glock, badge, cash,",
+                    "SET DEC": "airport lockers",
+                    "ARMOURY": "1x glock",
+                    "GRAPHICS": "ID badge, multi fake passports"
+                }
+            },
+            {
+                scene: "106",
+                setName: "AIRPORT TERMINAL",
+                departments: {
+                    "PROPS": "BAILEY: phone",
+                    "ACTION VEHICLES": "AFP Car"
+                }
+            },
+            {
+                scene: "107",
+                setName: "PROMENADE",
+                departments: {
+                    "PROPS": "BEN: phone",
+                    "ACTION VEHICLES": "Yamaha XS850"
+                }
+            },
+            {
+                scene: "108",
+                setName: "CONSTRUCTION SITE",
+                departments: {
+                    "PROPS": "MILTON: Cigarette, phone"
+                }
+            },
+            {
+                scene: "109",
+                setName: "BAILEY'S CAR",
+                departments: {
+                    "PROPS": "BAILEY: phone",
+                    "ACTION VEHICLES": "AFP car"
+                }
+            },
+            {
+                scene: "110",
+                setName: "PROMENADE",
+                departments: {
+                    "PROPS": "EDEN: Bens phone, Sim Card\nBEN: secure phone",
+                    "ACTION VEHICLES": "Yamaha XS850"
+                }
+            },
+            {
+                scene: "111",
+                setName: "LOLA'S BEDROOM",
+                departments: {
+                    "DESIGN / CONSTR.": "STUDIO BUILD??",
+                    "PROPS": "fort of legos, retro cassette boombox\nLOLA: Phone",
+                    "SET DEC": "Lolas bedroom dressing, lamp"
+                }
+            },
+            {
+                scene: "112",
+                setName: "PROMENADE",
+                departments: {
+                    "PROPS": "EDEN: Bens phone, Sim Card\nBEN: secure phone"
+                }
+            },
+            {
+                scene: "113",
+                setName: "CITY STREETS",
+                departments: {
+                    "PROPS": "BAILEY: phone",
+                    "ACTION VEHICLES": "AFP car"
+                }
+            },
+            {
+                scene: "114",
+                setName: "PROMENADE",
+                departments: {
+                    "PROPS": "EDEN: Bens phone, Sim Card\nBEN: secure phone"
+                }
+            },
+            {
+                scene: "115",
+                setName: "CONSTRUCTION SITE",
+                departments: {
+                    "SET DEC": "Plastic flaps",
+                    "ARMOURY": "EDEN: gun",
+                    "ACTION VEHICLES": "Yamaha XS850"
+                }
+            },
+            {
+                scene: "116",
+                setName: "CONSTRUCTION SITE",
+                departments: {
+                    "ARMOURY": "Bailey: gun",
+                    "ACTION VEHICLES": "AFP car"
+                }
+            },
+            {
+                scene: "117",
+                setName: "CONSTRUCTION SITE",
+                departments: {
+                    "ARMOURY": "EDEN: gun"
+                }
+            },
+            {
+                scene: "118",
+                setName: "STAIRWELL - CONSTRUCTION SITE",
+                departments: {
+                    "ARMOURY": "Bailey: gun"
+                }
+            },
+            {
+                scene: "119",
+                setName: "CONSTRUCTION SITE",
+                departments: {
+                    "ARMOURY": "EDEN: gun"
+                }
+            },
+            {
+                scene: "120",
+                setName: "PROMENADE",
+                departments: {}
+            },
+            {
+                scene: "121",
+                setName: "ROOF-TOP - CONSTRUCTION SITE",
+                departments: {
+                    "ARMOURY": "Bailey: gun"
+                }
+            },
+            {
+                scene: "122",
+                setName: "STAIRWELL - CONSTRUCTION SITE",
+                departments: {
+                    "ARMOURY": "EDEN: gun"
+                }
+            },
+            {
+                scene: "123",
+                setName: "ROOF-TOP - CONSTRUCTION SITE",
+                departments: {
+                    "PROPS": "MILTON: cigarette",
+                    "ARMOURY": "Bailey: gun"
+                }
+            },
+            {
+                scene: "124",
+                setName: "STAIRWELL - CONSTRUCTION SITE",
+                departments: {
+                    "DESIGN / CONSTR.": "Painting scaff - For crash stunt",
+                    "ARMOURY": "EDEN: gun",
+                    "SFX": "Painting scaff - For crash stunt"
+                }
+            },
+            {
+                scene: "125",
+                setName: "CONSTRUCTION SITE",
+                departments: {
+                    "DESIGN / CONSTR.": "Painting scaff - For crash stunt",
+                    "PROPS": "Glock, badge"
+                }
+            },
+            {
+                scene: "126",
+                setName: "ROOF-TOP - CONSTRUCTION SITE",
+                departments: {}
+            },
+            {
+                scene: "127",
+                setName: "SIDE OF BUILDING",
+                departments: {}
+            },
+            {
+                scene: "128",
+                setName: "ROOF-TOP - CONSTRUCTION SITE",
+                departments: {
+                    "ARMOURY": "EDEN: gun"
+                }
+            },
+            {
+                scene: "129",
+                setName: "STAIRWELL - CONSTRUCTION SITE",
+                departments: {
+                    "ARMOURY": "EDEN: gun"
+                }
+            },
+            {
+                scene: "130",
+                setName: "CONSTRUCTION SITE",
+                departments: {
+                    "ARMOURY": "EDEN: gun"
+                }
+            },
+            {
+                scene: "131",
+                setName: "PARKING LOT - CONSTRUCTION SITE",
+                departments: {
+                    "PROPS": "MILTON: keys",
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV"
+                }
+            },
+            {
+                scene: "132",
+                setName: "BLACK SUV",
+                departments: {
+                    "PROPS": "MILTON: keys",
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV"
+                }
+            },
+            {
+                scene: "133",
+                setName: "CONSTRUCTION SITE",
+                departments: {
+                    "ARMOURY": "EDEN: gun",
+                    "ACTION VEHICLES": "AFP car"
+                }
+            },
+            {
+                scene: "134",
+                setName: "BAILEY'S CAR",
+                departments: {
+                    "ACTION VEHICLES": "AFP car"
+                }
+            },
+            {
+                scene: "135",
+                setName: "CITY STREETS",
+                departments: {
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "136",
+                setName: "BAILEY'S CAR",
+                departments: {
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "137",
+                setName: "CITY STREETS",
+                departments: {
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "138",
+                setName: "BUSH ROAD",
+                departments: {
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "139",
+                setName: "BLACK SUV",
+                departments: {
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "140",
+                setName: "BAILEY'S CAR",
+                departments: {
+                    "PROPS": "EDEN:",
+                    "ARMOURY": "EDEN: Gun\n*SHOTS FIRED*",
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "141",
+                setName: "BLACK SUV",
+                departments: {
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "142",
+                setName: "BAILEY'S CAR",
+                departments: {
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "143",
+                setName: "BUSH ROAD",
+                departments: {
+                    "GREENS": "Scrub plants to drive car into",
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "144",
+                setName: "BAILEY'S CAR",
+                departments: {
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "145",
+                setName: "BLACK SUV",
+                departments: {
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "146",
+                setName: "BEACH",
+                departments: {}
+            },
+            {
+                scene: "147",
+                setName: "BAILEY'S CAR",
+                departments: {
+                    "GREENS": "Scrub plants to hide car into",
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "148",
+                setName: "BLACK SUV [ REAR END CRASH]",
+                departments: {
+                    "ARMOURY": "MILTON: Gun",
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car\nCAR CRASH DOUBLES????"
+                }
+            },
+            {
+                scene: "149",
+                setName: "BAILEY'S CAR",
+                departments: {
+                    "ARMOURY": "BEN: Glock",
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "150",
+                setName: "BUSH ROAD",
+                departments: {
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car",
+                    "SFX": "GUNSHOT THROUGH GLASS"
+                }
+            },
+            {
+                scene: "151",
+                setName: "BLACK SUV",
+                departments: {
+                    "ARMOURY": "MILTON: Gun",
+                    "ACTION VEHICLES": "MILTON Saloon? Black SUV\nAFP car"
+                }
+            },
+            {
+                scene: "152",
+                setName: "SPIT",
+                departments: {}
+            },
+            {
+                scene: "153",
+                setName: "BLACK SUV",
+                departments: {}
+            },
+            {
+                scene: "154",
+                setName: "BAILEY'S CAR",
+                departments: {}
+            },
+            {
+                scene: "155",
+                setName: "BLACK SUV",
+                departments: {}
+            },
+            {
+                scene: "156",
+                setName: "SPIT",
+                departments: {}
+            },
+            {
+                scene: "157",
+                setName: "BAILEY'S CAR",
+                departments: {}
+            },
+            {
+                scene: "158",
+                setName: "BLACK SUV",
+                departments: {}
+            },
+            {
+                scene: "159",
+                setName: "BAILEY'S CAR",
+                departments: {}
+            },
+            {
+                scene: "160",
+                setName: "BLACK SUV",
+                departments: {}
+            },
+            {
+                scene: "161",
+                setName: "THE SPIT",
+                departments: {}
+            },
+            {
+                scene: "162",
+                setName: "BAILEY'S CAR",
+                departments: {}
+            },
+            {
+                scene: "163",
+                setName: "THE SPIT",
+                departments: {
+                    "ARMOURY": "EDEN: Gun"
+                }
+            },
+            {
+                scene: "164",
+                setName: "MISS G'S BUNGALOW",
+                departments: {}
+            },
+            {
+                scene: "165",
+                setName: "SUV WITH TINTED WINDOWS",
+                departments: {
+                    "ACTION VEHICLES": "SUV with Tinted Windows"
+                }
+            },
+            {
+                scene: "166",
+                setName: "TARMAC",
+                departments: {
+                    "PROPS": "JERICHO: Silver Case",
+                    "ANIMALS": "JERICHO: Dog On Leash"
+                }
+            },
+            {
+                scene: "167",
+                setName: "SUV WITH TINTED WINDOWS",
+                departments: {
+                    "ACTION VEHICLES": "SUV with Tinted Windows"
+                }
+            }
+        ];
+
+        // All possible departments in order
+        const allDepartments = [
+            "DESIGN / CONSTR.",
+            "PROPS", 
+            "SET DEC",
+            "GREENS",
+            "ARMOURY",
+            "ACTION VEHICLES",
+            "GRAPHICS",
+            "PLAYBACK",
+            "SFX",
+            "ANIMALS",
+            "STUNTS",
+            "VFX"
+        ];
+
+        // Department mapping for styling
+        const departmentClasses = {
+            "DESIGN / CONSTR.": "dept-design",
+            "PROPS": "dept-props",
+            "SET DEC": "dept-setdec",
+            "GREENS": "dept-greens",
+            "ARMOURY": "dept-armoury",
+            "ACTION VEHICLES": "dept-vehicles",
+            "GRAPHICS": "dept-graphics",
+            "PLAYBACK": "dept-playback",
+            "SFX": "dept-sfx",
+            "ANIMALS": "dept-animals",
+            "STUNTS": "dept-stunts",
+            "VFX": "dept-vfx"
+        };
+
+        function parseItems(text) {
+            if (!text) return [];
+            
+            const items = [];
+            let currentPerson = null;
+            
+            // Split by both commas and newlines, then clean up
+            const parts = text.split(/[,\n]+/).map(part => part.trim()).filter(part => part.length > 0);
+            
+            for (let part of parts) {
+                // Check if this part contains a colon (person assignment)
+                if (part.includes(':')) {
+                    const colonIndex = part.indexOf(':');
+                    currentPerson = part.substring(0, colonIndex).trim();
+                    const item = part.substring(colonIndex + 1).trim();
+                    
+                    if (item) {
+                        items.push({
+                            person: currentPerson,
+                            item: item
+                        });
+                    }
+                } else if (part.trim()) {
+                    // Regular item
+                    items.push({
+                        person: currentPerson,
+                        item: part.trim()
+                    });
+                }
+            }
+            
+            return items;
+        }
+
+        // Save/Load functionality for checkbox states
+        function saveProgress() {
+            const checkboxStates = {};
+            const checkboxes = document.querySelectorAll('.checkbox');
+            checkboxes.forEach((checkbox, index) => {
+                checkboxStates[`checkbox_${index}`] = checkbox.classList.contains('checked');
+            });
+            localStorage.setItem('theMarkChecklist', JSON.stringify(checkboxStates));
+            
+            // Show save confirmation
+            showNotification('Progress saved!', 'success');
+        }
+
+        function loadProgress() {
+            const savedStates = localStorage.getItem('theMarkChecklist');
+            if (savedStates) {
+                const checkboxStates = JSON.parse(savedStates);
+                const checkboxes = document.querySelectorAll('.checkbox');
+                checkboxes.forEach((checkbox, index) => {
+                    if (checkboxStates[`checkbox_${index}`]) {
+                        checkbox.classList.add('checked');
+                    }
+                });
+                showNotification('Progress loaded!', 'info');
+            }
+        }
+
+        function clearProgress() {
+            if (confirm('Are you sure you want to clear all checkboxes? This cannot be undone.')) {
+                localStorage.removeItem('theMarkChecklist');
+                const checkboxes = document.querySelectorAll('.checkbox');
+                checkboxes.forEach(checkbox => {
+                    checkbox.classList.remove('checked');
+                });
+                showNotification('Progress cleared!', 'warning');
+            }
+        }
+
+        function exportProgress() {
+            const checkboxStates = localStorage.getItem('theMarkChecklist');
+            if (checkboxStates) {
+                const blob = new Blob([checkboxStates], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'the-mark-checklist-progress.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showNotification('Progress exported!', 'success');
+            } else {
+                showNotification('No progress to export!', 'warning');
+            }
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                left: 30px;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                z-index: 1000;
+                transition: all 0.3s ease;
+                opacity: 0.9;
+                ${type === 'success' ? 'background: #28a745;' : 
+                  type === 'warning' ? 'background: #ffc107;' : 
+                  type === 'info' ? 'background: #007bff;' : 
+                  'background: #007bff;'}
+            `;
+            
+            // Add a subtle pulse animation
+            notification.animate([
+                { transform: 'scale(1)', opacity: 0.9 },
+                { transform: 'scale(1.3)', opacity: 1 },
+                { transform: 'scale(1)', opacity: 0.9 }
+            ], {
+                duration: 400,
+                easing: 'ease-out'
+            });
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 1200);
+        }
+
+        function createDepartmentCard(deptName, items) {
+            const card = document.createElement('div');
+            card.className = 'department-card';
+            
+            const header = document.createElement('div');
+            header.className = `card-header ${departmentClasses[deptName] || 'dept-design'}`;
+            header.textContent = deptName;
+            
+            const content = document.createElement('div');
+            content.className = 'card-content';
+            
+            if (!items || items.length === 0) {
+                content.innerHTML = '<div class="empty-card">No items</div>';
+            } else {
+                const parsedItems = parseItems(items);
+                parsedItems.forEach((item, index) => {
+                    const row = document.createElement('div');
+                    row.className = `item-row ${index % 2 === 1 ? 'alternate' : ''}`;
+                    
+                    const checkbox = document.createElement('div');
+                    checkbox.className = 'checkbox';
+                    checkbox.onclick = function() {
+                        this.classList.toggle('checked');
+                        // Auto-save progress when checkbox is clicked
+                        setTimeout(saveProgress, 100);
+                    };
+                    
+                    const text = document.createElement('div');
+                    text.className = 'item-text';
+                    
+                    if (item.person) {
+                        text.innerHTML = `<span class="person-label">${item.person}:</span> ${item.item}`;
+                    } else {
+                        text.textContent = item.item;
+                    }
+                    
+                    row.appendChild(checkbox);
+                    row.appendChild(text);
+                    content.appendChild(row);
+                });
+            }
+            
+            card.appendChild(header);
+            card.appendChild(content);
+            
+            return card;
+        }
+
+        function createSceneRow(sceneData) {
+            const row = document.createElement('div');
+            row.className = 'scene-row';
+            
+            // Scene info column
+            const sceneInfo = document.createElement('div');
+            sceneInfo.className = 'scene-info';
+            
+            const sceneHeader = document.createElement('div');
+            sceneHeader.className = 'scene-header';
+            sceneHeader.textContent = 'Scene';
+            
+            const sceneTitle = document.createElement('div');
+            sceneTitle.className = 'scene-title';
+            sceneTitle.textContent = sceneData.setName;
+            
+            const sceneNumber = document.createElement('div');
+            sceneNumber.className = 'scene-number';
+            sceneNumber.textContent = `#${sceneData.scene}`;
+            
+            sceneInfo.appendChild(sceneHeader);
+            sceneInfo.appendChild(sceneTitle);
+            sceneInfo.appendChild(sceneNumber);
+            
+            // Departments container
+            const departmentsContainer = document.createElement('div');
+            departmentsContainer.className = 'departments-container';
+            
+            // Create cards for departments that have data in this scene
+            allDepartments.forEach(deptName => {
+                const items = sceneData.departments[deptName] || null;
+                const card = createDepartmentCard(deptName, items);
+                departmentsContainer.appendChild(card);
+            });
+            
+            row.appendChild(sceneInfo);
+            row.appendChild(departmentsContainer);
+            
+            return row;
+        }
+
+        function initializeScenes() {
+            const container = document.getElementById('scenesContainer');
+            
+            sampleData.forEach(sceneData => {
+                const sceneRow = createSceneRow(sceneData);
+                container.appendChild(sceneRow);
+            });
+            
+            // Load saved progress after scenes are created
+            setTimeout(loadProgress, 100);
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', initializeScenes);
+    </script>
+</body>
+</html>
